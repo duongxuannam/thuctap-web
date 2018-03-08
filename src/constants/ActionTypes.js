@@ -1,0 +1,3 @@
+export const LAY_DATA_TRANG_CHU = 'LAY_DATA_TRANG_CHU';
+export const CHI_TIET_CONG_VIEC = 'CHI_TIET_CONG_VIEC';
+
