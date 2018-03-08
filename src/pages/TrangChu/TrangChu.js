@@ -126,6 +126,7 @@ class TrangChu extends Component {
 };
 
 const mapStateToProps = state => {
+    // console.log('log state dc ko', state)
     return {
         dataTrangChu: state.dataTrangChu
     }

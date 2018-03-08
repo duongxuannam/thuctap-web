@@ -21,7 +21,7 @@ export const layDataTrangChu = (data) => {
 export const chiTietCongViecAPI = (id) => {
     return dispatch => {
         return callApi(`congviec/${id}`, 'GET', null).then(res => {
-            dispatch(chiTietCongViec(res.data));
+            dispatch(chiTietCongViec(res));
         });
     }
 }

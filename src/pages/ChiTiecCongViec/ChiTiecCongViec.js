@@ -10,14 +10,14 @@ class ChiTietCongViec extends Component {
         var { match } = this.props;
         if (match) {
             var id = match.params.id;
-            this.props.chiTietCongViec(id);
+            this.props.actChiTietCongViec(id);
         }
     }
     render() {
-        console.log('chi tiet ne: ')
+        // console.log('chi tiet ne: ', this.props.chiTietCongViec)
         return (
             <React.Fragment>
-                 <div class="main">
+                <div class="main">
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
@@ -129,8 +129,10 @@ class ChiTietCongViec extends Component {
                                 <div class="post">
                                     <div class="resume-head">
                                         <p>
-                                            <a class="btn btn-back btn-secondary" href="jobs.html" role="button">
-                                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Quay lại công việc mới nhất</a>
+                                            <a class="btn btn-back btn-secondary" role="button" onClick = { ()=> this.props.history.goBack() } >
+                                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true" />
+                                                Quay lại công việc mới nhất
+                                            </a>
                                         </p>
 
                                         <h1>Đây là cái tiêu đề</h1>
@@ -293,15 +295,16 @@ class ChiTietCongViec extends Component {
 }
 
 const mapStateToProps = state => {
+    // console.log('log state dc ko', state)
     return {
-        chitietcongviec : state.chitietcongviec
+        chiTietCongViec: state.chiTietCongViec
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        chiTietCongViec: () => {
-            dispatch(chiTietCongViecAPI());
+        actChiTietCongViec: (id) => {
+            dispatch(chiTietCongViecAPI(id));
         }
     }
 }
