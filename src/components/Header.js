@@ -56,7 +56,7 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            daDangNhap: false
+            daDangNhap: true
         };
     }
     showMenus = (menus) => {
