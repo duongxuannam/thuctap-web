@@ -31,3 +31,24 @@
 .tam-thoi{
     width: 146px;
 }
+.thongtin-tam{
+    position: absolute; left: -9999px; top: 0;
+}
+.thongtin-display-none{
+    display: none;
+}
+.lienhe-ghide{
+    width: 100% !important;
+}
+.lienhe-ghide-button{
+    pointer-events: all; cursor: pointer;
+}
+.lienhe-ghide-block{
+    display: block;
+}
+.lienhe-ghide-iframe{
+    border:0
+}
+.lienhe-ghide-map{
+    position: relative; overflow: hidden;
+}
