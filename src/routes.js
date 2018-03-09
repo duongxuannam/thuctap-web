@@ -10,7 +10,7 @@ import TinTuc from './pages/TinTuc/TinTuc';
 import ChiTietTinTuc from './pages/ChiTietTinTuc/ChiTietTinTuc';
 import LienHe from './pages/LienHe/LienHe';
 import ThemCongViec from './pages/ThemCongViec/ThemCongViec';
-
+import CongViecDaDang from './pages/CongViecDaDang/CongViecDaDang';
 import Loi from './pages/Loi/Loi';
 
 const routes = [
@@ -68,6 +68,11 @@ const routes = [
         path: '/themcongviec',
         exact: false,
         main: ({match, history}) => <ThemCongViec match={match} history={history}/>
+    },
+    {
+        path: '/congviecdadang',
+        exact: false,
+        main: ({match, history}) => <CongViecDaDang match={match} history={history}/>
     },
     {
         path: '',

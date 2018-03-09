@@ -56,7 +56,7 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            daDangNhap: true
+            daDangNhap: false
         };
     }
     showMenus = (menus) => {
@@ -81,10 +81,10 @@ class Header extends Component {
                 <div class="container">
                     <ul>
                         <li>
-                            <Link to={`/dangnhap`}>Thành viên</Link>
+                            <Link to={`/dangnhap`}>Đăng nhập thành viên</Link>
                         </li>
                         <li>
-                            <Link to={`/dangnhap`}>Nhà tuyển dụng</Link>
+                            <Link to={`/dangnhap`}>Đăng nhập nhà tuyển dụng</Link>
                         </li>
                     </ul>
                 </div>
