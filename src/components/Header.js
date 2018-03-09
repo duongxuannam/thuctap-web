@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 
-
 const menus = [
     {
         name: 'Trang Chủ',
@@ -15,7 +14,7 @@ const menus = [
     },
     {
         name: 'Tìm kiếm',
-        to: '/timkiem',
+        to: '/dangnhap',
         exact: false
     },
     {
@@ -54,6 +53,12 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
 };
 const logo = require('../images/logotdmu.png');
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            daDangNhap: false
+        };
+    }
     showMenus = (menus) => {
         var result = null;
         if(menus.length > 0){
@@ -71,20 +76,65 @@ class Header extends Component {
         return result;
     }
     render() {
-        return (
-            <React.Fragment>
-                <div class="bar">
+        const chuaDangNhap = (
+            <div class="bar">
                     <div class="container">
                         <ul>
                             <li>
-                                <a href="">Thành viên</a>
+                                <Link to={`/dangnhap`}>Thành viên</Link>
                             </li>
                             <li>
-                                <a href="">Nhà tuyển dụng</a>
+                                <Link to={`/dangnhap`}>Nhà tuyển dụng</Link>
                             </li>
                         </ul>
                     </div>
                 </div>
+        );
+        const daDangNhap = (
+            <div class="bar">
+            <div class="container">
+                <ul>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle user" type="button" id="barDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <img src="http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png" alt=""
+                                class="photo" /> asdasd
+                        <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="barDropdown1">
+                            <li>
+                                <a href="employer-profile.html">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile</a>
+                            </li>
+                            <li>
+                                <a href="my-jobs.html">
+                                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> My jobs</a>
+                            </li>
+                            <li>
+                                <a href="shortlisted.html">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Shortlisted</a>
+                            </li>
+                            <li>
+                                <a href="payments.html">
+                                    <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Payments</a>
+                            </li>
+                            <li>
+                                <a href="logout.html">
+                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        );
+        const topHeader = this.state.daDangNhap ? daDangNhap : chuaDangNhap;
+        return (
+            <React.Fragment>
+                
+
+                { topHeader }
+
                 <nav class="navbar">
                     <div class="container">
                         <a href="" class="logo">
