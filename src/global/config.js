@@ -1,1 +1,1 @@
-export const API_URL = 'https://apimongo.herokuapp.com';
+export const API_URL = 'http://apimongo.herokuapp.com';

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BannerSearch from '../../components/BannerSearch';
-import { layDataTrangChuAPI } from '../../actions/index';
+import { actLayDataTrangChuAPI } from '../../actions/index';
 
 class TrangChu extends Component {
     componentDidMount() {
-        this.props.layDataTrangChu();
+        this.props.actLayDataTrangChu();
     };
     showData(data) {
         var result = null;
@@ -133,8 +133,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        layDataTrangChu: () => {
-            dispatch(layDataTrangChuAPI());
+        actLayDataTrangChu: () => {
+            dispatch(actLayDataTrangChuAPI());
         }
     }
 }

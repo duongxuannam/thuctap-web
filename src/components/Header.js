@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { actDangXuatAPI } from '../actions/index';
 
 const menus = [
     {
@@ -53,11 +55,9 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
 };
 const logo = require('../images/logotdmu.png');
 class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            daDangNhap: false
-        };
+    
+    logOut = () => {
+        this.props.actDangXuat();
     }
     showMenus = (menus) => {
         var result = null;
@@ -76,6 +76,11 @@ class Header extends Component {
         return result;
     }
     render() {
+        console.log(this.props);
+        var hienThiTen = '';
+        if(this.props.taiKhoan && this.props.taiKhoan.taikhoan){
+            hienThiTen = this.props.taiKhoan.taikhoan.hoten
+        }
         const chuaDangNhap = (
             <div class="bar">
                 <div class="container">
@@ -97,7 +102,7 @@ class Header extends Component {
                         <li class="dropdown">
                             <a class="dropdown-toggle user" type="button" id="barDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <img src="http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png" alt=""
-                                    class="photo" /> Nammmm
+                                    class="photo" /> {this.props.taiKhoan === null ? '' : hienThiTen }
                         <span class="caret"></span>
                             </a>
 
@@ -121,7 +126,7 @@ class Header extends Component {
                                         <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Payments</a>
                                 </li>
                                 <li>
-                                    <a href="logout.html">
+                                    <a onClick = {this.logOut}>
                                         <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Đăng xuất</a>
                                 </li>
                             </ul>
@@ -130,7 +135,7 @@ class Header extends Component {
                 </div>
             </div>
         );
-        const topHeader = this.state.daDangNhap ? daDangNhap : chuaDangNhap;
+        const topHeader = localStorage.getItem('taikhoan') ? daDangNhap : chuaDangNhap;
         return (
             <React.Fragment>
 
@@ -162,4 +167,20 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+        taiKhoan: state.taiKhoan
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        actDangXuat: () => {
+            dispatch(actDangXuatAPI());
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
+
+
