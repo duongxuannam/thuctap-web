@@ -56,7 +56,6 @@ class DangNhap extends Component {
                 demnguoc: this.state.demnguoc - 1
             });
         }, 1000);
-
     }
 
     render() {
@@ -141,8 +140,6 @@ class DangNhap extends Component {
         const main = localStorage.getItem('taikhoan') ? daDangNhap : chuaDangNhap;
         if (demnguoc === 0) {
             this.props.history.goBack();
-
-
         }
         return (
             <React.Fragment>

@@ -33,6 +33,23 @@ export const chiTietCongViec = (data) => {
     }
 }
 
+
+//------------------------DANG KY
+export const actDangKyAPI = (data) => {
+    return dispatch => {
+        return callApi(`dangky`,'POST', data).then(res => {
+            dispatch(actDangKy(res.data));
+        }).catch(()=> dispatch(actDangKy()));
+    }
+}
+
+export const actDangKy = (data) => {
+    return {
+        type : Types.DANG_KY,
+        data
+    }
+}
+
 //------------------------DANG NHAP
 export const actDangNhapAPI = (data) => {
     return dispatch => {
