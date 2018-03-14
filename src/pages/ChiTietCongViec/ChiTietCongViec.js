@@ -14,7 +14,7 @@ class ChiTietCongViec extends Component {
         }
     }
     render() {
-        // console.log('chi tiet ne: ', this.props.chiTietCongViec)
+         console.log('chi tiet ne: ', this.props.chiTietCongViec)
         return (
             <React.Fragment>
                 <div class="main">
@@ -159,7 +159,7 @@ class ChiTietCongViec extends Component {
                                 </div>
 
                                 <div class="post-actions">
-                                    <a href="" class="btn btn-primary btn-lg btn-apply">Apply</a>
+                                    <a href="" class="btn btn-primary btn-lg btn-apply">Ứng tuyển</a>
                                     <div class="share-actions">
                                         <div class="socials-share">
                                             <ul>

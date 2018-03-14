@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
+import { EditorState, convertToRaw, } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import draftToHtml from 'draftjs-to-html';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 class ThemCongViec extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { editorState: EditorState.createEmpty() };
+    }
+    onEditorStateChange = (editorState) => this.setState({ editorState });
     render() {
+        const { editorState } = this.state;
+        console.log('luu lai o day ne:', draftToHtml(convertToRaw(editorState.getCurrentContent())))
         return (
             <React.Fragment>
                 <div class="main">
@@ -12,9 +23,9 @@ class ThemCongViec extends Component {
                                     <form class="form-dyna xs-4">
                                         <input type="hidden" name="job_create" value="1" />
                                         <div class="edit-job-actions">
-                                            <a class="btn btn-back btn-secondary btn-sm" href="my-jobs.html" role="button">
+                                            <a class="btn btn-back btn-secondary btn-sm" role="button">
                                                 <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                                <span class="wc-editable" data-pk="ws_back" data-type="text">Back</span>
+                                                <span class="wc-editable" onClick={() => this.props.history.goBack()}>Quay lại</span>
                                             </a>
                                         </div>
 
@@ -22,7 +33,7 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-8 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_job_title" data-type="text">Job title</span>
+                                                        <span class="wc-editable" data-pk="front_label_job_title" data-type="text">Tiêu đề</span>
                                                     </label>
                                                     <input type="text" name="i18n[1][job_title]" class="form-control required" data-msg-required="Job title is required" />
                                                     <div class="help-block with-errors">
@@ -34,7 +45,7 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-4 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_job_location" data-type="text">Job location</span>:</label>
+                                                        <span class="wc-editable" data-pk="front_label_job_location" data-type="text">Địa điểm</span>:</label>
                                                     <input type="text" name="i18n[1][address_city]" class="form-control required" data-msg-required="Job location is required"
                                                     />
                                                     <div class="help-block with-errors">
@@ -48,7 +59,7 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="ws_job_type" data-type="text">Job type</span>:</label>
+                                                        <span class="wc-editable" data-pk="ws_job_type" data-type="text">Chuyên ngành</span>:</label>
                                                     <select class="form-control" name="type_id">
 
                                                         <option value="1">Contract</option>
@@ -69,20 +80,18 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="ws_job_type" data-type="text">Job type</span>:</label>
+                                                        <span class="wc-editable" data-pk="ws_job_type" data-type="text">Kiểu</span>:</label>
                                                     <select class="form-control" name="type_id">
 
-                                                        <option value="1">Contract</option>
+                                                        <option value="1">Toàn thời gian</option>
 
-                                                        <option value="2">Full Time</option>
+                                                        <option value="2">Bán thời gian</option>
 
-                                                        <option value="3">Internship</option>
+                                                        <option value="3">Thực tập</option>
 
-                                                        <option value="4">Other</option>
+                                                        <option value="4">Thời vụ</option>
 
-                                                        <option value="5">Part Time</option>
-
-                                                        <option value="6">Temp</option>
+                                                        <option value="5">Chính thức</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -92,7 +101,7 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="ws_job_type" data-type="text">Job type</span>:</label>
+                                                        <span class="wc-editable" data-pk="ws_job_type" data-type="text">Chức vụ</span>:</label>
                                                     <select class="form-control" name="type_id">
 
                                                         <option value="1">Contract</option>
@@ -113,7 +122,7 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_salary" data-type="text">Salary</span>:</label>
+                                                        <span class="wc-editable" data-pk="front_label_salary" data-type="text">Lương</span>:</label>
                                                     <input type="text" name="job_salary" class="form-control" />
                                                 </div>
                                             </div>
@@ -124,7 +133,7 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_education_level" data-type="text">My education level is</span>:</label>
+                                                        <span class="wc-editable" data-pk="front_label_education_level" data-type="text">Trình độ</span>:</label>
 
                                                     <select class="form-control" name="filter_id[]">
 
@@ -154,7 +163,7 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_year_experience" data-type="text">Years of Experience</span>:</label>
+                                                        <span class="wc-editable" data-pk="front_label_year_experience" data-type="text">Kinh nghiệm</span>:</label>
 
                                                     <select class="form-control" name="filter_id[]">
 
@@ -171,11 +180,17 @@ class ThemCongViec extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group editor-themcongviec">
                                             <label class="control-label">
-                                                <span class="wc-editable" data-pk="front_label_job_description" data-type="text">Job description</span>:</label>
-                                            <textarea name="i18n[1][job_description]" rows="10" class="form-control mceEditor"></textarea>
+                                                <span class="wc-editable" data-pk="front_label_job_description" data-type="text">Miêu tả chi tiết</span>:</label>
+                                            <Editor
+                                                editorState={editorState}
+                                                wrapperClassName="demo-wrapper"
+                                                editorClassName="demo-editor boderediter-edit"
+                                                onEditorStateChange={this.onEditorStateChange}
+                                            />
                                         </div>
+
 
                                         <button type="submit" class="btn btn-primary">
                                             <span class="wc-editable" data-pk="front_button_save" data-type="action">Lưu</span>
@@ -186,11 +201,11 @@ class ThemCongViec extends Component {
                         </div>
                     </div>
                 </div>
+
                 <div class="push"></div>
             </React.Fragment >
         );
     }
 };
-
 
 export default ThemCongViec;

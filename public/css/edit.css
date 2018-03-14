@@ -94,3 +94,13 @@
 .hien-thi-loi-edit{
     color: red;
 }
+.editor-themcongviec span{
+    color: black;
+}
+.boderediter-edit{
+    height: 60px;
+    border-radius: 5px;
+    font-size: 17px;
+    padding: 10px 15px;
+    border: 1px solid rgba(0,0,0,.2);
+}

@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
+import { EditorState, } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 class ThongTinTaiKhoan extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { editorState: EditorState.createEmpty() };
+    }
+    onEditorStateChange = (editorState) => this.setState({ editorState });
     render() {
+        const { editorState } = this.state;
         return (
             <React.Fragment>
                 <div class="main">
@@ -50,7 +59,7 @@ class ThongTinTaiKhoan extends Component {
                                                     <div class="col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_contact_name" data-type="text">Contact Name</span>:</label>
+                                                                <span class="wc-editable" data-pk="front_label_contact_name" data-type="text">Họ tên</span>:</label>
                                                             <input type="text" name="contact_name" class="form-control" />
                                                         </div>
                                                     </div>
@@ -58,7 +67,7 @@ class ThongTinTaiKhoan extends Component {
                                                     <div class="col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_phone" data-type="text">Phone</span>: </label>
+                                                                <span class="wc-editable" data-pk="front_label_phone" data-type="text">Số điện thoại</span>: </label>
                                                             <input type="text" name="phone" class="form-control" />
                                                         </div>
                                                     </div>
@@ -77,7 +86,7 @@ class ThongTinTaiKhoan extends Component {
                                                     <div class="col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_website" data-type="text">Website</span>:</label>
+                                                                <span class="wc-editable" data-pk="front_label_website" data-type="text">Địa chỉ</span>:</label>
                                                             <input type="text" name="url" class="form-control url"
                                                                 placeholder="http://www.domain.com" />
                                                             <div class="help-block with-errors">
@@ -89,8 +98,8 @@ class ThongTinTaiKhoan extends Component {
                                                     <div class="col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_password" data-type="text">Password</span>:</label>
-                                                            <input type="password" id="pjJLProfilePassword" name="password" class="form-control required"
+                                                                <span class="wc-editable">Trường đại học</span>:</label>
+                                                            <input id="pjJLProfilePassword" name="password" class="form-control required"
                                                             />
                                                             <div class="help-block with-errors">
                                                                 <ul class="list-unstyled"></ul>
@@ -101,8 +110,8 @@ class ThongTinTaiKhoan extends Component {
                                                     <div class="col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_cpassword" data-type="text">Confirm password</span>: </label>
-                                                            <input type="password" name="cpassword" class="form-control required"
+                                                                <span class="wc-editable">Chuyên ngành</span>: </label>
+                                                            <input name="cpassword" class="form-control required"
                                                             />
                                                             <div class="help-block with-errors">
                                                                 <ul class="list-unstyled"></ul>
@@ -113,13 +122,7 @@ class ThongTinTaiKhoan extends Component {
 
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_address" data-type="text">Address</span>:</label>
-                                                    <input type="text" name="i18n[1][address]" class="form-control" />
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_description" data-type="text">Description</span>:</label>
+                                                        <span class="wc-editable" data-pk="front_label_description" data-type="text">Miêu tả bản thân</span>:</label>
                                                     <textarea name="i18n[1][description]" rows="10" class="form-control"></textarea>
                                                 </div>
 
@@ -135,7 +138,7 @@ class ThongTinTaiKhoan extends Component {
                                                     <div class="col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_contact_name" data-type="text">Contact Name</span>:</label>
+                                                                <span class="wc-editable" data-pk="front_label_b_contact_name" data-type="text">Tên doanh nghiệp</span>:</label>
                                                             <input type="text" name="b_contact_name" value="" class="form-control" />
                                                         </div>
                                                     </div>
@@ -143,7 +146,7 @@ class ThongTinTaiKhoan extends Component {
                                                     <div class="col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_phone" data-type="text">Phone</span>:</label>
+                                                                <span class="wc-editable" data-pk="front_label_b_phone" data-type="text">Số điện thoại</span>:</label>
                                                             <input type="text" name="b_phone" value="" class="form-control" />
                                                         </div>
                                                     </div>
@@ -152,7 +155,7 @@ class ThongTinTaiKhoan extends Component {
                                                         <div class="form-group">
                                                             <label class="control-label">
                                                                 <span class="wc-editable" data-pk="front_label_b_email" data-type="text">Email</span>:</label>
-                                                            <input type="text" name="b_email" value="" class="form-control email" data-msg-required="Email is required." data-msg-email="Email is invalid."
+                                                            <input type="text" name="b_email" value="" class="form-control email"
                                                                 data-msg-remote="Email was registered by another." />
                                                             <div class="help-block with-errors">
                                                                 <ul class="list-unstyled"></ul>
@@ -163,50 +166,34 @@ class ThongTinTaiKhoan extends Component {
                                                     <div class="col-sm-6 col-xs-12">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_company_name" data-type="text">Company Name</span>:</label>
+                                                                <span class="wc-editable" data-pk="front_label_company_name" data-type="text">Website</span>:</label>
                                                             <input type="text" name="company_name" class="form-control required" />
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-6 col-xs-12">
+                                                    <div class="col-sm-12 col-xs-12">
                                                         <div class="form-group">
                                                             <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_address" data-type="text">Address</span>:</label>
+                                                                <span class="wc-editable" data-pk="front_label_b_address" data-type="text">Địa chỉ liên hệ</span>:</label>
                                                             <input type="text" name="b_address" value="" class="form-control" />
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div class="form-group">
+                                                    <div class="col-sm-12 col-xs-12">
+                                                        <div class="form-group editor-themcongviec" >
                                                             <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_city" data-type="text">City</span>:</label>
-                                                            <input type="text" name="b_city" value="" class="form-control" />
+                                                                <span class="wc-editable" >Miêu tả chi tiết</span>:</label>
+                                                            <Editor
+                                                                editorState={editorState}
+                                                                wrapperClassName="demo-wrapper"
+                                                                editorClassName="demo-editor boderediter-edit"
+                                                                onEditorStateChange={this.onEditorStateChange}
+                                                            />
+
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_state" data-type="text">State</span>:</label>
-                                                            <input type="text" name="b_state" value="" class="form-control" />
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_country" data-type="text">Country</span>:</label>
-                                                            <input type="text" name="b_country" value="" class="form-control" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_vat" data-type="text">VAT Number</span>:</label>
-                                                            <input type="text" name="b_vat" value="" class="form-control" />
-                                                        </div>
-                                                    </div>
                                                 </div>
 
                                                 <button type="submit" class="btn btn-primary">
@@ -227,6 +214,5 @@ class ThongTinTaiKhoan extends Component {
         );
     }
 };
-
 
 export default ThongTinTaiKhoan;
