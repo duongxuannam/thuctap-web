@@ -1,20 +1,56 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { chiTietCongViecAPI } from '../../actions/index';
+import { Link } from 'react-router-dom';
+import { chiTietCongViecAPI, ungTuyenAPI } from '../../actions/index';
 
 
 const logo = require('../../images/cty2.jpg')
 
 class ChiTietCongViec extends Component {
     componentDidMount() {
-        var { match } = this.props;
+        const { match } = this.props;
         if (match) {
-            var id = match.params.id;
+            const { id } = match.params;
             this.props.actChiTietCongViec(id);
         }
     }
+    ungTuyen = () => {
+        const data = {
+            _idCongViec: '5aa88ac5d8125d0ab419b98d',
+            _idTaiKhoan: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id
+        };
+        this.props.actUngTuyen(data);
+    }
+    kiemTraDaUngTuyen = () => {
+        console.log('tại sapo')
+        var result = false
+        if(this.props.chiTietCongViec._danhsachungtuyen && this.props.chiTietCongViec._danhsachungtuyen.length > 0){
+            for (var i = 0; i < this.props.chiTietCongViec._danhsachungtuyen.length; i++) {
+                if (localStorage.getItem('taikhoan') && this.props.chiTietCongViec._danhsachungtuyen[i] === JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id) {
+                    result = true;
+                    break;
+                }
+            };
+
+        }
+        return result
+    }
     render() {
-         console.log('chi tiet ne: ', this.props.chiTietCongViec)
+        console.log('chi tiet ne: ', this.props.chiTietCongViec);
+        console.log('may tai lai hong ');
+
+        const buttondDisabled = (
+            <a onClick={this.ungTuyen} disabled class="btn btn-primary btn-lg btn-apply">Bạn đã ứng tuyển</a>
+        )
+        const buttonEnabled = (
+            <a onClick={this.ungTuyen} class="btn btn-primary btn-lg btn-apply">Ứng tuyển</a>
+        )
+        const buttonChuaDangNhap = (
+            <Link to={`/dangnhap`} class="btn btn-primary btn-lg btn-apply">Đăng nhập để ứng tuyển</Link>
+
+        )
+        const hienthiButton = this.kiemTraDaUngTuyen() ? buttondDisabled : buttonEnabled;
+        const ChuaDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? hienthiButton : buttonChuaDangNhap
         return (
             <React.Fragment>
                 <div class="main">
@@ -73,7 +109,7 @@ class ChiTietCongViec extends Component {
                                         </p>
 
                                         <p>
-                                            <a href="login.html" class="btn btn-primary btn-apply">Apply</a>
+                                            <a class="btn btn-primary btn-apply">Apply</a>
                                         </p>
                                     </div>
                                 </div>
@@ -129,13 +165,13 @@ class ChiTietCongViec extends Component {
                                 <div class="post">
                                     <div class="resume-head">
                                         <p>
-                                            <a class="btn btn-back btn-secondary" role="button" onClick = { ()=> this.props.history.goBack() } >
+                                            <a class="btn btn-back btn-secondary" role="button" onClick={() => this.props.history.goBack()} >
                                                 <span class="glyphicon glyphicon-menu-left" aria-hidden="true" />
                                                 Quay lại công việc mới nhất
                                             </a>
                                         </p>
 
-                                        <h1>Đây là cái tiêu đề</h1>
+                                        <h1>{this.props.chiTietCongViec.tieude}</h1>
 
                                         <p>
                                             <em>
@@ -159,7 +195,7 @@ class ChiTietCongViec extends Component {
                                 </div>
 
                                 <div class="post-actions">
-                                    <a href="" class="btn btn-primary btn-lg btn-apply">Ứng tuyển</a>
+                                { ChuaDangNhap }
                                     <div class="share-actions">
                                         <div class="socials-share">
                                             <ul>
@@ -297,7 +333,8 @@ class ChiTietCongViec extends Component {
 const mapStateToProps = state => {
     // console.log('log state dc ko', state)
     return {
-        chiTietCongViec: state.chiTietCongViec
+        chiTietCongViec: state.chiTietCongViec,
+        taiKhoan: state.taiKhoan
     }
 }
 
@@ -305,6 +342,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         actChiTietCongViec: (id) => {
             dispatch(chiTietCongViecAPI(id));
+        },
+        actUngTuyen: (data) => {
+            dispatch(ungTuyenAPI(data));
         }
     }
 }

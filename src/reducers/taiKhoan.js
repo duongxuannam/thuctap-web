@@ -5,17 +5,17 @@ var initialState = data ? data : null;
 const taiKhoan = (state = initialState, action) => {
     switch (action.type) {
         case Types.DANG_KY:
-        console.log('vo day hem:', action)
-        if (action.data && action.data.taikhoan) {
-            console.log('vo if hem: ', action)
-            state = action.data;
-            localStorage.setItem('taikhoan', JSON.stringify(state));
-        }
-        else{
-            console.log('vo else hem: ', action)
-            state = { loi: true }
-        }
-        return state;
+            console.log('vo day hem:', action)
+            if (action.data && action.data.taikhoan) {
+                console.log('vo if hem: ', action)
+                state = action.data;
+                localStorage.setItem('taikhoan', JSON.stringify(state));
+            }
+            else {
+                console.log('vo else hem: ', action)
+                state = { loi: true }
+            }
+            return state;
         case Types.DANG_NHAP:
             if (action.data === '') {
                 state = { loi: true }

@@ -32,6 +32,22 @@ export const chiTietCongViec = (data) => {
         data
     }
 }
+//-----------UNG TUYEN
+export const ungTuyenAPI = (data) => {
+    return dispatch => {
+        return callApi(`ungtuyen`, 'POST', data).then(res => { 
+            dispatch(ungTuyen(res.data));
+        }).catch(()=> console.log('loi o dayu ne'));
+    }
+}
+
+export const ungTuyen = (data) => {
+    return {
+        type : Types.UNG_TUYEN,
+        data
+    }
+}
+
 
 
 //------------------------DANG KY
