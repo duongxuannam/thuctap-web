@@ -11,6 +11,18 @@
   <link type="text/css" rel="stylesheet" href="%PUBLIC_URL%/css/style.css" />
   <link type="text/css" rel="stylesheet" href="%PUBLIC_URL%/css/theme1.css" />
   <link type="text/css" rel="stylesheet" href="%PUBLIC_URL%/css/edit.css" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "f4318781-c9c6-4ab2-b805-7975e030c9b9",
+      autoRegister: false,
+      notifyButton: {
+        enable: true /* Set to false to hide */
+      }
+    }]);
+  </script>
   <title>Thực tập</title>
 
 </head>
