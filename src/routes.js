@@ -11,6 +11,7 @@ import ChiTietTinTuc from './pages/ChiTietTinTuc/ChiTietTinTuc';
 import LienHe from './pages/LienHe/LienHe';
 import ThemCongViec from './pages/ThemCongViec/ThemCongViec';
 import CongViecDaDang from './pages/CongViecDaDang/CongViecDaDang';
+import ThemTinTuc from './pages/ThemTinTuc/ThemTinTuc';
 import Loi from './pages/Loi/Loi';
 
 const routes = [
@@ -27,52 +28,57 @@ const routes = [
     {
         path: '/chitietcongviec/:id',
         exact: false,
-        main: ({match, history}) => <ChiTietCongViec match={match} history={history}/>
+        main: ({ match, history }) => <ChiTietCongViec match={match} history={history} />
     },
     {
         path: '/dangnhap',
         exact: false,
-        main: ({match, history}) => <DangNhap match={match} history={history}/>
+        main: ({ match, history }) => <DangNhap match={match} history={history} />
     },
     {
         path: '/dangky',
         exact: false,
-        main: ({match, history}) => <DangKy match={match} history={history}/>
+        main: ({ match, history }) => <DangKy match={match} history={history} />
     },
     {
         path: '/quenmatkhau',
         exact: false,
-        main: ({match, history}) => <QuenMatKhau match={match} history={history}/>
+        main: ({ match, history }) => <QuenMatKhau match={match} history={history} />
     },
     {
         path: '/thongtintaikhoan',
         exact: false,
-        main: ({match, history}) => <ThongTinTaiKhoan match={match} history={history}/>
+        main: ({ match, history }) => <ThongTinTaiKhoan match={match} history={history} />
     },
     {
         path: '/tintuc',
         exact: false,
-        main: ({match, history}) => <TinTuc match={match} history={history}/>
+        main: ({ match, history }) => <TinTuc match={match} history={history} />
     },
     {
         path: '/chitiettintuc',
         exact: false,
-        main: ({match, history}) => <ChiTietTinTuc match={match} history={history}/>
+        main: ({ match, history }) => <ChiTietTinTuc match={match} history={history} />
     },
     {
         path: '/lienhe',
         exact: false,
-        main: ({match, history}) => <LienHe match={match} history={history}/>
+        main: ({ match, history }) => <LienHe match={match} history={history} />
     },
     {
         path: '/themcongviec',
         exact: false,
-        main: ({match, history}) => <ThemCongViec match={match} history={history}/>
+        main: ({ match, history }) => <ThemCongViec match={match} history={history} />
     },
     {
         path: '/congviecdadang',
         exact: false,
-        main: ({match, history}) => <CongViecDaDang match={match} history={history}/>
+        main: ({ match, history }) => <CongViecDaDang match={match} history={history} />
+    },
+    {
+        path: '/themtintuc',
+        exact: false,
+        main: ({ match, history }) => <ThemTinTuc match={match} history={history} />
     },
     {
         path: '',

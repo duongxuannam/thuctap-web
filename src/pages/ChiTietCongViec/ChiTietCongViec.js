@@ -20,7 +20,7 @@ class ChiTietCongViec extends Component {
             _idTaiKhoan: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id
         };
         this.props.actUngTuyen(data);
-    }
+    };
     kiemTraDaUngTuyen = () => {
         console.log('tại sapo')
         var result = false
@@ -38,7 +38,6 @@ class ChiTietCongViec extends Component {
     render() {
         console.log('chi tiet ne: ', this.props.chiTietCongViec);
         console.log('may tai lai hong ');
-
         const buttondDisabled = (
             <a onClick={this.ungTuyen} disabled class="btn btn-primary btn-lg btn-apply">Bạn đã ứng tuyển</a>
         )
@@ -47,7 +46,6 @@ class ChiTietCongViec extends Component {
         )
         const buttonChuaDangNhap = (
             <Link to={`/dangnhap`} class="btn btn-primary btn-lg btn-apply">Đăng nhập để ứng tuyển</Link>
-
         )
         const hienthiButton = this.kiemTraDaUngTuyen() ? buttondDisabled : buttonEnabled;
         const ChuaDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? hienthiButton : buttonChuaDangNhap
@@ -108,9 +106,7 @@ class ChiTietCongViec extends Component {
                                             <strong>Thỏa thuận</strong>
                                         </p>
 
-                                        <p>
-                                            <a class="btn btn-primary btn-apply">Apply</a>
-                                        </p>
+                                        
                                     </div>
                                 </div>
                                 <div class="company-info">
