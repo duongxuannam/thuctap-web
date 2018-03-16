@@ -7,12 +7,58 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 class ThemCongViec extends Component {
     constructor(props) {
         super(props);
-        this.state = { editorState: EditorState.createEmpty() };
+        this.state = {
+            editorState: EditorState.createEmpty(),
+            txtTieuDe: '',
+            txtDiaDiem: '',
+            chuyenNganh: '',
+            kieu: '',
+            chucVu: '',
+            txtLuong: '',
+            trinhDo: '',
+            kinhNghiem: '',
+            txtSoLuong: '',
+            thoiHan: '',
+            txtMoTa: EditorState.createEmpty(),
+            demnguoc: 5,
+        };
     }
-    onEditorStateChange = (editorState) => this.setState({ editorState });
+    onEditorStateChange = (txtMoTa) => this.setState({ txtMoTa });
+    onChange = (e) => {
+        const target = e.target;
+        const name = target.name;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        this.setState({
+            [name]: value
+        });
+    };
+    onChangeFile = () => {
+        var file = this.refs.file.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend =  (e) => {
+            this.setState({
+                imgSrc: [reader.result]
+            })
+          };
+    }
     render() {
-        const { editorState } = this.state;
-        console.log('luu lai o day ne:', draftToHtml(convertToRaw(editorState.getCurrentContent())))
+        const {
+            editorState,
+            txtTieuDe,
+            txtDiaDiem,
+            chuyenNganh,
+            kieu,
+            chucVu,
+            txtLuong,
+            trinhDo,
+            kinhNghiem,
+            txtSoLuong,
+            thoiHan,
+            txtMoTa,
+            demnguoc,
+         } = this.state;
+        console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())))
         return (
             <React.Fragment>
                 <div class="main">
@@ -20,7 +66,7 @@ class ThemCongViec extends Component {
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="form">
-                                    <form class="form-dyna xs-4">
+                                    <form class="form-dyna xs-4" onSubmit={this.handleFiles}>
                                         <input type="hidden" name="job_create" value="1" />
                                         <div class="edit-job-actions">
                                             <a class="btn btn-back btn-secondary btn-sm" role="button">
@@ -30,24 +76,32 @@ class ThemCongViec extends Component {
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-sm-8 col-xs-12">
+                                            <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_job_title" data-type="text">Tiêu đề</span>
+                                                        <span class="wc-editable">Tiêu đề</span>
                                                     </label>
-                                                    <input type="text" name="i18n[1][job_title]" class="form-control required" data-msg-required="Job title is required" />
+                                                    <input
+                                                        type="text" class="form-control required"
+                                                        onChange={this.onChange}
+                                                        value={txtTieuDe}
+                                                        name='txtTieuDe'
+                                                        placeholder='Tiêu đề' />
                                                     <div class="help-block with-errors">
                                                         <ul class="list-unstyled"></ul>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="col-sm-4 col-xs-12">
+                                            <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_job_location" data-type="text">Địa điểm</span>:</label>
-                                                    <input type="text" name="i18n[1][address_city]" class="form-control required" data-msg-required="Job location is required"
-                                                    />
+                                                        <span class="wc-editable" >Địa điểm</span>:</label>
+                                                    <input
+                                                        type="text" class="form-control required"
+                                                        onChange={this.onChange}
+                                                        value={txtDiaDiem}
+                                                        name='txtDiaDiem'
+                                                        placeholder='Địa điểm làm việc' />
                                                     <div class="help-block with-errors">
                                                         <ul class="list-unstyled"></ul>
                                                     </div>
@@ -59,39 +113,27 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="ws_job_type" data-type="text">Chuyên ngành</span>:</label>
-                                                    <select class="form-control" name="type_id">
-
-                                                        <option value="1">Contract</option>
-
-                                                        <option value="2">Full Time</option>
-
-                                                        <option value="3">Internship</option>
-
-                                                        <option value="4">Other</option>
-
-                                                        <option value="5">Part Time</option>
-
-                                                        <option value="6">Temp</option>
+                                                        <span class="wc-editable" >Chuyên ngành</span>:</label>
+                                                    <select class="form-control" onChange={this.onChange} defaultValue={chuyenNganh} name="chuyenNganh">
+                                                        <option value="" disabled >Lựa chọn chuyên ngành</option>
+                                                        <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+                                                        <option value="Giáo dục">Giáo dục</option>
+                                                        <option value="Kinh tế">Kinh tế</option>
+                                                        <option value="Tài nguyên môi trường">Tài nguyên môi trường</option>
                                                     </select>
                                                 </div>
                                             </div>
-
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="ws_job_type" data-type="text">Kiểu</span>:</label>
-                                                    <select class="form-control" name="type_id">
-
-                                                        <option value="1">Toàn thời gian</option>
-
-                                                        <option value="2">Bán thời gian</option>
-
-                                                        <option value="3">Thực tập</option>
-
-                                                        <option value="4">Thời vụ</option>
-
-                                                        <option value="5">Chính thức</option>
+                                                        <span class="wc-editable" >Kiểu</span>:</label>
+                                                    <select class="form-control" onChange={this.onChange} defaultValue={kieu} name="kieu">
+                                                        <option value="" disabled >Lựa chọn kiểu</option>
+                                                        <option value="Toàn thời gian">Toàn thời gian</option>
+                                                        <option value="Bán thời gian">Bán thời gian</option>
+                                                        <option value="Thực tập">Thực tập</option>
+                                                        <option value="Thời vụ">Thời vụ</option>
+                                                        <option value="Chính thức">Chính thức</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -101,20 +143,15 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="ws_job_type" data-type="text">Chức vụ</span>:</label>
-                                                    <select class="form-control" name="type_id">
+                                                        <span class="wc-editable">Chức vụ</span>:</label>
+                                                    <select class="form-control" onChange={this.onChange} defaultValue={chucVu} name="chucVu">
+                                                        <option value="" disabled>Lựa chọn chức vụ</option>
 
-                                                        <option value="1">Contract</option>
+                                                        <option value="Thực tập sinh">Thực tập sinh</option>
 
-                                                        <option value="2">Full Time</option>
+                                                        <option value="Nhân viên chính thức">Nhân viên chính thức</option>
 
-                                                        <option value="3">Internship</option>
-
-                                                        <option value="4">Other</option>
-
-                                                        <option value="5">Part Time</option>
-
-                                                        <option value="6">Temp</option>
+                                                        <option value="Freelancer">Freelancer</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -122,8 +159,8 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_salary" data-type="text">Lương</span>:</label>
-                                                    <input type="text" name="job_salary" class="form-control" />
+                                                        <span class="wc-editable" >Lương</span>:</label>
+                                                    <input type="text" class="form-control" onChange={this.onChange} value={txtLuong} name="txtLuong" placeholder='Nhập khoản lương hoặc trợ cấp' />
                                                 </div>
                                             </div>
 
@@ -133,29 +170,14 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_education_level" data-type="text">Trình độ</span>:</label>
-
-                                                    <select class="form-control" name="filter_id[]">
-
-                                                        <option value="13"> Associate Degree</option>
-
-                                                        <option value="14"> Bachelor&#039;s Degree</option>
-
-                                                        <option value="15"> Certification</option>
-
-                                                        <option value="16"> Doctorate</option>
-
-                                                        <option value="17"> High School or equivalent</option>
-
-                                                        <option value="18"> Master&#039;s Degree</option>
-
-                                                        <option value="19"> Professional</option>
-
-                                                        <option value="20"> Some College Coursework Completed</option>
-
-                                                        <option value="21"> Some High School Coursework</option>
-
-                                                        <option value="22"> Vocational</option>
+                                                        <span class="wc-editable" >Trình độ</span>:</label>
+                                                    <select class="form-control" onChange={this.onChange} defaultValue={trinhDo} name="trinhDo">
+                                                        <option value="" disabled >Lựa chọn trình độ</option>
+                                                        <option value="Sinh viên năm 1 - 2"> Sinh viên năm 1 - 2</option>
+                                                        <option value="Sinh viên năm 3 - 4"> Sinh viên năm 3 - 4</option>
+                                                        <option value="Đại học"> Đại học</option>
+                                                        <option value="Cao đẳng"> Cao đẳng</option>
+                                                        <option value="Không"> Không</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -163,28 +185,66 @@ class ThemCongViec extends Component {
                                             <div class="col-sm-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
-                                                        <span class="wc-editable" data-pk="front_label_year_experience" data-type="text">Kinh nghiệm</span>:</label>
+                                                        <span class="wc-editable">Kinh nghiệm</span>:</label>
 
-                                                    <select class="form-control" name="filter_id[]">
+                                                    <select class="form-control" onChange={this.onChange} defaultValue={kinhNghiem} name="kinhNghiem">
+                                                        <option value="" disabled >Lựa chọn kinh nghiệm</option>
+                                                        <option value="Không" >Không</option>
 
-                                                        <option value="8"> &lt; 1</option>
+                                                        <option value="< 1 năm"> &lt; 1 năm</option>
 
-                                                        <option value="9"> 1 - 3</option>
+                                                        <option value="1 - 2 năm"> 1 - 2 năm</option>
 
-                                                        <option value="10"> 3 - 5</option>
-
-                                                        <option value="11"> 5 - 10</option>
-
-                                                        <option value="12"> &gt; 10</option>
+                                                        <option value="> 2 năm"> &gt; 2 năm</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">
+                                                        <span class="wc-editable">Số lượng</span>
+                                                    </label>
+                                                    <input type="text" class="form-control required" onChange={this.onChange} value={txtSoLuong} name="txtSoLuong" />
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">
+                                                        <span class="wc-editable" >Thời hạn</span>:</label>
+                                                    <input type="date" class="form-control required" onChange={this.onChange} value={thoiHan} name="thoiHan" />
+                                                    <div class="help-block with-errors">
+                                                        <ul class="list-unstyled"></ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-sm-6 col-xs-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">
+                                                        <span class="wc-editable" >Hình ảnh(nếu có)</span>:</label>
+                                                    <input
+                                                        ref="file"
+                                                        type="file"
+                                                        name="user[image]"
+                                                        multiple="true"
+                                                        onChange={this.onChangeFile} />
+                                                    <img src={this.state.imgSrc} />
+                                                    <div class="help-block with-errors">
+                                                        <ul class="list-unstyled"></ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group editor-themcongviec">
                                             <label class="control-label">
-                                                <span class="wc-editable" data-pk="front_label_job_description" data-type="text">Miêu tả chi tiết</span>:</label>
+                                                <span class="wc-editable" >Miêu tả chi tiết</span>:</label>
                                             <Editor
-                                                editorState={editorState}
+                                                editorState={txtMoTa}
                                                 wrapperClassName="demo-wrapper"
                                                 editorClassName="demo-editor boderediter-edit"
                                                 onEditorStateChange={this.onEditorStateChange}
@@ -193,7 +253,7 @@ class ThemCongViec extends Component {
 
 
                                         <button type="submit" class="btn btn-primary">
-                                            <span class="wc-editable" data-pk="front_button_save" data-type="action">Lưu</span>
+                                            <span class="wc-editable" >Lưu</span>
                                         </button>
                                     </form>
                                 </div>

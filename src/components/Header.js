@@ -15,15 +15,15 @@ const menus = [
         exact: false
     },
     {
-        name: 'Tìm kiếm',
-        to: '/dangnhap',
+        name: 'Thêm công việc',
+        to: '/themcongviec',
         exact: false
     },
     {
         name: 'Tin tức',
         to: '/tintuc',
         exact: false
-    },
+    },  
     {
         name: 'Thông tin',
         to: '/thongtin',

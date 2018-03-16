@@ -24,14 +24,13 @@ class ChiTietCongViec extends Component {
     kiemTraDaUngTuyen = () => {
         console.log('tại sapo')
         var result = false
-        if(this.props.chiTietCongViec._danhsachungtuyen && this.props.chiTietCongViec._danhsachungtuyen.length > 0){
+        if (this.props.chiTietCongViec._danhsachungtuyen && this.props.chiTietCongViec._danhsachungtuyen.length > 0) {
             for (var i = 0; i < this.props.chiTietCongViec._danhsachungtuyen.length; i++) {
                 if (localStorage.getItem('taikhoan') && this.props.chiTietCongViec._danhsachungtuyen[i] === JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id) {
                     result = true;
                     break;
                 }
             };
-
         }
         return result
     }
@@ -39,7 +38,7 @@ class ChiTietCongViec extends Component {
         console.log('chi tiet ne: ', this.props.chiTietCongViec);
         console.log('may tai lai hong ');
         const buttondDisabled = (
-            <a onClick={this.ungTuyen} disabled class="btn btn-primary btn-lg btn-apply">Bạn đã ứng tuyển</a>
+            <a disabled class="btn btn-primary btn-lg btn-apply">Bạn đã ứng tuyển</a>
         )
         const buttonEnabled = (
             <a onClick={this.ungTuyen} class="btn btn-primary btn-lg btn-apply">Ứng tuyển</a>
@@ -106,7 +105,7 @@ class ChiTietCongViec extends Component {
                                             <strong>Thỏa thuận</strong>
                                         </p>
 
-                                        
+
                                     </div>
                                 </div>
                                 <div class="company-info">
@@ -191,7 +190,7 @@ class ChiTietCongViec extends Component {
                                 </div>
 
                                 <div class="post-actions">
-                                { ChuaDangNhap }
+                                    {ChuaDangNhap}
                                     <div class="share-actions">
                                         <div class="socials-share">
                                             <ul>
