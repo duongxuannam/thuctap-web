@@ -105,7 +105,6 @@ class ThemTinTuc extends Component {
     render() {
         const { txtNoiDung, txtTieuDe, loiTieuDe, loiHinhAnh } = this.state;
         // console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtNoiDung.getCurrentContent())));
-        // console.log(configCloudinary)
         const divUploading = (
             <div>
                 <div id="popup">
