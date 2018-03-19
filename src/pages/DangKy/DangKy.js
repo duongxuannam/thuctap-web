@@ -109,6 +109,7 @@ class DangKy extends Component {
         const {
             txtEmail,
             txtMatKhau,
+            txtNhapLaiMatKhau,
             txtTenHienThi,
             txtSoDienThoai,
             loiEmail,
@@ -123,9 +124,53 @@ class DangKy extends Component {
             hoten: txtTenHienThi,
             sodienthoai: txtSoDienThoai
         };
-        console.log('log truoc khi api', { loiMatKhau, loiEmail, loiNhapLaiMatKhau, loiTenHienThi, loiSoDienThoai })
+        if (this.state.txtEmail.length < 5) {
+             this.setState({ loiEmail: 'Email phải có ít nhất 5ký tự' });
+            if (this.state.txtEmail === '') {
+                 this.setState({ loiEmail: 'Trường này là bắt buộc' })
+            }
+        } else {
+            this.setState({ loiEmail: '' })
+        }
+        if (this.state.txtTenHienThi.length < 2) {
+            this.setState({ loiTenHienThi: 'Tên hiển thị phải có ít nhất 2 ký tự' });
+            if (this.state.txtTenHienThi === '') {
+                this.setState({ loiTenHienThi: 'Trường này là bắt buộc' })
+            }
+        } else {
+            this.setState({ loiTenHienThi: '' })
+        }
+        if (this.state.txtSoDienThoai.length < 9) {
+            this.setState({ loiSoDienThoai: 'Số điện thoại không hợp lệ' });
+            if (this.state.txtSoDienThoai === '') {
+                this.setState({ loiSoDienThoai: 'Trường này là bắt buộc' })
+            }
+            if (isNaN(this.state.txtSoDienThoai)) {
+                this.setState({ loiSoDienThoai: 'Số điện thoại không hợp lệ' })
+            }
+        } else {
+            this.setState({ loiSoDienThoai: '' })
+        }
+        if (this.state.txtMatKhau.length < 5) {
+            this.setState({ loiMatKhau: 'Mật khẩu phải nhiều hơn 5 ký tự' });
+            if (this.state.txtMatKhau === '') {
+                this.setState({ loiMatKhau: 'Trường này là bắt buộc' })
+            }
+        } else {
+            this.setState({ loiMatKhau: '' })
+        }
+        if (this.state.txtNhapLaiMatKhau !== this.state.txtMatKhau) {
+            this.setState({ loiNhapLaiMatKhau: 'Nhập lại chưa trùng với mật khẩu' })
+            if (this.state.txtNhapLaiMatKhau === '') {
+                this.setState({ loiNhapLaiMatKhau: 'Trường này là bắt buộc' })
+            }
+        } else {
+            this.setState({ loiNhapLaiMatKhau: '' })
+        }
         if (loiEmail === '' && loiMatKhau === '' && loiNhapLaiMatKhau === '' && loiTenHienThi === '' && loiSoDienThoai === '') {
-            this.props.actDangKy(data);
+          if(  txtEmail !== '' && txtMatKhau !== '' && txtTenHienThi !== '' && txtSoDienThoai !== '' && txtNhapLaiMatKhau !== '' )  {
+           return this.props.actDangKy(data);
+            }
         }
     }
     render() {

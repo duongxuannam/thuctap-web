@@ -49,6 +49,27 @@ export const ungTuyen = (data) => {
 }
 
 
+//----------DANG TUYEN
+export const actDangTuyenAPI = (data) => {
+    return dispatch => {
+        return callApi(`themcongviec`, 'POST', data).then(res => { 
+           console.log('res: ',res);
+        }).catch(()=> console.log('loi o dayu ne'));
+    }
+}
+
+
+//----------DANG TIN TUC
+export const actThemTinTucAPI = (data) => {
+    console.log('qua met moi', data)
+    return dispatch => {
+        return callApi(`themtintuc`, 'POST', data).then(res => { 
+           console.log('res: ',res);
+        }).catch(()=> console.log('loi o dayu ne'));
+    }
+}
+
+
 
 //------------------------DANG KY
 export const actDangKyAPI = (data) => {

@@ -16,7 +16,7 @@ class ChiTietCongViec extends Component {
     }
     ungTuyen = () => {
         const data = {
-            _idCongViec: '5aa88ac5d8125d0ab419b98d',
+            _idCongViec: this.props.chiTietCongViec._id,
             _idTaiKhoan: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id
         };
         this.props.actUngTuyen(data);
@@ -36,7 +36,7 @@ class ChiTietCongViec extends Component {
     }
     render() {
         console.log('chi tiet ne: ', this.props.chiTietCongViec);
-        console.log('may tai lai hong ');
+        console.log('may tai lai hong', this.props.chiTietCongViec._id);
         const buttondDisabled = (
             <a disabled class="btn btn-primary btn-lg btn-apply">Bạn đã ứng tuyển</a>
         )
