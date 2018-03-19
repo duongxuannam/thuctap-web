@@ -72,16 +72,16 @@ class ThemTinTuc extends Component {
             return this.setState({ loiTieuDe: "Trương này là bắt buộc" })
         }
 
-        // cloudinary.uploader.upload(`${this.state.txtHinhAnh}`).then(result => {
+        cloudinary.uploader.upload(`${this.state.txtHinhAnh}`).then(result => {
             const data = {
                 tieude: this.state.txtTieuDe,
                 noidung: draftToHtml(convertToRaw(this.state.txtNoiDung.getCurrentContent())),
                 _nguoidang: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
-                // hinhanh: result.secure_url,
-                hinhanh: result.secure_url,
+                 hinhanh: result.secure_url,
+              
             }
             this.props.actThemTinTuc(data);
-        // })
+        })
 
 
 
