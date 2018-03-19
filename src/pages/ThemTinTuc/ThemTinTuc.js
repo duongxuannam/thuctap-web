@@ -20,7 +20,8 @@ class ThemTinTuc extends Component {
             txtHinhAnh: '',
             loiTieuDe: '',
             loiHinhAnh: '',
-            loiNoiDung: ''
+            loiNoiDung: '',
+            disabled: ''
         };
     }
     onEditorStateChange = (txtNoiDung) => this.setState({ txtNoiDung });
@@ -71,26 +72,53 @@ class ThemTinTuc extends Component {
         if (this.state.txtTieuDe === '') {
             return this.setState({ loiTieuDe: "Trương này là bắt buộc" })
         }
-
-        cloudinary.uploader.upload(`${this.state.txtHinhAnh}`).then(result => {
-            const data = {
-                tieude: this.state.txtTieuDe,
-                noidung: draftToHtml(convertToRaw(this.state.txtNoiDung.getCurrentContent())),
-                _nguoidang: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
-                 hinhanh: result.secure_url,
-              
+        if (this.state.loiTieuDe === '' && this.state.loiHinhAnh === '') {
+            if (this.state.txtTieuDe !== '' && this.state.txtNoiDung !== '') {
+                if (this.state.txtHinhAnh) {
+                    this.setState({ disabled: 'disabled' })
+                    cloudinary.uploader.upload(`${this.state.txtHinhAnh}`).then(result => {
+                        return result.secure_url
+                    }).then(hinh => {
+                        const data = {
+                            tieude: this.state.txtTieuDe,
+                            noidung: draftToHtml(convertToRaw(this.state.txtNoiDung.getCurrentContent())),
+                            _nguoidang: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
+                            hinhanh: hinh,
+                        }
+                        this.props.actThemTinTuc(data);
+                        alert("Thêm thành công");
+                        return this.props.history.goBack();
+                    })
+                } else {
+                    const data = {
+                        tieude: this.state.txtTieuDe,
+                        noidung: draftToHtml(convertToRaw(this.state.txtNoiDung.getCurrentContent())),
+                        _nguoidang: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
+                    }
+                    this.props.actThemTinTuc(data);
+                    alert("Thêm thành công");
+                    return this.props.history.goBack();
+                }
             }
-            this.props.actThemTinTuc(data);
-        })
-
-
-
+        }
     }
-
     render() {
         const { txtNoiDung, txtTieuDe, loiTieuDe, loiHinhAnh } = this.state;
         // console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtNoiDung.getCurrentContent())));
         // console.log(configCloudinary)
+        const divUploading = (
+            <div>
+                <div id="popup">
+                    <div id="overlay"></div>
+                    <div id="lightbox">
+                        <h1>đang lưu vào cơ sỡ dữ liệu vui lòng đợi</h1>
+                    </div>
+                </div>
+                <div class='cuoi'>
+                </div>
+            </div>
+        )
+        const uploading = this.state.disabled ? divUploading : '';
         return (
             <React.Fragment>
                 <div class="main">
@@ -106,8 +134,8 @@ class ThemTinTuc extends Component {
                                                 <span class="wc-editable" onClick={() => this.props.history.goBack()}>Quay lại</span>
                                             </a>
                                         </div>
-
                                         <div class="row">
+                                            {uploading}
                                             <div class="col-sm-12 col-xs-12">
                                                 <div class="form-group">
                                                     <label class="control-label">
@@ -118,7 +146,9 @@ class ThemTinTuc extends Component {
                                                         onChange={this.onChange}
                                                         value={txtTieuDe}
                                                         name='txtTieuDe'
-                                                        placeholder='Tiêu đề' />
+                                                        placeholder='Tiêu đề'
+                                                        disabled={this.state.disabled}
+                                                    />
                                                     <div class="help-block with-errors">
                                                         <span class="wc-editable hien-thi-loi-edit">{loiTieuDe}</span>
                                                     </div>

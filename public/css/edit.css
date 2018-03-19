@@ -104,3 +104,37 @@
     padding: 10px 15px;
     border: 1px solid rgba(0,0,0,.2);
 }
+
+
+
+#popup{
+    position:absolute;
+    width: 100%;
+}
+#overlay{
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 400;
+    background-color: rgba(0, 0, 0, .9);
+    margin:0;
+    padding:0
+}
+#lightbox{
+    position:relative;
+    width:500px;
+    height:300px;
+  
+    display:block;
+    text-align: center;
+    top:0;
+    margin:20px auto;
+    z-index: 500;
+}
+.cuoi{
+    height:2000px;
+    display:block
+}

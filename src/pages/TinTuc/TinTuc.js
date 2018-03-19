@@ -88,8 +88,8 @@ class TinTuc extends Component {
                                         <span class="wc-editable" data-pk="ws_blog_side_desc" data-type="text">Use this field as a call to action to your job portal visitors - candidates and employers.
                                     Ask them to send you a short success story or contribute to your blog.</span>
                                     </p>
-                                    <Link to={`/chitiettintuc`} class="btn btn-primary" >
-                                        <span class="wc-editable" data-pk="ws_blog_read_more" data-type="text">Đọc tiếp</span>
+                                    <Link to={`/themtintuc`} class="btn btn-primary" >
+                                        <span class="wc-editable" >Thêm bài viết</span>
 
                                     </Link>
                                 </div>
