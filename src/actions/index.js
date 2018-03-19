@@ -59,6 +59,42 @@ export const actDangTuyenAPI = (data) => {
 }
 
 
+//-----------------LAY DATA TIN TUC
+export const actLayDataTinTucAPI = () => {
+    return dispatch => {
+        return callApi('tintuc', 'GET', null).then(res => {
+            dispatch(actLayDataTinTuc(res.data));
+        });
+    };
+}
+export const actLayDataTinTuc = (data) => {
+    return {
+        type : Types.LAY_DATA_TIN_TUC,
+        data
+    }
+}
+
+
+//-----------CHI TIET CONG VIEC
+export const chiTietTinTucAPI = (id) => {
+    return dispatch => {
+        return callApi(`tintuc/${id}`, 'GET', null).then(res => {
+            dispatch(chiTietTinTuc(res));
+        });
+    }
+}
+
+export const chiTietTinTuc = (data) => {
+    return {
+        type : Types.CHI_TIET_TIN_TUC,
+        data
+    }
+}
+
+
+
+
+
 //----------DANG TIN TUC
 export const actThemTinTucAPI = (data) => {
     console.log('qua met moi', data)

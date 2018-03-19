@@ -56,7 +56,7 @@ const routes = [
         main: ({ match, history }) => <TinTuc match={match} history={history} />
     },
     {
-        path: '/chitiettintuc',
+        path: '/chitiettintuc/:id',
         exact: false,
         main: ({ match, history }) => <ChiTietTinTuc match={match} history={history} />
     },

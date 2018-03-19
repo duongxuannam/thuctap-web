@@ -138,3 +138,11 @@
     height:2000px;
     display:block
 }
+
+.hinhtintuc{
+    height: 750;
+    width: 252
+}
+.imgbootstrap {
+    width:750px;height: 562px;display:block; max-width: 100%;
+}

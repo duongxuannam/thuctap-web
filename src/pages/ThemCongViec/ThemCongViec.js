@@ -226,7 +226,7 @@ class ThemCongViec extends Component {
 
         const day = new Date().toISOString().substr(0, 10);
         console.log('ahuhu', this.state)
-        // console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
+        console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
         return (
             <React.Fragment>
                 <div class="main">
