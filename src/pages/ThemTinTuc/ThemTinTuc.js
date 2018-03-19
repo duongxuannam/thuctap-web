@@ -42,8 +42,7 @@ class ThemTinTuc extends Component {
         reader.readAsDataURL(file);
         reader.onloadend = (e) => {
             this.setState({
-                txtHinhAnh: [reader.result],
-                file: file
+                txtHinhAnh: [reader.result]
             })
         };
     }
@@ -79,7 +78,7 @@ class ThemTinTuc extends Component {
                 noidung: draftToHtml(convertToRaw(this.state.txtNoiDung.getCurrentContent())),
                 _nguoidang: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
                 // hinhanh: result.secure_url,
-                hinhanh: this.state.file,
+                hinhanh: result.secure_url,
             }
             this.props.actThemTinTuc(data);
         // })
