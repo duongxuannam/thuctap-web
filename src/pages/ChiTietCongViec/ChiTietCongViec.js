@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { chiTietCongViecAPI, ungTuyenAPI } from '../../actions/index';
 
 
-const logo = require('../../images/cty2.jpg')
+const logo = require('../../images/cty2.jpg');
 
 class ChiTietCongViec extends Component {
     componentDidMount() {
@@ -13,7 +13,7 @@ class ChiTietCongViec extends Component {
             const { id } = match.params;
             this.props.actChiTietCongViec(id);
         }
-    }
+    }    
     ungTuyen = () => {
         const data = {
             _idCongViec: this.props.chiTietCongViec._id,

@@ -86,10 +86,10 @@ class Header extends Component {
                 <div class="container">
                     <ul>
                         <li>
-                            <Link to={`/dangnhap`}>Đăng nhập thành viên</Link>
+                            <Link to={`/dangnhap`}>Đăng nhập</Link>
                         </li>
                         <li>
-                            <Link to={`/dangnhap`}>Đăng nhập nhà tuyển dụng</Link>
+                            <Link to={`/dangky`}>Đăng ký</Link>
                         </li>
                     </ul>
                 </div>

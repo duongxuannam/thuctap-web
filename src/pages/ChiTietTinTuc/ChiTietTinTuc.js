@@ -11,12 +11,7 @@ class ChiTietTinTuc extends Component {
             this.props.actChiTietTinTuc(id);
         }
     }
-    hienThiChu = () => {
-        const hienthi = this.props.chiTietTinTuc.noidung
-            return (
-                 this.props.chiTietTinTuc.noidung 
-            )
-    } 
+   
     render() {
         const { tieude, _nguoidang, ngaydang, hinhanh, noidung } = this.props.chiTietTinTuc
         var tenDefualt = ''
@@ -49,7 +44,7 @@ class ChiTietTinTuc extends Component {
                                         <img class="img-responsive img-hover" src={ hinhanh }
                                             alt="" />
                                     </div>
-                                    <div class="lead" dangerouslySetInnerHTML={{__html: this.props.chiTietTinTuc.noidung}} >
+                                    <div class="lead" dangerouslySetInnerHTML={{__html: noidung}} >
                             
                                     </div>
                                 </div>

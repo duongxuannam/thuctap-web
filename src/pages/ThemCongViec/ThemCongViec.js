@@ -5,6 +5,7 @@ import draftToHtml from 'draftjs-to-html';
 import { connect } from 'react-redux';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { actDangTuyenAPI } from '../../actions/index';
+import { Link } from 'react-router-dom';
 
 
 class ThemCongViec extends Component {
@@ -225,244 +226,277 @@ class ThemCongViec extends Component {
          } = this.state;
 
         const day = new Date().toISOString().substr(0, 10);
-        console.log('ahuhu', this.state)
-        console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
-        return (
-            <React.Fragment>
-                <div class="main">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="form">
-                                    <form class="form-dyna xs-4" onSubmit={this.onSubmit}>
-                                        <input type="hidden" name="job_create" value="1" />
-                                        <div class="edit-job-actions">
-                                            <a class="btn btn-back btn-secondary btn-sm" role="button">
-                                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                                <span class="wc-editable" onClick={() => this.props.history.goBack()}>Quay lại</span>
-                                            </a>
-                                        </div>
+        // console.log('ahuhu', this.state)
+        // console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
+        // console.log('aaa', this.props.taiKhoan.taikhoan)
+        const chuaDangNhap = (
+            <div className="loi-ghide-height">
+                <div className="container ">
+                    <div class="panel panel-danger ">
+                        <div class="panel-heading">Bạn chưa đăng nhập</div>
+                        <div class="panel-body">Vui lòng <Link to='dangnhap'>đăng nhập</Link> và kích hoạt tài khoản nhà tuyển dụng để đăng tuyển</div>
 
-                                        <div class="row">
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable">Tiêu đề</span>
-                                                    </label>
-                                                    <input
-                                                        type="text" class="form-control required"
-                                                        onChange={this.onChange}
-                                                        value={txtTieuDe}
-                                                        name='txtTieuDe'
-                                                        placeholder='Tiêu đề' />
-                                                    <div class="help-block with-errors">
-                                                        <span class="wc-editable hien-thi-loi-edit">{loiTieuDe}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable">Địa điểm</span>:</label>
-                                                    <input
-                                                        type="text" class="form-control required"
-                                                        onChange={this.onChange}
-                                                        value={txtDiaDiem}
-                                                        name='txtDiaDiem'
-                                                        placeholder='Địa điểm làm việc' />
-                                                    <div class="help-block with-errors">
-                                                        <span class="wc-editable hien-thi-loi-edit">{loiDiaDiem}</span>
-                                                    </div>
+                    </div>
+                </div>
+            </div>
+        )
+        const ok = (
+            <div class="main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="form">
+                                <form class="form-dyna xs-4" onSubmit={this.onSubmit}>
+                                    <input type="hidden" name="job_create" value="1" />
+                                    <div class="edit-job-actions">
+                                        <a class="btn btn-back btn-secondary btn-sm" role="button">
+                                            <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                                            <span class="wc-editable" onClick={() => this.props.history.goBack()}>Quay lại</span>
+                                        </a>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable">Tiêu đề</span>
+                                                </label>
+                                                <input
+                                                    type="text" class="form-control required"
+                                                    onChange={this.onChange}
+                                                    value={txtTieuDe}
+                                                    name='txtTieuDe'
+                                                    placeholder='Tiêu đề' />
+                                                <div class="help-block with-errors">
+                                                    <span class="wc-editable hien-thi-loi-edit">{loiTieuDe}</span>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable" >Chuyên ngành</span>:</label>
-                                                    <select class="form-control" onChange={this.onChange} defaultValue={chuyenNganh} name="chuyenNganh">
-                                                        <option value="" disabled >Lựa chọn chuyên ngành</option>
-                                                        <option value="Công nghệ thông tin">Công nghệ thông tin</option>
-                                                        <option value="Giáo dục">Giáo dục</option>
-                                                        <option value="Kinh tế">Kinh tế</option>
-                                                        <option value="Tài nguyên môi trường">Tài nguyên môi trường</option>
-                                                        <option value="Khác">Khác</option>
-                                                    </select>
-                                                    <div class="help-block with-errors">
-                                                        <span class="wc-editable hien-thi-loi-edit">{loiChuyenNganh}</span>
-                                                    </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable">Địa điểm</span>:</label>
+                                                <input
+                                                    type="text" class="form-control required"
+                                                    onChange={this.onChange}
+                                                    value={txtDiaDiem}
+                                                    name='txtDiaDiem'
+                                                    placeholder='Địa điểm làm việc' />
+                                                <div class="help-block with-errors">
+                                                    <span class="wc-editable hien-thi-loi-edit">{loiDiaDiem}</span>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable" >Kiểu</span>:</label>
-                                                    <select class="form-control" onChange={this.onChange} defaultValue={kieu} name="kieu">
-                                                        <option value="" disabled >Lựa chọn kiểu</option>
-                                                        <option value="Toàn thời gian">Toàn thời gian</option>
-                                                        <option value="Bán thời gian">Bán thời gian</option>
-                                                        <option value="Thực tập">Thực tập</option>
-                                                        <option value="Thời vụ">Thời vụ</option>
-                                                        <option value="Chính thức">Chính thức</option>
-                                                    </select>
-                                                    <div class="help-block with-errors">
-                                                        <span class="wc-editable hien-thi-loi-edit">{loiKieu}</span>
-                                                    </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable" >Chuyên ngành</span>:</label>
+                                                <select class="form-control" onChange={this.onChange} defaultValue={chuyenNganh} name="chuyenNganh">
+                                                    <option value="" disabled >Lựa chọn chuyên ngành</option>
+                                                    <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+                                                    <option value="Giáo dục">Giáo dục</option>
+                                                    <option value="Kinh tế">Kinh tế</option>
+                                                    <option value="Tài nguyên môi trường">Tài nguyên môi trường</option>
+                                                    <option value="Khác">Khác</option>
+                                                </select>
+                                                <div class="help-block with-errors">
+                                                    <span class="wc-editable hien-thi-loi-edit">{loiChuyenNganh}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable" >Kiểu</span>:</label>
+                                                <select class="form-control" onChange={this.onChange} defaultValue={kieu} name="kieu">
+                                                    <option value="" disabled >Lựa chọn kiểu</option>
+                                                    <option value="Toàn thời gian">Toàn thời gian</option>
+                                                    <option value="Bán thời gian">Bán thời gian</option>
+                                                    <option value="Thực tập">Thực tập</option>
+                                                    <option value="Thời vụ">Thời vụ</option>
+                                                    <option value="Chính thức">Chính thức</option>
+                                                </select>
+                                                <div class="help-block with-errors">
+                                                    <span class="wc-editable hien-thi-loi-edit">{loiKieu}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable">Chức vụ</span>:</label>
+                                                <select class="form-control" onChange={this.onChange} defaultValue={chucVu} name="chucVu">
+                                                    <option value="" disabled>Lựa chọn chức vụ</option>
+
+                                                    <option value="Thực tập sinh">Thực tập sinh</option>
+
+                                                    <option value="Nhân viên chính thức">Nhân viên chính thức</option>
+
+                                                    <option value="Freelancer">Freelancer</option>
+                                                </select>
+                                                <div class="help-block with-errors">
+                                                    <span class="wc-editable hien-thi-loi-edit">{loiChucVu}</span>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable">Chức vụ</span>:</label>
-                                                    <select class="form-control" onChange={this.onChange} defaultValue={chucVu} name="chucVu">
-                                                        <option value="" disabled>Lựa chọn chức vụ</option>
-
-                                                        <option value="Thực tập sinh">Thực tập sinh</option>
-
-                                                        <option value="Nhân viên chính thức">Nhân viên chính thức</option>
-
-                                                        <option value="Freelancer">Freelancer</option>
-                                                    </select>
-                                                    <div class="help-block with-errors">
-                                                        <span class="wc-editable hien-thi-loi-edit">{loiChucVu}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable" >Lương</span>:</label>
-                                                    <input type="text" class="form-control" onChange={this.onChange} value={txtLuong} name="txtLuong" placeholder='Nhập khoản lương hoặc trợ cấp' />
-                                                    <div class="help-block with-errors">
-                                                        <span class="wc-editable hien-thi-loi-edit">{loiLuong}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable" >Trình độ</span>:</label>
-                                                    <select class="form-control" onChange={this.onChange} defaultValue={trinhDo} name="trinhDo">
-                                                        <option value="" disabled >Lựa chọn trình độ</option>
-                                                        <option value="Sinh viên năm 1 - 2"> Sinh viên năm 1 - 2</option>
-                                                        <option value="Sinh viên năm 3 - 4"> Sinh viên năm 3 - 4</option>
-                                                        <option value="Đại học"> Đại học</option>
-                                                        <option value="Cao đẳng"> Cao đẳng</option>
-                                                        <option value="Không"> Không</option>
-                                                    </select>
-                                                    <div class="help-block with-errors">
-                                                        <span class="wc-editable hien-thi-loi-edit">{loiTrinhDo}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable">Kinh nghiệm</span>:</label>
-
-                                                    <select class="form-control" onChange={this.onChange} defaultValue={kinhNghiem} name="kinhNghiem">
-                                                        <option value="" disabled >Lựa chọn kinh nghiệm</option>
-                                                        <option value="Không" >Không</option>
-
-                                                        <option value="< 1 năm"> &lt; 1 năm</option>
-
-                                                        <option value="1 - 2 năm"> 1 - 2 năm</option>
-
-                                                        <option value="> 2 năm"> &gt; 2 năm</option>
-                                                    </select>
-                                                    <div class="help-block with-errors">
-                                                        <span class="wc-editable hien-thi-loi-edit">{loiKinhNghiem}</span>
-                                                    </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable" >Lương</span>:</label>
+                                                <input type="text" class="form-control" onChange={this.onChange} value={txtLuong} name="txtLuong" placeholder='Nhập khoản lương hoặc trợ cấp' />
+                                                <div class="help-block with-errors">
+                                                    <span class="wc-editable hien-thi-loi-edit">{loiLuong}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable">Số lượng</span>
-                                                    </label>
-                                                    <input type="text" class="form-control required" onChange={this.onChange} value={txtSoLuong} name="txtSoLuong" />
-                                                    <div class="help-block with-errors">
-                                                        <span class="wc-editable hien-thi-loi-edit">{loiSoLuong}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable" >Thời hạn</span>:</label>
-                                                    <input type="date" class="form-control required" min={day} onChange={this.onChange} value={thoiHan} name="thoiHan" />
-                                                    <div class="help-block with-errors">
-                                                        <span class="wc-editable hien-thi-loi-edit">{loiThoiHan}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
 
-                                            <div class="col-sm-6 col-xs-12">
-                                                <div class="form-group">
-                                                    <label class="control-label">
-                                                        <span class="wc-editable" >Hình ảnh(nếu có)</span>:</label>
-                                                    <input
-                                                        ref="file"
-                                                        type="file"
-                                                        name="user[image]"
-                                                        multiple="true"
-                                                        onChange={this.onChangeFile} />
-                                                    <div class="col-sm-12 col-xs-12">
-                                                        <img class="col-sm-12 col-xs-12" src={this.state.imgSrc} alt="Chưa chọn hình" />
-                                                    </div>
+                                    </div>
 
-                                                    <div class="help-block with-errors">
-                                                        <ul class="list-unstyled"></ul>
-                                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable" >Trình độ</span>:</label>
+                                                <select class="form-control" onChange={this.onChange} defaultValue={trinhDo} name="trinhDo">
+                                                    <option value="" disabled >Lựa chọn trình độ</option>
+                                                    <option value="Sinh viên năm 1 - 2"> Sinh viên năm 1 - 2</option>
+                                                    <option value="Sinh viên năm 3 - 4"> Sinh viên năm 3 - 4</option>
+                                                    <option value="Đại học"> Đại học</option>
+                                                    <option value="Cao đẳng"> Cao đẳng</option>
+                                                    <option value="Không"> Không</option>
+                                                </select>
+                                                <div class="help-block with-errors">
+                                                    <span class="wc-editable hien-thi-loi-edit">{loiTrinhDo}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group editor-themcongviec">
-                                            <label class="control-label">
-                                                <span class="wc-editable" >Mô tả chi tiết</span>:</label>
-                                            <Editor
-                                                editorState={txtMoTa}
-                                                wrapperClassName="demo-wrapper"
-                                                editorClassName="demo-editor boderediter-edit"
-                                                onEditorStateChange={this.onEditorStateChange}
-                                            />
-                                            <div class="help-block with-errors">
-                                                <span class="wc-editable hien-thi-loi-edit">{loiMoTa}</span>
+
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable">Kinh nghiệm</span>:</label>
+
+                                                <select class="form-control" onChange={this.onChange} defaultValue={kinhNghiem} name="kinhNghiem">
+                                                    <option value="" disabled >Lựa chọn kinh nghiệm</option>
+                                                    <option value="Không" >Không</option>
+
+                                                    <option value="< 1 năm"> &lt; 1 năm</option>
+
+                                                    <option value="1 - 2 năm"> 1 - 2 năm</option>
+
+                                                    <option value="> 2 năm"> &gt; 2 năm</option>
+                                                </select>
+                                                <div class="help-block with-errors">
+                                                    <span class="wc-editable hien-thi-loi-edit">{loiKinhNghiem}</span>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable">Số lượng</span>
+                                                </label>
+                                                <input type="text" class="form-control required" onChange={this.onChange} value={txtSoLuong} name="txtSoLuong" />
+                                                <div class="help-block with-errors">
+                                                    <span class="wc-editable hien-thi-loi-edit">{loiSoLuong}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable" >Thời hạn</span>:</label>
+                                                <input type="date" class="form-control required" min={day} onChange={this.onChange} value={thoiHan} name="thoiHan" />
+                                                <div class="help-block with-errors">
+                                                    <span class="wc-editable hien-thi-loi-edit">{loiThoiHan}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    <span class="wc-editable" >Hình ảnh(nếu có)</span>:</label>
+                                                <input
+                                                    ref="file"
+                                                    type="file"
+                                                    name="user[image]"
+                                                    multiple="true"
+                                                    onChange={this.onChangeFile} />
+                                                <div class="col-sm-12 col-xs-12">
+                                                    <img class="col-sm-12 col-xs-12" src={this.state.imgSrc} alt="Chưa chọn hình" />
+                                                </div>
+
+                                                <div class="help-block with-errors">
+                                                    <ul class="list-unstyled"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group editor-themcongviec">
+                                        <label class="control-label">
+                                            <span class="wc-editable" >Mô tả chi tiết</span>:</label>
+                                        <Editor
+                                            editorState={txtMoTa}
+                                            wrapperClassName="demo-wrapper"
+                                            editorClassName="demo-editor boderediter-edit"
+                                            onEditorStateChange={this.onEditorStateChange}
+                                        />
+                                        <div class="help-block with-errors">
+                                            <span class="wc-editable hien-thi-loi-edit">{loiMoTa}</span>
+                                        </div>
+                                    </div>
 
 
-                                        <button type="submit" class="btn btn-primary">
-                                            <span class="wc-editable" >Lưu</span>
-                                        </button>
-                                    </form>
-                                </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <span class="wc-editable" >Lưu</span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        )
+        const chuaKichHoat = (
+            <div className="loi-ghide-height">
+                <div className="container ">
+                    <div class="panel panel-danger ">
+                        <div class="panel-heading">Bạn chưa kich hoạt tài khoản nhà tuyên dụng</div>
+                        <div class="panel-body">Vui lòng <Link to='dangnhap'>kích hoạt</Link> tài khoản nhà tuyển dụng để đăng tuyển</div>
 
+                    </div>
+                </div>
+            </div>
+        )
+        const daDangNhap = this.props.taiKhoan &&  this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? ok : chuaKichHoat; 
+       const main = this.props.taiKhoan ? daDangNhap : chuaDangNhap
+        return (
+            <React.Fragment>
+
+                {main}
                 <div class="push"></div>
             </React.Fragment >
         );
     }
 };
 
+const mapStateToProps = state => {
+    return {
+        taiKhoan: state.taiKhoan
+    }
+}
 const mapDispatchToProps = (dispatch, props) => {
     return {
         actDangTuyen: (data) => {
@@ -472,4 +506,4 @@ const mapDispatchToProps = (dispatch, props) => {
 }
 
 
-export default connect(null, mapDispatchToProps)(ThemCongViec);
+export default connect(mapStateToProps, mapDispatchToProps)(ThemCongViec);
