@@ -105,6 +105,40 @@ export const actThemTinTucAPI = (data) => {
     }
 }
 
+//----------Cap nhat thong tin
+export const actCapNhatThongTinAPI = (data) => {
+    console.log('qua met moi', data)
+    return dispatch => {
+        return callApi(`capnhatthongtin`, 'POST', data).then(res => { 
+             dispatch(actCapNhatThongTin(res.data));
+            console.log('res: ',res);
+        }).catch(()=> console.log('loi o dayu ne'));
+    }
+}
+export const actCapNhatThongTin = (data) => {
+    return {
+        type : Types.CAP_NHAT_THONG_TIN,
+        data
+    }
+}
+
+
+//----------kich hoat nha tuyen dung
+export const actKichHoatNhaTuyenDungAPI = (data) => {
+    console.log('qua met moi', data)
+    return dispatch => {
+        return callApi(`dangkynhatuyendung`, 'POST', data).then(res => { 
+             dispatch(actKichHoatNhaTuyenDung(res.data));
+            console.log('res: ',res);
+        }).catch(()=> console.log('loi o dayu ne'));
+    }
+}
+export const actKichHoatNhaTuyenDung = (data) => {
+    return {
+        type : Types.KICH_HOAT_NHA_TUYEN_DUNG,
+        data
+    }
+}
 
 
 //------------------------DANG KY

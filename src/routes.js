@@ -12,6 +12,8 @@ import LienHe from './pages/LienHe/LienHe';
 import ThemCongViec from './pages/ThemCongViec/ThemCongViec';
 import CongViecDaDang from './pages/CongViecDaDang/CongViecDaDang';
 import ThemTinTuc from './pages/ThemTinTuc/ThemTinTuc';
+import NhaTuyenDung from './pages/NhaTuyenDung/NhaTuyenDung';
+import KichHoatNhaTuyenDung from './pages/KichHoatNhaTuyenDung/KichHoatNhaTuyenDung';
 import Loi from './pages/Loi/Loi';
 
 const routes = [
@@ -79,6 +81,17 @@ const routes = [
         path: '/themtintuc',
         exact: false,
         main: ({ match, history }) => <ThemTinTuc match={match} history={history} />
+    },
+    {
+        path: '/nhatuyendung',
+        exact: false,
+        main: ({ match, history }) => <NhaTuyenDung match={match} history={history} />
+    },
+    ,
+    {
+        path: '/kichhoatnhatuyendung',
+        exact: false,
+        main: ({ match, history }) => <KichHoatNhaTuyenDung match={match} history={history} />
     },
     {
         path: '',

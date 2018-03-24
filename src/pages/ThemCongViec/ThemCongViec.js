@@ -3,9 +3,9 @@ import { EditorState, convertToRaw, } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { actDangTuyenAPI } from '../../actions/index';
-import { Link } from 'react-router-dom';
 
 
 class ThemCongViec extends Component {
@@ -227,7 +227,7 @@ class ThemCongViec extends Component {
 
         const day = new Date().toISOString().substr(0, 10);
         // console.log('ahuhu', this.state)
-        // console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
+         console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
         // console.log('aaa', this.props.taiKhoan.taikhoan)
         const chuaDangNhap = (
             <div className="loi-ghide-height">
@@ -474,14 +474,14 @@ class ThemCongViec extends Component {
                 <div className="container ">
                     <div class="panel panel-danger ">
                         <div class="panel-heading">Bạn chưa kich hoạt tài khoản nhà tuyên dụng</div>
-                        <div class="panel-body">Vui lòng <Link to='dangnhap'>kích hoạt</Link> tài khoản nhà tuyển dụng để đăng tuyển</div>
+                        <div class="panel-body">Vui lòng <Link to='kichhoatnhatuyendung'>kích hoạt</Link> tài khoản nhà tuyển dụng để đăng tuyển</div>
 
                     </div>
                 </div>
             </div>
         )
-        const daDangNhap = this.props.taiKhoan &&  this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? ok : chuaKichHoat; 
-       const main = this.props.taiKhoan ? daDangNhap : chuaDangNhap
+        const daDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? ok : chuaKichHoat;
+        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? daDangNhap : chuaDangNhap
         return (
             <React.Fragment>
 

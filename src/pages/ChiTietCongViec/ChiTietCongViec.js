@@ -22,11 +22,10 @@ class ChiTietCongViec extends Component {
         this.props.actUngTuyen(data);
     };
     kiemTraDaUngTuyen = () => {
-        console.log('tại sapo')
         var result = false
         if (this.props.chiTietCongViec._danhsachungtuyen && this.props.chiTietCongViec._danhsachungtuyen.length > 0) {
             for (var i = 0; i < this.props.chiTietCongViec._danhsachungtuyen.length; i++) {
-                if (localStorage.getItem('taikhoan') && this.props.chiTietCongViec._danhsachungtuyen[i] === JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id) {
+                if (this.props.taiKhoan && this.props.chiTietCongViec._danhsachungtuyen[i] === this.props.taiKhoan.taikhoan._id) {
                     result = true;
                     break;
                 }
@@ -40,13 +39,17 @@ class ChiTietCongViec extends Component {
         const buttondDisabled = (
             <a disabled class="btn btn-primary btn-lg btn-apply">Bạn đã ứng tuyển</a>
         )
+        const buttondChuaHoanThienHoSo = (
+            <Link to={`/thongtintaikhoan`} class="btn btn-primary btn-lg btn-apply">Hoàn thiện hồ sơ trước khi ứng tuyển</Link>
+        )
         const buttonEnabled = (
             <a onClick={this.ungTuyen} class="btn btn-primary btn-lg btn-apply">Ứng tuyển</a>
         )
         const buttonChuaDangNhap = (
             <Link to={`/dangnhap`} class="btn btn-primary btn-lg btn-apply">Đăng nhập để ứng tuyển</Link>
         )
-        const hienthiButton = this.kiemTraDaUngTuyen() ? buttondDisabled : buttonEnabled;
+        const daDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.hoanthienhoso ? buttonEnabled : buttondChuaHoanThienHoSo 
+        const hienthiButton = this.kiemTraDaUngTuyen() ? buttondDisabled : daDangNhap;
         const ChuaDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? hienthiButton : buttonChuaDangNhap
         return (
             <React.Fragment>

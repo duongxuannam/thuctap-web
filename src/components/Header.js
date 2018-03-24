@@ -75,6 +75,7 @@ class Header extends Component {
         }
         return result;
     }
+    
     render() {
         console.log(this.props);
         var hienThiTen = '';
@@ -110,12 +111,14 @@ class Header extends Component {
                                 <li>
                                     <Link to={`/thongtintaikhoan`}>
                                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                        Thông tin
+                                        Thông tin tài khoản
                                     </Link>
                                 </li>
                                 <li>
-                                    <a href="my-jobs.html">
-                                        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> My jobs</a>
+                                <Link to={`/nhatuyendung`}>
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                Nhà tuyển dụng
+                            </Link>
                                 </li>
                                 <li>
                                     <a href="shortlisted.html">

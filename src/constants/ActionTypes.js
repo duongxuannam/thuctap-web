@@ -8,6 +8,10 @@ export const DANG_TUYEN = 'DANG_TUYEN';
 export const THEM_TIN_TUC = 'THEM_TIN_TUC';
 export const LAY_DATA_TIN_TUC = 'LAY_DATA_TIN_TUC';
 export const CHI_TIET_TIN_TUC = 'CHI_TIET_TIN_TUC';
+export const CAP_NHAT_THONG_TIN = 'CAP_NHAT_THONG_TIN';
+export const KICH_HOAT_NHA_TUYEN_DUNG = 'KICH_HOAT_NHA_TUYEN_DUNG';
+
+
 
 
 

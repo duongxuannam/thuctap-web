@@ -94,11 +94,12 @@ class DangKy extends Component {
                     if (this.state.txtSoDienThoai === '') {
                         this.setState({ loiSoDienThoai: 'Trường này là bắt buộc' })
                     }
-                    if (isNaN(this.state.txtSoDienThoai)) {
-                        this.setState({ loiSoDienThoai: 'Số điện thoại không hợp lệ' })
-                    }
+                   
                 } else {
                     this.setState({ loiSoDienThoai: '' })
+                }
+                if (isNaN(this.state.txtSoDienThoai)) {
+                    this.setState({ loiSoDienThoai: 'Số điện thoại không hợp lệ' })
                 }
             }
         });
@@ -200,9 +201,7 @@ class DangKy extends Component {
                             <div class="form" onSubmit={this.dangKy}>
                                 <form class="form-dyna xs-4">
                                     <div class="form-group">
-                                        <label class="control-label">
-                                            <span class="wc-editable" data-type="text">Email</span>
-                                        </label>
+                                        <label class="control-label"><span class="wc-editable" data-type="text">Email</span>   </label>
                                         <input type="email" name="txtEmail" value={txtEmail} onChange={this.onChange} class="form-control required email" />
                                         <div class="help-block with-errors">
                                             <span class="wc-editable hien-thi-loi-edit">{loiEmail}</span>

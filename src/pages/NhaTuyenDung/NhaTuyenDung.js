@@ -13,7 +13,7 @@ import { actCapNhatThongTinAPI } from '../../actions/index';
 
 cloudinary.config(configCloudinary)
 
-class ThongTinTaiKhoan extends Component {
+class NhaTuyenDung extends Component {
     constructor(props) {
         super(props);
         // const html = '<ol>\n<li>Đêm nay trên đường hành quân ra mặt trận&nbsp;<\/li>\n<li>trùng trùng đoàn quân tiến bước theo con đường của <strong>Bác<\/strong><\/li>\n<\/ol>\n';
@@ -167,7 +167,7 @@ class ThongTinTaiKhoan extends Component {
         }
         if (this.state.loiHoTen === '' && this.state.loiHinhAnh === '' && this.state.loiSoDienThoai === '' && this.state.loiDiaChi === '' && this.state.loiTruongDaiHoc === '' && this.state.loiChuyenNganh === '') {
             if (this.state.txtHoTen !== '' && this.state.txtDiaChi !== '' && this.state.txtTruongDaiHoc !== '' && this.state.txtChuyenNganh !== '') {
-      
+
                 if (this.state.daThayHinh) {
                     this.setState({ disabled: 'disabled' })
                     cloudinary.uploader.upload(`${this.state.hinhanh}`).then(result => {
@@ -464,7 +464,15 @@ class ThongTinTaiKhoan extends Component {
 
         return (
             <React.Fragment>
-                {main}
+                <div className="loi-ghide-height">
+                    <div className="container ">
+                        <div class="panel panel-danger ">
+                            <div class="panel-heading">Bạn chưa kich hoạt tài khoản nhà tuyên dụng</div>
+                            <div class="panel-body">Vui lòng <Link to='kichhoatnhatuyendung'>kích hoạt</Link> tài khoản nhà tuyển dụng và đợi xét duyệt để đăng tuyển</div>
+
+                        </div>
+                    </div>
+                </div>
                 <div class="push"></div>
             </React.Fragment>
         );
@@ -483,4 +491,4 @@ const mapDispatchToProps = (dispatch, props) => {
         },
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ThongTinTaiKhoan);
+export default connect(mapStateToProps, mapDispatchToProps)(NhaTuyenDung);
