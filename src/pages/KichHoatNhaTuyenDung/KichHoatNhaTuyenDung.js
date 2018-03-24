@@ -260,7 +260,12 @@ class KichHoatNhaTuyenDung extends Component {
         const choDuyet = (
             <div class="alert alert-warning">Bạn đã đăng ký thông tin nhà tuyển dụng vui lòng đợi hoặc liên hệ trực tiếp để kích hoạt tính năng</div>
         )
+        const daDuyet = (
+            <div class="alert alert-success">Bạn đã kích hoạt nhà tuyển dụng. Có thể đăng tuyển và chỉnh sửa thông tin</div>
+        )
         const mainHoanThien = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.trangthai === 'dangduyet' ? choDuyet : chuaDangKy;
+        const mainHoanThienDaDuyet = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.trangthai === 'daduyet' ? daDuyet : mainHoanThien;
+
         const chuaDangNhap = (
             <div className="loi-ghide-height">
                 <div className="container ">
@@ -304,7 +309,7 @@ class KichHoatNhaTuyenDung extends Component {
                             </div>
 
                             <div class="col-lg-8 col-md-7 col-xs-12">
-                                {mainHoanThien}
+                                {mainHoanThienDaDuyet}
 
 
                                 <div class="form">

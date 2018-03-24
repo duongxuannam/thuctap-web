@@ -14,6 +14,8 @@ import CongViecDaDang from './pages/CongViecDaDang/CongViecDaDang';
 import ThemTinTuc from './pages/ThemTinTuc/ThemTinTuc';
 import NhaTuyenDung from './pages/NhaTuyenDung/NhaTuyenDung';
 import KichHoatNhaTuyenDung from './pages/KichHoatNhaTuyenDung/KichHoatNhaTuyenDung';
+import QuanLy from './pages/QuanLy/QuanLy';
+import ThongTinNhaTuyenDung from './pages/ThongTinNhaTuyenDung/ThongTinNhaTuyenDung';
 import Loi from './pages/Loi/Loi';
 
 const routes = [
@@ -87,11 +89,20 @@ const routes = [
         exact: false,
         main: ({ match, history }) => <NhaTuyenDung match={match} history={history} />
     },
-    ,
+    {
+        path: '/quanly',
+        exact: false,
+        main: ({ match, history }) => <QuanLy match={match} history={history} />
+    },
     {
         path: '/kichhoatnhatuyendung',
         exact: false,
         main: ({ match, history }) => <KichHoatNhaTuyenDung match={match} history={history} />
+    },
+    {
+        path: '/thongtinnhatuyendung/:id',
+        exact: false,
+        main: ({ match, history }) => <ThongTinNhaTuyenDung match={match} history={history} />
     },
     {
         path: '',

@@ -141,6 +141,57 @@ export const actKichHoatNhaTuyenDung = (data) => {
 }
 
 
+//------------------------DANH SÁCH DANG KY NAH TUYEN DUNG
+export const actLayDanhSachDangKyNhaTuyenDungAPI = () => {
+    return dispatch => {
+        return callApi(`danhsachdangkynhatuyendung`,'GET', null).then(res => {
+            console.log('huh',res)
+            dispatch(actLayDanhSachDangKyNhaTuyenDung(res.data));
+        });
+    }
+}
+
+export const actLayDanhSachDangKyNhaTuyenDung = (data) => {
+    return {
+        type : Types.LAY_DANH_SACH_DANG_KY_NHA_TUYEN_DUNG,
+        data
+    }
+}
+
+
+//------------------------DUYET  NHA TUYEN DUNG
+export const actDuyetNhaTuyenDungAPI = (id) => {
+    return dispatch => {
+        return callApi(`duyetnhatuyendung/${id}`,'GET', null).then(res => {
+            console.log('huh',res)
+            dispatch( actDuyetNhaTuyenDung(res.data));
+        });
+    }
+}
+
+export const  actDuyetNhaTuyenDung = (data) => {
+    return {
+        type : Types.DUYET_NHA_TUYEN_DUNG,
+        data
+    }
+}
+
+
+//------------------------LAY THONG TIN TAI KHOAN
+export const actLayThongTinTaiKhoanAPI = (id) => {
+    return dispatch => {
+        return callApi(`laythongtintaikhoan/${id}`,'GET', null).then(res => {
+            dispatch( actLayThongTinTaiKhoan(res.data));
+        });
+    }
+}
+
+export const  actLayThongTinTaiKhoan = (data) => {
+    return {
+        type : Types.LAY_THONG_TIN_TAI_KHOAN,
+        data
+    }
+}
 //------------------------DANG KY
 export const actDangKyAPI = (data) => {
     return dispatch => {

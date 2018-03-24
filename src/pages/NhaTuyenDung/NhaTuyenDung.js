@@ -8,7 +8,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { configCloudinary } from '../../global/config';
-import { actCapNhatThongTinAPI } from '../../actions/index';
+import { actKichHoatNhaTuyenDungAPI } from '../../actions/index';
 
 
 cloudinary.config(configCloudinary)
@@ -23,46 +23,58 @@ class NhaTuyenDung extends Component {
 
         this.state = {
             editorState: EditorState.createEmpty(),
-            txtHoTen: '',
+            txtTenCongTy: '',
             txtSoDienThoai: '',
             txtEmail: '',
             txtDiaChi: '',
-            txtTruongDaiHoc: '',
-            txtChuyenNganh: '',
-            loiHoTen: '',
+            txtWebsite: '',
+            linhvuchoatdong: '',
+            loiTenCongTy: '',
             loiSoDienThoai: '',
             loiDiaChi: '',
-            loiTruongDaiHoc: '',
-            loiChuyenNganh: '',
+            loiLinhVucHoatDong: '',
+            loiEmail: '',
+            loiWebsite: '',
             loiHinhAnh: '',
             daThayHinh: false,
             disabled: '',
-            hinhanh: 'http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png'
+            hinhanh: 'https://res.cloudinary.com/thuctap/image/upload/v1521876438/LogoTitle.png'
 
         };
-        //  this.state = { editorState };
     }
     componentDidMount() {
-        if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
-            const { anhdaidien, email, hotenthat, diachi, truongdaihoc, chuyennganh, gioithieu, sodienthoai } = this.props.taiKhoan.taikhoan
+        if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.nhatuyendung) {
+            const { tencongty, email, website, diachi, linhvuchoatdong, gioithieu, sodienthoai, logo } = this.props.taiKhoan.taikhoan.nhatuyendung
             const gioiThieuCuoiCung = gioithieu ? EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(gioithieu).contentBlocks)) : EditorState.createEmpty()
             // const contentBlock = htmlToDraft(gioithieu);
             // const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
             // gioiThieuCuoiCung = EditorState.createWithContent(contentState);
 
             this.setState({
-                txtHoTen: hotenthat,
+                txtTenCongTy: tencongty,
                 txtDiaChi: diachi,
                 txtEmail: email,
-                txtChuyenNganh: chuyennganh,
-                txtTruongDaiHoc: truongdaihoc,
+                txtWebsite: website,
                 txtSoDienThoai: sodienthoai,
+                linhvuchoatdong: linhvuchoatdong,
                 editorState: gioiThieuCuoiCung,
-                hinhanh: anhdaidien ? anhdaidien : this.state.hinhanh
+                hinhanh: logo ? logo : this.state.hinhanh,
+                trangthai: this.props.taiKhoan.taikhoan
             })
         }
     }
     onEditorStateChange = (editorState) => this.setState({ editorState: editorState });
+    validateEmail(sEmail) {
+        var reEmail = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
+
+        if (!sEmail.match(reEmail)) {
+
+            return false;
+        }
+
+        return true;
+
+    }
     onChange = (e) => {
         const target = e.target;
         const name = target.name;
@@ -70,14 +82,14 @@ class NhaTuyenDung extends Component {
         this.setState({
             [name]: value
         }, () => {
-            if (name === 'txtHoTen') {
-                if (this.state.txtHoTen.length < 3) {
-                    this.setState({ loiHoTen: 'Họ tên quá ngắn' });
-                    if (this.state.txtHoTen === '') {
-                        this.setState({ loiHoTen: 'Trường này là bắt buộc' })
+            if (name === 'txtTenCongTy') {
+                if (this.state.txtTenCongTy.length < 3) {
+                    this.setState({ loiTenCongTy: 'Tên công ty quá ngắn' });
+                    if (this.state.txtTenCongTy === '') {
+                        this.setState({ loiTenCongTy: 'Trường này là bắt buộc' })
                     }
                 } else {
-                    this.setState({ loiHoTen: '' })
+                    this.setState({ loiTenCongTy: '' })
                 }
             }
             if (name === 'txtDiaChi') {
@@ -90,22 +102,24 @@ class NhaTuyenDung extends Component {
                     this.setState({ loiDiaChi: '' })
                 }
             }
-            if (name === 'txtChuyenNganh') {
-                if (this.state.txtChuyenNganh.length < 3) {
-                    this.setState({ loiChuyenNganh: 'Tên chuyên ngành quá ngắn' });
+            if (name === 'txtEmail') {
+                if (this.state.txtEmail.length < 5) {
+                    this.setState({ loiEmail: 'Email không hợp lệ' });
                     if (this.state.txtChuyenNganh === '') {
-                        this.setState({ loiChuyenNganh: 'Trường này là bắt buộc' })
+                        this.setState({ loiEmail: 'Trường này là bắt buộc' })
                     }
+
+                }
+                if (!this.validateEmail(this.state.txtEmail)) {
+                    console.log('co vo day ko')
+                    this.setState({ loiEmail: 'Email không hợp lệ' })
                 } else {
-                    this.setState({ loiChuyenNganh: '' })
+                    this.setState({ loiEmail: '' })
                 }
             }
-            if (name === 'txtTruongDaiHoc') {
-                if (this.state.txtTruongDaiHoc.length < 3) {
-                    this.setState({ loiTruongDaiHoc: 'Tên trường đại học quá ngắn' });
-                    if (this.state.txtTruongDaiHoc === '') {
-                        this.setState({ loiTruongDaiHoc: 'Trường này là bắt buộc' })
-                    }
+            if (name === 'txtWebsite') {
+                if (this.state.txtWebsite.length < 3) {
+                    this.setState({ loiTruongDaiHoc: 'Tên website quá ngắn' });
                 } else {
                     this.setState({ loiTruongDaiHoc: '' })
                 }
@@ -125,6 +139,13 @@ class NhaTuyenDung extends Component {
                 }
                 if (isNaN(this.state.txtSoDienThoai)) {
                     this.setState({ loiSoDienThoai: 'Số điện thoại không hợp lệ' })
+                }
+            }
+            if (name === 'linhvuchoatdong') {
+                if (this.state.linhvuchoatdong.length === '') {
+                    this.setState({ loiLinhVucHoatDong: 'Bạn chưa chọn' });
+                } else {
+                    this.setState({ loiLinhVucHoatDong: '' })
                 }
             }
         });
@@ -153,51 +174,61 @@ class NhaTuyenDung extends Component {
     }
     onSubmit = (e) => {
         e.preventDefault();
-        if (!this.state.txtHoTen) {
-            this.setState({ loiHoTen: "Trương này là bắt buộc" })
+        if (!this.state.txtTenCongTy) {
+            this.setState({ loiTenCongTy: "Trương này là bắt buộc" })
         }
         if (!this.state.txtDiaChi) {
             this.setState({ loiDiaChi: "Trương này là bắt buộc" })
         }
-        if (!this.state.txtTruongDaiHoc) {
-            this.setState({ loiTruongDaiHoc: "Trương này là bắt buộc" })
+        if (!this.state.txtSoDienThoai) {
+            this.setState({ loiSoDienThoai: "Trương này là bắt buộc" })
         }
-        if (!this.state.txtChuyenNganh) {
-            this.setState({ loiChuyenNganh: "Trương này là bắt buộc" })
+        if (!this.state.txtEmail) {
+            this.setState({ loiEmail: "Trương này là bắt buộc" })
         }
-        if (this.state.loiHoTen === '' && this.state.loiHinhAnh === '' && this.state.loiSoDienThoai === '' && this.state.loiDiaChi === '' && this.state.loiTruongDaiHoc === '' && this.state.loiChuyenNganh === '') {
-            if (this.state.txtHoTen !== '' && this.state.txtDiaChi !== '' && this.state.txtTruongDaiHoc !== '' && this.state.txtChuyenNganh !== '') {
-
+        if (this.state.linhvuchoatdong === '') {
+            this.setState({ loiLinhVucHoatDong: "Trương này là bắt buộc" })
+        }
+        
+        
+        if (this.state.loiTenCongTy === '' && this.state.loiHinhAnh === '' && this.state.loiSoDienThoai === '' && this.state.loiDiaChi === '' && this.state.loiEmail === '' && this.state.loiLinhVucHoatDong === '') {
+            console.log('hi')
+            if (this.state.txtTenCongTy !== '' && this.state.txtDiaChi !== '' && this.state.txtEmail !== '' && this.state.txtSoDienThoai !== '' && this.state.linhvuchoatdong !== '') {
+                console.log('hello')
                 if (this.state.daThayHinh) {
                     this.setState({ disabled: 'disabled' })
                     cloudinary.uploader.upload(`${this.state.hinhanh}`).then(result => {
                         return result.secure_url
                     }).then(hinh => {
                         const data = {
-                            hoten: this.state.txtHoTen,
+                            tencongty: this.state.txtTenCongTy,
                             sodienthoai: this.state.txtSoDienThoai,
                             diachi: this.state.txtDiaChi,
-                            truongdaihoc: this.state.txtTruongDaiHoc,
-                            chuyennganh: this.state.txtChuyenNganh,
+                            email: this.state.txtEmail,
+                            website: this.state.txtWebsite,
+                            linhvuchoatdong: this.state.linhvuchoatdong,
                             gioithieu: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
                             _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
-                            hinhanh: hinh,
+                            logo: hinh,
+                            trangthai: this.state.trangthai
                         }
-                        this.props.actCapNhatThongTin(data);
+                        this.props.actKichHoatNhaTuyenDung(data);
                         alert("Thêm thành công");
                         return this.props.history.goBack();
                     })
                 } else {
                     const data = {
-                        hoten: this.state.txtHoTen,
+                        tencongty: this.state.txtTenCongTy,
                         sodienthoai: this.state.txtSoDienThoai,
                         diachi: this.state.txtDiaChi,
-                        truongdaihoc: this.state.txtTruongDaiHoc,
-                        chuyennganh: this.state.txtChuyenNganh,
+                        email: this.state.txtEmail,
+                        website: this.state.txtWebsite,
+                        linhvuchoatdong: this.state.linhvuchoatdong,
                         gioithieu: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
                         _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
+                        trangthai: this.state.trangthai
                     }
-                    this.props.actCapNhatThongTin(data);
+                    this.props.actKichHoatNhaTuyenDung(data);
                     alert("Thêm thành công");
                     return this.props.history.goBack();
                 }
@@ -206,14 +237,15 @@ class NhaTuyenDung extends Component {
     }
     render() {
         const { editorState,
-            txtHoTen,
+            txtTenCongTy,
             txtSoDienThoai,
             txtEmail,
             txtDiaChi,
-            txtTruongDaiHoc,
-            txtChuyenNganh,
-            hinhanh, loiChuyenNganh, loiTruongDaiHoc, loiSoDienThoai, loiHoTen, loiDiaChi, loiHinhAnh,
+            txtWebsite,
+            linhvuchoatdong,
+            hinhanh, loiLinhVucHoatDong, loiSoDienThoai, loiTenCongTy, loiDiaChi, loiHinhAnh, loiEmail
         } = this.state;
+        console.log('linnh vu : ', this.state.trangthai)
         const divUploading = (
             <div>
                 <div id="popup">
@@ -227,14 +259,18 @@ class NhaTuyenDung extends Component {
             </div>
         )
         const uploading = this.state.disabled ? divUploading : '';
-        const chuaHoanThienHoSo = (
-            <div class="alert alert-danger">Bạn cần hoàn thiện hồ sơ để có thể ứng tuyển</div>
+        const chuaDangKy = (
+            <div class="alert alert-danger">Bạn cần đăng ký thông tin nhà tuyển dụng để có thể đăng tuyển</div>
         )
-        const daHoanThienHoSo = (
-            <div class="alert alert-success">Bạn đã hoàn thiện hồ sơ. Có thê cập nhật và lưu lại</div>
+        const choDuyet = (
+            <div class="alert alert-warning">Bạn đã đăng ký thông tin nhà tuyển dụng vui lòng đợi hoặc liên hệ trực tiếp để kích hoạt tính năng</div>
+        )
+        const daDuyet = (
+            <div class="alert alert-success">Bạn đã kích hoạt nhà tuyển dụng. Có thể đăng tuyển và chỉnh sửa thông tin</div>
+        )
+        const mainHoanThien = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.trangthai === 'dangduyet' ? choDuyet : chuaDangKy;
+        const mainHoanThienDaDuyet = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.trangthai === 'daduyet' ? daDuyet : mainHoanThien;
 
-        )
-        const mainHoanThien = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.hoanthienhoso ? daHoanThienHoSo : chuaHoanThienHoSo
         const chuaDangNhap = (
             <div className="loi-ghide-height">
                 <div className="container ">
@@ -260,7 +296,7 @@ class NhaTuyenDung extends Component {
 
                                     <div class="upload-file upload-file3 upload-photo">
                                         <a >
-                                            <span class="wc-editable" >Ảnh đại diện</span>
+                                            <span class="wc-editable" >Logo</span>
                                         </a>
                                         <input
                                             ref="file"
@@ -278,7 +314,7 @@ class NhaTuyenDung extends Component {
                             </div>
 
                             <div class="col-lg-8 col-md-7 col-xs-12">
-                                {mainHoanThien}
+                                {mainHoanThienDaDuyet}
 
 
                                 <div class="form">
@@ -287,15 +323,15 @@ class NhaTuyenDung extends Component {
                                             <div class="col-sm-12 col-xs-12">
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div class="form-group">
-                                                        <label class="control-label"> <span class="wc-editable" >Họ tên</span>:</label>
+                                                        <label class="control-label"> <span class="wc-editable" >Tên công ty</span>:</label>
                                                         <input
                                                             type="text"
-                                                            name="txtHoTen"
-                                                            value={txtHoTen}
+                                                            name="txtTenCongTy"
+                                                            value={txtTenCongTy}
                                                             onChange={this.onChange}
                                                             class="form-control" />
                                                         <div class="help-block with-errors">
-                                                            <span class="wc-editable hien-thi-loi-edit ml-20">{loiHoTen}</span>
+                                                            <span class="wc-editable hien-thi-loi-edit ml-20">{loiTenCongTy}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -303,7 +339,7 @@ class NhaTuyenDung extends Component {
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div class="form-group">
                                                         <label class="control-label">
-                                                            <span class="wc-editable" >Số điện thoại</span>: </label>
+                                                            <span class="wc-editable" >Số điện thoại công ty</span>: </label>
                                                         <input type="tel" name="txtSoDienThoai" value={txtSoDienThoai} onChange={this.onChange} class="form-control" />
                                                         <div class="help-block with-errors">
                                                             <span class="wc-editable hien-thi-loi-edit ml-20">{loiSoDienThoai}</span>
@@ -315,10 +351,10 @@ class NhaTuyenDung extends Component {
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div class="form-group">
                                                         <label class="control-label">
-                                                            <span class="wc-editable" >Email</span>:</label>
-                                                        <input type="text" name="txtEmail" value={txtEmail} onChange={this.onChange} class="form-control required email" disabled />
+                                                            <span class="wc-editable" >Email liên hệ</span>:</label>
+                                                        <input type="email" name="txtEmail" value={txtEmail} onChange={this.onChange} class="form-control required email" />
                                                         <div class="help-block with-errors">
-                                                            <span class="wc-editable hien-thi-loi-edit ml-20"></span>
+                                                            <span class="wc-editable hien-thi-loi-edit ml-20">{loiEmail}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -326,7 +362,7 @@ class NhaTuyenDung extends Component {
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div class="form-group">
                                                         <label class="control-label">
-                                                            <span class="wc-editable">Địa chỉ</span>:</label>
+                                                            <span class="wc-editable">Địa chỉ công ty</span>:</label>
                                                         <input type="text" name="txtDiaChi" value={txtDiaChi} onChange={this.onChange} class="form-control url" />
                                                         <div class="help-block with-errors">
                                                             <span class="wc-editable hien-thi-loi-edit ml-20">{loiDiaChi}</span>
@@ -338,10 +374,10 @@ class NhaTuyenDung extends Component {
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div class="form-group">
                                                         <label class="control-label">
-                                                            <span class="wc-editable">Trường đại học</span>:</label>
-                                                        <input name="txtTruongDaiHoc" type="text" value={txtTruongDaiHoc} onChange={this.onChange} class="form-control required" />
+                                                            <span class="wc-editable">Website(nếu có)</span>:</label>
+                                                        <input name="txtWebsite" type="text" value={txtWebsite} onChange={this.onChange} class="form-control required" />
                                                         <div class="help-block with-errors">
-                                                            <span class="wc-editable hien-thi-loi-edit ml-20">{loiTruongDaiHoc}</span>
+                                                            <span class="wc-editable hien-thi-loi-edit ml-20"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -349,11 +385,19 @@ class NhaTuyenDung extends Component {
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div class="form-group">
                                                         <label class="control-label">
-                                                            <span class="wc-editable">Chuyên ngành</span>: </label>
-                                                        <input name="txtChuyenNganh" value={txtChuyenNganh} type="text" onChange={this.onChange} class="form-control required"
-                                                        />
+                                                            <span class="wc-editable">Lĩnh vực hoạt động</span>: </label>
+                                                        <select class="form-control" onChange={this.onChange} value={linhvuchoatdong} name="linhvuchoatdong">
+                                                            <option value="" disabled >Lựa chọn Lĩnh vực</option>
+                                                            <option value="Kinh doanh"> Kinh doanh</option>                                                            <option value="Công nghệ thông tin"> Công nghệ thông tin</option>
+                                                            <option value="Cơ khí"> Cơ khí</option>
+                                                            <option value="Kỹ thuật"> Kỹ thuật</option>
+                                                            <option value="Kinh tế"> Kinh tế</option>
+                                                            <option value="Giáo dục"> Giáo dục</option>
+                                                            <option value="Hành chính - luật"> Hành chính - luật</option>
+                                                            <option value="Khác"> Khác</option>
+                                                        </select>
                                                         <div class="help-block with-errors">
-                                                            <span class="wc-editable hien-thi-loi-edit ml-20">{loiChuyenNganh}</span>
+                                                            <span class="wc-editable hien-thi-loi-edit ml-20">{loiLinhVucHoatDong}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -361,7 +405,7 @@ class NhaTuyenDung extends Component {
                                             <div class="col-sm-12 col-xs-12">
                                                 <div class="form-group editor-themcongviec" >
                                                     <label class="control-label">
-                                                        <span class="wc-editable" >Giới thiệu bản thân</span>:</label>
+                                                        <span class="wc-editable" >Giới thiệu công ty</span>:</label>
                                                     <Editor
                                                         editorState={editorState}
                                                         wrapperClassName="demo-wrapper"
@@ -384,76 +428,6 @@ class NhaTuyenDung extends Component {
                         </div>
                     </div>
                 </div>
-                {/* <div role="tabpanel" class="tab-pane " id="billing-details">
-                                            <div class="form">
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_contact_name" data-type="text">Tên doanh nghiệp</span>:</label>
-                                                            <input type="text" name="b_contact_name" value="" class="form-control" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_phone" data-type="text">Số điện thoại</span>:</label>
-                                                            <input type="text" name="b_phone" value="" class="form-control" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_email" data-type="text">Email</span>:</label>
-                                                            <input type="text" name="b_email" value="" class="form-control email"
-                                                                data-msg-remote="Email was registered by another." />
-                                                            <div class="help-block with-errors">
-                                                                <ul class="list-unstyled"></ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6 col-xs-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_company_name" data-type="text">Website</span>:</label>
-                                                            <input type="text" name="company_name" class="form-control required" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 col-xs-12">
-                                                        <div class="form-group">
-                                                            <label class="control-label">
-                                                                <span class="wc-editable" data-pk="front_label_b_address" data-type="text">Địa chỉ liên hệ</span>:</label>
-                                                            <input type="text" name="b_address" value="" class="form-control" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12 col-xs-12">
-                                                        <div class="form-group editor-themcongviec" >
-                                                            <label class="control-label">
-                                                                <span class="wc-editable" >Miêu tả chi tiết</span>:</label>
-                                                            <Editor
-                                                                editorState={editorState}
-                                                                wrapperClassName="demo-wrapper"
-                                                                editorClassName="demo-editor boderediter-edit"
-                                                                onEditorStateChange={this.onEditorStateChange}
-                                                            />
-
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-
-                                                <button type="submit" class="btn btn-primary">
-                                                    <span class="wc-editable" data-pk="front_button_save" data-type="action">Lưu</span>
-                                                </button>
-                                            </div>
-                                        </div> */}
-
 
 
                 <div id="upload" className="thongtin-tam"></div>
@@ -464,15 +438,9 @@ class NhaTuyenDung extends Component {
 
         return (
             <React.Fragment>
-                <div className="loi-ghide-height">
-                    <div className="container ">
-                        <div class="panel panel-danger ">
-                            <div class="panel-heading">Bạn chưa kich hoạt tài khoản nhà tuyên dụng</div>
-                            <div class="panel-body">Vui lòng <Link to='kichhoatnhatuyendung'>kích hoạt</Link> tài khoản nhà tuyển dụng và đợi xét duyệt để đăng tuyển</div>
-
-                        </div>
-                    </div>
-                </div>
+                {
+                    main
+                }
                 <div class="push"></div>
             </React.Fragment>
         );
@@ -486,8 +454,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        actCapNhatThongTin: (data) => {
-            dispatch(actCapNhatThongTinAPI(data));
+        actKichHoatNhaTuyenDung: (data) => {
+            dispatch(actKichHoatNhaTuyenDungAPI(data));
         },
     }
 }

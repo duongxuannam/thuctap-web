@@ -45,12 +45,16 @@ class ChiTietCongViec extends Component {
         const buttonEnabled = (
             <a onClick={this.ungTuyen} class="btn btn-primary btn-lg btn-apply">Ứng tuyển</a>
         )
+        const buttonNhaTuyenDung = (
+            <a disabled class="btn btn-primary btn-lg btn-apply">Nhà tuyển dụng không thể ứng tuyển</a>
+        )
         const buttonChuaDangNhap = (
             <Link to={`/dangnhap`} class="btn btn-primary btn-lg btn-apply">Đăng nhập để ứng tuyển</Link>
         )
         const daDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.hoanthienhoso ? buttonEnabled : buttondChuaHoanThienHoSo 
         const hienthiButton = this.kiemTraDaUngTuyen() ? buttondDisabled : daDangNhap;
-        const ChuaDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? hienthiButton : buttonChuaDangNhap
+        const hienthiButtonCuoiCung = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? buttonNhaTuyenDung : hienthiButton
+        const ChuaDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? hienthiButtonCuoiCung : buttonChuaDangNhap
         return (
             <React.Fragment>
                 <div class="main">

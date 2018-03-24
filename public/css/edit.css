@@ -76,6 +76,9 @@
     padding-right: 10;
 
 }
+.black-color{
+    color: black
+}
 .btn-danger-edit{
     color: #fff;
     background-color: #d9534f;

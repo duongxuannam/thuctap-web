@@ -227,7 +227,7 @@ class ThemCongViec extends Component {
 
         const day = new Date().toISOString().substr(0, 10);
         // console.log('ahuhu', this.state)
-         console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
+        console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
         // console.log('aaa', this.props.taiKhoan.taikhoan)
         const chuaDangNhap = (
             <div className="loi-ghide-height">
@@ -480,8 +480,20 @@ class ThemCongViec extends Component {
                 </div>
             </div>
         )
+        const choDuyet = (
+            <div className="loi-ghide-height">
+                <div className="container ">
+                    <div class="panel panel-warning ">
+                        <div class="panel-heading">Bạn đã đăng ký tài khoản nhà tuyên dụng</div>
+                        <div class="panel-body">Vui lòng đợi duyệt hoặc liên hệ trực tiếp <Link to='lienhe'>tại đây</Link></div>
+
+                    </div>
+                </div>
+            </div>
+        )
         const daDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? ok : chuaKichHoat;
-        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? daDangNhap : chuaDangNhap
+        const daDangKyChuaDuyet = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.trangthai === 'dangduyet' ? choDuyet : daDangNhap;
+        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? daDangKyChuaDuyet : chuaDangNhap
         return (
             <React.Fragment>
 
