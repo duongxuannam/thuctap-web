@@ -36,7 +36,7 @@ class BannerSearch extends Component {
         this.setState({
             [name]: value
         })
-    }
+    }  
     render() {
         return (
             <div class="section-background-intro-edit intro intro-home">
