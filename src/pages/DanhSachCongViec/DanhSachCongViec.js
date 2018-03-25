@@ -2,12 +2,25 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import BannerSearch from '../../components/BannerSearch';
-import { actLayDanhSachCongViecAPI } from '../../actions/index';
+import { actLayDanhSachCongViecAPI, actTimKiemTrangDanhSachAPI } from '../../actions/index';
 
 class DanhSachCongViec extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            chuyenNganh: '',
+            kieu: '',
+        };
+    }
+    onChange = (e) => {
+        const target = e.target;
+        const name = target.name;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        this.setState({
+            [name]: value
+        })}
     componentDidMount() {
-        const sotrang = this.props.danhSachCongViec.sotrang
-        this.props.actLayDanhSachCongViec(sotrang);
+        this.props.actLayDanhSachCongViec(1);
     }
     showData(data) {
         var result = null;
@@ -66,19 +79,105 @@ class DanhSachCongViec extends Component {
         return result;
     }
     taiThem = () => {
-        const sotrang = this.props.danhSachCongViec.sotrang
-        this.props.actLayDanhSachCongViec(sotrang);
-       
-        
+        if (!this.props.danhSachCongViec.hetdulieu) {
+            if(this.props.danhSachCongViec.dangTimKiem){
+                const data = {
+                    sotrang: this.props.danhSachCongViec.sotrang,
+                    chuyennganh : this.state.chuyenNganh,
+                    kieu: this.state.kieu
+                }
+               return this.props.actTimKiemTrangDanhSach(data);
+            }
+            const sotrang = this.props.danhSachCongViec.sotrang
+            this.props.actLayDanhSachCongViec(sotrang);
+        }
+
+
+
+    }
+    timKiem = (e) => {
+        e.preventDefault();
+        const data = {
+            sotrang: 1,
+            chuyennganh : this.state.chuyenNganh,
+            kieu: this.state.kieu
+        }
+        this.props.actTimKiemTrangDanhSach(data);
     }
     render() {
         const hetDuLieu = (
-            <div class="alert alert-danger mrt-20"> Đã hết dữ liệu</div>
+            <div class="alert alert-danger mrt-20"> Không tìm thấy hoặc đã hết dữ liệu</div>
         )
+        const taiThemEnable = (
+            <a onClick={this.taiThem} class="btn btn-primary btn-lg btn-apply">Tải thêmmmmmm</a>
+
+        );
+        const taiThemDisable = (
+            <React.Fragment>
+                <a onClick={this.taiThem} disabled class="btn btn-primary btn-lg btn-apply mr-tt">Tải thêm</a>
+                <a onClick={() => this.props.actLayDanhSachCongViec(1)} class="btn btn-primary btn-lg btn-apply">Mới nhất</a>
+
+            </React.Fragment>
+        );
+        const taiThem = this.props.danhSachCongViec.hetdulieu ? taiThemDisable : taiThemEnable
         console.log('tsaj', this.props.danhSachCongViec)
         return (
             <React.Fragment>
-                <BannerSearch />
+                <div class="section-background-intro-edit intro intro-home">
+                    <div class="search-jobs">
+                        <div class="container">
+                            <h1>
+                                <span class="wc-editable" >Tìm kiếm công việc</span>
+                            </h1>
+                            <form >
+                                <div class="row">
+                                    <div class="col-sm-5 col-xs-12">
+                                        <div class="form-group">
+                                            <select class="form-control" value={this.state.chuyenNganh} onChange={this.onChange} name="chuyenNganh">
+                                                <option value="" disabled >Lựa chọn chuyên ngành</option>
+                                                <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+                                                <option value="Giáo dục">Giáo dục</option>
+                                                <option value="Kinh tế">Kinh tế</option>
+                                                <option value="Tài nguyên môi trường">Tài nguyên môi trường</option>
+                                                <option value="Khác">Khác</option>
+                                                <option value="">Không tìm kiếm</option>
+                                            </select>
+                                            <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 col-xs-12">
+                                        <div class="form-group">
+                                            <select class="form-control" value={this.state.kieu} onChange={this.onChange} name="kieu">
+                                                <option value="" disabled >Lựa chọn kiểu thực tập</option>
+                                                <option value="Toàn thời gian">Toàn thời gian</option>
+                                                <option value="Bán thời gian">Bán thời gian</option>
+                                                <option value="Thực tập">Thực tập</option>
+                                                <option value="Thời vụ">Thời vụ</option>
+                                                <option value="Chính thức">Chính thức</option>
+                                                <option value="">Không tìm kiếm</option>
+                                            </select>
+                                            <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-12">
+                                        <button  onClick={this.timKiem} class="btn btn-primary btn-lg">
+                                            <span class="wc-editable" >Tìm kiếm</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <p>
+
+                            </p>
+                            <p>
+
+                            </p>
+                            <p>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
                 <div class="search-jobs-results">
                     <div class="container">
                         <div class="search-jobs-results-filter">
@@ -112,7 +211,7 @@ class DanhSachCongViec extends Component {
 
                         <div class="search-jobs-results-list">
 
-                             {this.showData(this.props.danhSachCongViec.mang)} 
+                            {this.showData(this.props.danhSachCongViec.mang)}
 
                         </div>
 
@@ -121,8 +220,7 @@ class DanhSachCongViec extends Component {
 
 
                         <div class="search-jobs-results-footer">
-                            <a onClick={this.taiThem} class="btn btn-primary btn-lg btn-apply">Tải thêmmmmmm</a>
-
+                            {taiThem}
                         </div>
                     </div>
                 </div>
@@ -141,6 +239,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         actLayDanhSachCongViec: (sotrang) => {
             dispatch(actLayDanhSachCongViecAPI(sotrang));
+        },
+        actTimKiemTrangDanhSach: (data) => {
+            dispatch(actTimKiemTrangDanhSachAPI(data));
         }
     }
 }

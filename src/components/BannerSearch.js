@@ -49,13 +49,26 @@ class BannerSearch extends Component {
                             <div class="row">
                                 <div class="col-sm-5 col-xs-12">
                                     <div class="form-group">
-                                        <input name="tuKhoa" value={this.state.tuKhoa} onChange={this.onChange} class="form-control" placeholder={this.state.loiTuKhoa} type="text" />
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    <select class="form-control"  value='' name="chuyenNganh">
+                                    <option value="" disabled >Lựa chọn chuyên ngành</option>
+                                    <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+                                    <option value="Giáo dục">Giáo dục</option>
+                                    <option value="Kinh tế">Kinh tế</option>
+                                    <option value="Tài nguyên môi trường">Tài nguyên môi trường</option>
+                                    <option value="Khác">Khác</option>
+                                </select>                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                     </div>
                                 </div>
                                 <div class="col-sm-5 col-xs-12">
                                     <div class="form-group">
-                                        <input name="diaDiem" value={this.state.diaDiem} onChange={this.onChange} class="form-control" placeholder={this.state.loiDiaDiem} type="text"  />
+                                    <select class="form-control"  value='' name="chuyenNganh">
+                                            <option value="" disabled >Lựa chọn chuyên ngành</option>
+                                            <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+                                            <option value="Giáo dục">Giáo dục</option>
+                                            <option value="Kinh tế">Kinh tế</option>
+                                            <option value="Tài nguyên môi trường">Tài nguyên môi trường</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
                                         <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                     </div>
                                 </div>

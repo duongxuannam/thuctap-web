@@ -77,11 +77,19 @@ export const actLayDataTinTuc = (data) => {
 
 //-----------------LAY DATA DANH SÁCH CÔNG VIỆC
 export const actLayDanhSachCongViecAPI = (sotrang) => {
+    if(sotrang === 1){
+        return dispatch => {
+            return callApi(`danhsachcongviec/${sotrang}`, 'GET', null).then(res => {
+                dispatch(actLayDanhSachCongViecLanDau(res.data));
+            });
+        };
+    }
     return dispatch => {
         return callApi(`danhsachcongviec/${sotrang}`, 'GET', null).then(res => {
             dispatch(actLayDanhSachCongViec(res.data));
         });
     };
+  
 }
 export const actLayDanhSachCongViec = (data) => {
     return {
@@ -89,19 +97,58 @@ export const actLayDanhSachCongViec = (data) => {
         data
     }
 }
+export const actLayDanhSachCongViecLanDau = (data) => {
+    return {
+        type : Types.LAY_DANH_SACH_CONG_VIEC_LAN_DAU,
+        data
+    }
+}
 
 
-//-----------------TIM KIEM CÔNG VIỆC
+//-----------------TIM KIEM CÔNG VIỆC trang chu
 export const actTimKiemCongViecAPI = (data) => {
+    // console.log(data)
     return dispatch => {
-        return callApi(`danhsachcongviec/${data}`, 'POST', data).then(res => {
-            dispatch(actTimKiemCongViec(res.data));
-        });
+        console.log(data)
+         return callApi(`timviectrangchu/`, 'POST', data).then(res => {
+             dispatch(actTimKiemCongViec(res.data));
+         });
     };
 }
 export const actTimKiemCongViec = (data) => {
     return {
         type : Types.TIM_KIEM_CONG_VIEC,
+        data
+    }
+}
+
+//-----------------TIM KIEM CÔNG VIỆC trang danh sach
+export const actTimKiemTrangDanhSachAPI = (data) => {
+     console.log('tim lan may ', data.sotrang)
+     if(data.sotrang === 1){
+        return dispatch => {
+            console.log(data)
+             return callApi(`timviectrangdanhsach/`, 'POST', data).then(res => {
+                 dispatch(actTimKiemLanDauTrangDanhSach(res.data));
+             });
+        };
+     }
+    return dispatch => {
+        console.log(data)
+         return callApi(`timviectrangdanhsach/`, 'POST', data).then(res => {
+             dispatch(actTimKiemTrangDanhSach(res.data));
+         });
+    };
+}
+export const actTimKiemTrangDanhSach = (data) => {
+    return {
+        type : Types.TIM_KIEM_CONG_VIEC_TRANG_DANH_SACH,
+        data
+    }
+}
+export const actTimKiemLanDauTrangDanhSach = (data) => {
+    return {
+        type : Types.TIM_KIEM_CONG_VIEC_LAN_DAU_TRANG_DANH_SACH,
         data
     }
 }
