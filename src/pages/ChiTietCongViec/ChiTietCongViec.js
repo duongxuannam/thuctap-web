@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { chiTietCongViecAPI, ungTuyenAPI } from '../../actions/index';
+import CongViecTuongTu from '../../components/CongViecTuongTu';
 
 
 const logo = require('../../images/cty2.jpg');
@@ -13,7 +14,7 @@ class ChiTietCongViec extends Component {
             const { id } = match.params;
             this.props.actChiTietCongViec(id);
         }
-    }    
+    }
     ungTuyen = () => {
         const data = {
             _idCongViec: this.props.chiTietCongViec._id,
@@ -51,7 +52,7 @@ class ChiTietCongViec extends Component {
         const buttonChuaDangNhap = (
             <Link to={`/dangnhap`} class="btn btn-primary btn-lg btn-apply">Đăng nhập để ứng tuyển</Link>
         )
-        const daDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.hoanthienhoso ? buttonEnabled : buttondChuaHoanThienHoSo 
+        const daDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.hoanthienhoso ? buttonEnabled : buttondChuaHoanThienHoSo
         const hienthiButton = this.kiemTraDaUngTuyen() ? buttondDisabled : daDangNhap;
         const hienthiButtonCuoiCung = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? buttonNhaTuyenDung : hienthiButton
         const ChuaDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? hienthiButtonCuoiCung : buttonChuaDangNhap
@@ -73,43 +74,50 @@ class ChiTietCongViec extends Component {
                                                 <span class="wc-editable" data-pk="front_post_on" data-type="text">Ngày đăng</span>
                                             </span>
                                             <br />
-                                            <strong>06.04.2017</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.ngaydang ? this.props.chiTietCongViec.ngaydang : 'Đang tải'}</strong>
+                                        </p>
+                                        <p>
+                                            <span>
+                                                <span class="wc-editable" data-pk="front_post_on" data-type="text">Thời hạn</span>
+                                            </span>
+                                            <br />
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.thoihan ? this.props.chiTietCongViec.thoihan : 'Đang tải'}</strong>
                                         </p>
                                         <p>
                                             <span>
                                                 <span class="wc-editable" data-pk="ws_category" data-type="text">Chuyên ngành</span>
                                             </span>
                                             <br />
-                                            <strong>Giáo dục</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.chuyennganh ? this.props.chiTietCongViec.chuyennganh : 'Đang tải'}</strong>
                                         </p>
                                         <p>
                                             <span>
                                                 <span class="wc-editable" data-pk="ws_job_type" data-type="text">Kiểu</span>
                                             </span>
                                             <br />
-                                            <strong>Parttime</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.kieu ? this.props.chiTietCongViec.kieu : 'Đang tải'}</strong>
                                         </p>
                                         <p>
                                             <span>Chức vụ</span>
                                             <br />
-                                            <strong>Nhân viên</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.chucvu ? this.props.chiTietCongViec.chucvu : 'Đang tải'}</strong>
                                         </p>
                                         <p>
                                             <span>Trình độ</span>
                                             <br />
-                                            <strong>Sinh viên</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.trinhdo ? this.props.chiTietCongViec.trinhdo : 'Đang tải'}</strong>
                                         </p>
                                         <p>
                                             <span>Kinh nghiệm</span>
                                             <br />
-                                            <strong>Không</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.kinhnghiem ? this.props.chiTietCongViec.kinhnghiem : 'Đang tải'}</strong>
                                         </p>
                                         <p>
                                             <span>
                                                 <span class="wc-editable" data-pk="front_label_salary" data-type="text">Mức lương</span>
                                             </span>
                                             <br />
-                                            <strong>Thỏa thuận</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.luong ? this.props.chiTietCongViec.luong : 'Đang tải'}</strong>
                                         </p>
 
 
@@ -117,28 +125,28 @@ class ChiTietCongViec extends Component {
                                 </div>
                                 <div class="company-info">
                                     <div class="company-image">
-                                        <img src={logo} alt="" />
+                                        <img src={this.props.chiTietCongViec && this.props.chiTietCongViec._nguoidang && this.props.chiTietCongViec._nguoidang.nhatuyendung.logo ? this.props.chiTietCongViec._nguoidang.nhatuyendung.logo : 'https://res.cloudinary.com/thuctap/image/upload/v1521876438/LogoTitle.png'} alt="" />
                                     </div>
                                     <div class="company-description">
                                         <p>
                                             <span>
-                                                <span class="wc-editable" data-pk="front_label_contact_name" data-type="text">Nhà tuyển dụng</span>
+                                                <span class="wc-editable" >Nhà tuyển dụng</span>
                                             </span>
 
-                                            <strong>Gia sư ALL</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec._nguoidang && this.props.chiTietCongViec._nguoidang.nhatuyendung.tencongty ? this.props.chiTietCongViec._nguoidang.nhatuyendung.tencongty : 'Đang tải'}</strong>
                                         </p>
                                         <p>
                                             <span>
-                                                <span class="wc-editable" data-pk="front_label_phone" data-type="text">Điện thoại</span>
+                                                <span class="wc-editable" >Điện thoại</span>
                                             </span>
-                                            <strong>0165 326 4570</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec._nguoidang && this.props.chiTietCongViec._nguoidang.nhatuyendung.sodienthoai ? this.props.chiTietCongViec._nguoidang.nhatuyendung.sodienthoai : 'Đang tải'}</strong>
                                         </p>
                                         <p>
                                             <span>
-                                                <span class="wc-editable" data-pk="front_label_email" data-type="text">Email</span>
+                                                <span class="wc-editable" >Email</span>
                                             </span>
                                             <strong>
-                                                <a href="">hiepsytrongtaycokiem@gmail.com</a>
+                                                <a >{this.props.chiTietCongViec && this.props.chiTietCongViec._nguoidang && this.props.chiTietCongViec._nguoidang.nhatuyendung.email ? this.props.chiTietCongViec._nguoidang.nhatuyendung.email : 'Đang tải'}</a>
                                             </strong>
                                         </p>
                                         <p>
@@ -146,17 +154,12 @@ class ChiTietCongViec extends Component {
                                                 <span class="wc-editable" data-pk="front_label_website" data-type="text">Website</span>
                                             </span>
                                             <strong>
-                                                <a >ahaihih.com</a>
+                                                <a>{this.props.chiTietCongViec && this.props.chiTietCongViec._nguoidang && this.props.chiTietCongViec._nguoidang.nhatuyendung.website ? this.props.chiTietCongViec._nguoidang.nhatuyendung.website : 'Đang tải'}</a>
                                             </strong>
                                         </p>
                                         <p>
                                             <a href="" class="btn btn-secondary">
                                                 <span class="wc-editable" data-pk="ws_company_details" data-type="text">Chi tiết</span>
-                                            </a>
-                                        </p>
-                                        <p>
-                                            <a>
-                                                <span class="wc-editable" data-pk="ws_see_all_jobs" data-type="text">Xem tất cả công việc</span>
                                             </a>
                                         </p>
                                     </div>
@@ -173,29 +176,31 @@ class ChiTietCongViec extends Component {
                                             </a>
                                         </p>
 
-                                        <h1>{this.props.chiTietCongViec.tieude}</h1>
+                                        <h1>{this.props.chiTietCongViec.tieude ? this.props.chiTietCongViec.tieude : 'Đang tải'}</h1>
 
                                         <p>
                                             <em>
                                                 <span class="wc-editable" data-pk="front_company" data-type="text">Nhà tuyển dụng</span>:
-                                          <strong>Gia sư ALL</strong>
+                                                &nbsp; <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec._nguoidang && this.props.chiTietCongViec._nguoidang.nhatuyendung.tencongty ? this.props.chiTietCongViec._nguoidang.nhatuyendung.tencongty : 'Đang tải'}</strong>
                                             </em>
                                             <em>
                                                 <span class="wc-editable" data-pk="front_location" data-type="text">Địa điểm</span>:
-                                          <strong>Bình Dương</strong>
+                                                &nbsp;   <strong>{this.props.chiTietCongViec.diadiem ? this.props.chiTietCongViec.diadiem : 'Đang tải'}</strong>
                                             </em>
                                         </p>
                                     </div>
+
 
                                     <h2>
                                         <span class="wc-editable" data-pk="front_label_job_description" data-type="text">Mô tả công việc</span>
                                     </h2>
 
-                                    <div class="paragraph">
-                                        <p>ahihi</p>
-                                    </div>
-                                </div>
+                                    <div class="lead black-color" dangerouslySetInnerHTML={{ __html: this.props.chiTietCongViec && this.props.chiTietCongViec.mota ? this.props.chiTietCongViec.mota : 'Đang tải' }} >
 
+                                    </div>
+
+
+                                </div>
                                 <div class="post-actions">
                                     {ChuaDangNhap}
                                     <div class="share-actions">
@@ -208,7 +213,7 @@ class ChiTietCongViec extends Component {
 
                                                 <li>
                                                     <a>
-                                                        <img src="http://vevs.website/web-demo/job-portal-website/app/web/upload/medium/social-facebook-176-1507281876.png" alt=""
+                                                        <img src="https://res.cloudinary.com/thuctap/image/upload/v1521951393/social-facebook-176-1507281876.png" alt=""
                                                             title="" />
                                                     </a>
                                                 </li>
@@ -220,110 +225,12 @@ class ChiTietCongViec extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div class="section-similar">
-                            <h2>
-                                <span class="wc-editable" data-pk="ws_similar_jobs" data-type="text">Công việc tương tự</span>
-                            </h2>
-                            <div class="job">
-                                <a href="http://vevs.website/web-demo/job-portal-website/health-and-social-care-apprenticeship-assessor-43.html" class="job-image">
-                                    <img src="http://vevs.website/web-demo/job-portal-website/app/web/upload/medium/48280b012ef1e0862fdb31f175dacc1e.jpg" alt="" />
-                                </a>
 
-                                <div class="job-info">
-                                    <a href="" class="job-title">Đây là cái tiêu đề</a>
 
-                                    <div class="job-meta">
-                                        <ul>
-                                            <li class="col-size-1of4">
-                                                <span class="glyphicon glyphicon-calendar"></span>
+                        <CongViecTuongTu
+                            actChiTietCongViec={this.props.actChiTietCongViec}
+                            chuyennganh={this.props.chiTietCongViec && this.props.chiTietCongViec.chuyennganh ? this.props.chiTietCongViec.chuyennganh : 'ahuhu'} />
 
-                                                18.04.2017
-                                      </li>
-
-                                            <li class="col-size-2of4">
-                                                <span class="glyphicon glyphicon-briefcase"></span>
-
-                                                Giáo dục </li>
-
-                                            <li class="col-size-1of4">
-                                                <span class="glyphicon glyphicon-map-marker"></span>
-
-                                                Bình Dương </li>
-                                        </ul>
-
-                                        <div class="job-meta-inner">
-                                            <span class="badge badge-label-temp">Chi tiết</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job">
-                                <a href="http://vevs.website/web-demo/job-portal-website/health-and-social-care-apprenticeship-assessor-43.html" class="job-image">
-                                    <img src="http://vevs.website/web-demo/job-portal-website/app/web/upload/medium/48280b012ef1e0862fdb31f175dacc1e.jpg" alt="" />
-                                </a>
-
-                                <div class="job-info">
-                                    <a href="" class="job-title">Đây là cái tiêu đề</a>
-
-                                    <div class="job-meta">
-                                        <ul>
-                                            <li class="col-size-1of4">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-
-                                                18.04.2017
-                                      </li>
-
-                                            <li class="col-size-2of4">
-                                                <span class="glyphicon glyphicon-briefcase"></span>
-
-                                                Giáo dục </li>
-
-                                            <li class="col-size-1of4">
-                                                <span class="glyphicon glyphicon-map-marker"></span>
-
-                                                Bình Dương </li>
-                                        </ul>
-
-                                        <div class="job-meta-inner">
-                                            <span class="badge badge-label-temp">Chi tiết</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="job">
-                                <a href="http://vevs.website/web-demo/job-portal-website/health-and-social-care-apprenticeship-assessor-43.html" class="job-image">
-                                    <img src="http://vevs.website/web-demo/job-portal-website/app/web/upload/medium/48280b012ef1e0862fdb31f175dacc1e.jpg" alt="" />
-                                </a>
-
-                                <div class="job-info">
-                                    <a href="" class="job-title">Đây là cái tiêu đề</a>
-
-                                    <div class="job-meta">
-                                        <ul>
-                                            <li class="col-size-1of4">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-
-                                                18.04.2017
-                                      </li>
-
-                                            <li class="col-size-2of4">
-                                                <span class="glyphicon glyphicon-briefcase"></span>
-
-                                                Giáo dục </li>
-
-                                            <li class="col-size-1of4">
-                                                <span class="glyphicon glyphicon-map-marker"></span>
-
-                                                Bình Dương </li>
-                                        </ul>
-
-                                        <div class="job-meta-inner">
-                                            <span class="badge badge-label-temp">Chi tiết</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="push"></div>

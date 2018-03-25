@@ -16,7 +16,7 @@ class TrangChu extends Component {
                     <React.Fragment key={index}>
                         <Link to={`/chitietcongviec/${item._id}`} className="job">
                             <div class="job-image">
-                                <img src={item.hinhanh} alt="" />
+                                <img src={item._nguoidang.nhatuyendung.logo ? item._nguoidang.nhatuyendung.logo : 'https://res.cloudinary.com/thuctap/image/upload/v1521876438/LogoTitle.png'} alt="" />
                             </div>
                             <div class="job-info">
                                 <div class="job-title">{item.tieude}</div>
@@ -26,22 +26,35 @@ class TrangChu extends Component {
                                         <li class="col-size-1of4" title="Posted on">
                                             <span class="glyphicon glyphicon-calendar"></span>
 
-                                            06.04.2017 </li>
+                                            &nbsp;{item.ngaydang} </li>
 
-                                        <li class="col-size-2of4" title="Category">
-                                            <span class="glyphicon glyphicon-briefcase"></span>
+                                            <li class="col-size-1of4" title="Posted on">
+                                            <span class="glyphicon glyphicon-calendar"></span>
 
-                                            {item.chuyennganh}  </li>
+                                            &nbsp;{item.thoihan} </li>
 
                                         <li class="col-size-1of4" title="Location">
                                             <span class="glyphicon glyphicon-map-marker"></span>
-                                            London </li>
+                                            &nbsp;{item.diadiem} </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="col-size-1of4" title="Posted on">
+                                            <span class="glyphicon glyphicon-briefcase"></span>
+
+                                            &nbsp;{item.chuyennganh} </li>
+
+                                            <li class="col-size-1of4" title="Posted on">
+                                            <span class="glyphicon glyphicon-asterisk"></span>
+
+                                            &nbsp;{item.kieu} </li>
+
+                                        <li class="col-size-1of4" title="Location">
+                                          
+                                            ... </li>
                                     </ul>
                                 </div>
                                 <div class="job-description">
-                                    Pro Active Retail Security Officer required to operate in luxury retail environment. Searching for self-motivated individuals
-  who are always looking to achieve the highest standards. Responsibilities:Regular Report Writing, Liaison between
-  the team and the client and head office, Door Supervision, Staff... ...</div>
+                                    Click vào để xem thông tin chi tiết và ứng tuyển.</div>
                             </div>
                         </Link>
                     </React.Fragment>
