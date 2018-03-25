@@ -6,6 +6,7 @@ import dataTinTuc from './dataTinTuc';
 import chiTietTinTuc from './chiTietTinTuc';
 import danhSachDangKyNhaTuyenDung from './danhSachDangKyNhaTuyenDung';
 import taiKhoanDuocChon from './taiKhoanDuocChon';
+import danhSachCongViec from './danhSachCongViec';
 
 const appReducers = combineReducers({
    dataTrangChu,
@@ -14,7 +15,8 @@ const appReducers = combineReducers({
    dataTinTuc,
    chiTietTinTuc,
    danhSachDangKyNhaTuyenDung,
-   taiKhoanDuocChon
+   taiKhoanDuocChon,
+   danhSachCongViec
 });
 
 export default appReducers;

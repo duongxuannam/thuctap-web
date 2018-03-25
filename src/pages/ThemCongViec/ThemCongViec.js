@@ -187,8 +187,8 @@ class ThemCongViec extends Component {
         if (this.state.txtMoTa === '') {
             this.setState({ loiMoTa: 'Trường này là bắt buộc' })
         }
-        if (this.state.loiTieuDe === '' && this.state.loiDiaDiem === '' && this.state.loiLuong === '' && this.state.loiSoLuong === '' && this.state.loiThoiHan === '') {
-            if (this.state.tieude !== '' && this.state.diadiem !== '' && this.state.chuyennganh !== '' && this.state.kieu !== '' && this.state.chucvu !== '' && this.state.luong !== '' && this.state.trinhdo !== '' && this.state.kinhnghiem !== '' && this.state.soluong !== '' && this.state.thoihan !== '') {
+        if (this.state.loiTieuDe === '' && this.state.loiDiaDiem === '' && this.state.loiChuyenNganh === ''&& this.state.loiKieu === ''  && this.state.loiChucVu === '' && this.state.loiLuong === '' && this.state.loiTrinhDo === '' && this.state.loiKinhNghiem === '' && this.state.loiSoLuong === '' && this.state.loiThoiHan === ''  ) {
+            if (this.state.txtTieuDe !== '' && this.state.txtDiaDiem !== '' && this.state.chuyenNganh !== '' && this.state.kieu !== '' && this.state.chucVu !== '' && this.state.txtLuong !== '' && this.state.trinhDo !== '' && this.state.kinhNghiem !== '' && this.state.txtSoLuong !== '' && this.state.thoiHan !== '') {
                 this.props.actDangTuyen(data);
                 alert("Thêm thành công");
                 return this.props.history.goBack();
@@ -294,7 +294,7 @@ class ThemCongViec extends Component {
                                             <div class="form-group">
                                                 <label class="control-label">
                                                     <span class="wc-editable" >Chuyên ngành</span>:</label>
-                                                <select class="form-control" onChange={this.onChange} defaultValue={chuyenNganh} name="chuyenNganh">
+                                                <select class="form-control" onChange={this.onChange} value={chuyenNganh} name="chuyenNganh">
                                                     <option value="" disabled >Lựa chọn chuyên ngành</option>
                                                     <option value="Công nghệ thông tin">Công nghệ thông tin</option>
                                                     <option value="Giáo dục">Giáo dục</option>
@@ -311,7 +311,7 @@ class ThemCongViec extends Component {
                                             <div class="form-group">
                                                 <label class="control-label">
                                                     <span class="wc-editable" >Kiểu</span>:</label>
-                                                <select class="form-control" onChange={this.onChange} defaultValue={kieu} name="kieu">
+                                                <select class="form-control" onChange={this.onChange} value={kieu} name="kieu">
                                                     <option value="" disabled >Lựa chọn kiểu</option>
                                                     <option value="Toàn thời gian">Toàn thời gian</option>
                                                     <option value="Bán thời gian">Bán thời gian</option>
@@ -331,7 +331,7 @@ class ThemCongViec extends Component {
                                             <div class="form-group">
                                                 <label class="control-label">
                                                     <span class="wc-editable">Chức vụ</span>:</label>
-                                                <select class="form-control" onChange={this.onChange} defaultValue={chucVu} name="chucVu">
+                                                <select class="form-control" onChange={this.onChange} value={chucVu} name="chucVu">
                                                     <option value="" disabled>Lựa chọn chức vụ</option>
 
                                                     <option value="Thực tập sinh">Thực tập sinh</option>
@@ -364,7 +364,7 @@ class ThemCongViec extends Component {
                                             <div class="form-group">
                                                 <label class="control-label">
                                                     <span class="wc-editable" >Trình độ</span>:</label>
-                                                <select class="form-control" onChange={this.onChange} defaultValue={trinhDo} name="trinhDo">
+                                                <select class="form-control" onChange={this.onChange} value={trinhDo} name="trinhDo">
                                                     <option value="" disabled >Lựa chọn trình độ</option>
                                                     <option value="Sinh viên năm 1 - 2"> Sinh viên năm 1 - 2</option>
                                                     <option value="Sinh viên năm 3 - 4"> Sinh viên năm 3 - 4</option>
@@ -383,7 +383,7 @@ class ThemCongViec extends Component {
                                                 <label class="control-label">
                                                     <span class="wc-editable">Kinh nghiệm</span>:</label>
 
-                                                <select class="form-control" onChange={this.onChange} defaultValue={kinhNghiem} name="kinhNghiem">
+                                                <select class="form-control" onChange={this.onChange} value={kinhNghiem} name="kinhNghiem">
                                                     <option value="" disabled >Lựa chọn kinh nghiệm</option>
                                                     <option value="Không" >Không</option>
 

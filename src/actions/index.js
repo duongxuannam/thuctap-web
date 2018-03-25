@@ -75,6 +75,21 @@ export const actLayDataTinTuc = (data) => {
 }
 
 
+//-----------------LAY DATA DANH SÁCH CÔNG VIỆC
+export const actLayDanhSachCongViecAPI = (sotrang) => {
+    return dispatch => {
+        return callApi(`danhsachcongviec/${sotrang}`, 'GET', null).then(res => {
+            dispatch(actLayDanhSachCongViec(res.data));
+        });
+    };
+}
+export const actLayDanhSachCongViec = (data) => {
+    return {
+        type : Types.LAY_DANH_SACH_CONG_VIEC,
+        data
+    }
+}
+
 //-----------CHI TIET CONG VIEC
 export const chiTietTinTucAPI = (id) => {
     return dispatch => {
