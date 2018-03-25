@@ -14,7 +14,7 @@ class TrangChu extends Component {
             result = data.map((item, index) => {
                 return (
                     <React.Fragment key={index}>
-                        <Link to={`/chitietcongviec/${item._id}`} className="job">
+                        <Link to={`/chitietcongviec/${item._id}`} onClick={()=>window.scrollTo(0, 0)} className="job">
                             <div class="job-image">
                                 <img src={item._nguoidang.nhatuyendung.logo ? item._nguoidang.nhatuyendung.logo : 'https://res.cloudinary.com/thuctap/image/upload/v1521876438/LogoTitle.png'} alt="" />
                             </div>
@@ -73,7 +73,7 @@ class TrangChu extends Component {
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1 col-xs-12">
                                 <h2 class="text-center">
-                                    <span class="wc-editable" data-pk="ws_recent_jobs" data-type="text">Công việc mới nhất</span>
+                                    <span class="wc-editable" >Công việc mới nhất</span>
                                 </h2>
 
                                 <div class="recent-jobs">
@@ -82,9 +82,9 @@ class TrangChu extends Component {
                                     {this.showData(this.props.dataTrangChu)}
                                 </div>
                                 <div class="recent-jobs-actions">
-                                    <a href="" class="btn btn-secondary">
-                                        <span class="wc-editable" data-pk="front_browse_jobs" data-type="text">Xem tất cả</span>
-                                    </a>
+                                <Link to={`/danhsachcongviec`}  onClick={()=>window.scrollTo(0, 0)} class="btn btn-secondary">
+                                        <span class="wc-editable" >Xem tất cả</span>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@ class TrangChu extends Component {
                                     <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
                                 </div>
                                 <br />
-                                <Link to={`/dangnhap`} class="btn btn-tertiary" >
+                                <Link to={`/dangnhap`}  onClick={()=>window.scrollTo(0, 0)} class="btn btn-tertiary" >
                                     <span class="wc-editable" data-pk="ws_btn_subscribe" data-type="action">Đăng nhập</span>
                                 </Link>
                             </div>

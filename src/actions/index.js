@@ -90,6 +90,23 @@ export const actLayDanhSachCongViec = (data) => {
     }
 }
 
+
+//-----------------TIM KIEM CÔNG VIỆC
+export const actTimKiemCongViecAPI = (data) => {
+    return dispatch => {
+        return callApi(`danhsachcongviec/${data}`, 'POST', data).then(res => {
+            dispatch(actTimKiemCongViec(res.data));
+        });
+    };
+}
+export const actTimKiemCongViec = (data) => {
+    return {
+        type : Types.TIM_KIEM_CONG_VIEC,
+        data
+    }
+}
+
+
 //-----------CHI TIET CONG VIEC
 export const chiTietTinTucAPI = (id) => {
     return dispatch => {

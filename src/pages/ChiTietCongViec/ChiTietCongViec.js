@@ -158,9 +158,9 @@ class ChiTietCongViec extends Component {
                                             </strong>
                                         </p>
                                         <p>
-                                            <a href="" class="btn btn-secondary">
-                                                <span class="wc-editable" data-pk="ws_company_details" data-type="text">Chi tiết</span>
-                                            </a>
+                                            <Link to={`/thongtinnhatuyendung/${this.props.chiTietCongViec && this.props.chiTietCongViec._nguoidang ? this.props.chiTietCongViec._nguoidang._id : ''}`}  onClick={()=>window.scrollTo(0, 0)} class="btn btn-secondary">
+                                                <span class="wc-editable">Chi tiết</span>
+                                            </Link>
                                         </p>
                                     </div>
                                 </div>

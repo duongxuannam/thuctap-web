@@ -14,7 +14,7 @@ class TinTuc extends Component {
                 return (
                     <div class="blog-post" key={index}>
                         <h2>
-                            <Link to={`/chitiettintuc/${item._id}`} >{item.tieude}</Link>
+                            <Link to={`/chitiettintuc/${item._id}`} onClick={()=>window.scrollTo(0, 0)}>{item.tieude}</Link>
                         </h2>
 
                         <p class="lead">
@@ -23,7 +23,7 @@ class TinTuc extends Component {
                        <span class="wc-editable" data-pk="ws_blog_at" data-type="text">at</span> {item.ngaydang}</p>
 
                         <div class="blog-post-image ">
-                            <Link to={`/chitiettintuc/${item._id}`}>
+                            <Link to={`/chitiettintuc/${item._id}`} onClick={()=>window.scrollTo(0, 0)}>
                                 <img class="imgbootstrap  " src={item.hinhanh}
                                     alt="" />
                             </Link>
@@ -31,7 +31,7 @@ class TinTuc extends Component {
 
                         {/* <p>Write a short description containing the key highlights from your post.</p> */}
 
-                        <Link to={`/chitiettintuc/${item._id}`} class="btn btn-primary">
+                        <Link to={`/chitiettintuc/${item._id}`} class="btn btn-primary" onClick={()=>window.scrollTo(0, 0)}>
                             <span class="wc-editable" data-pk="ws_blog_read_more" data-type="text">Xem</span>
                         </Link>
                     </div>

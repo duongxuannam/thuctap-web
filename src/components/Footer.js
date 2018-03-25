@@ -43,7 +43,7 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
             children={() => {
                 return (
                     <li >
-                        <Link to={to}>
+                        <Link to={to} onClick={()=>window.scrollTo(0, 0)}>
                             {label}
                         </Link>
                     </li>

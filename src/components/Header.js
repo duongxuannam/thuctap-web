@@ -55,6 +55,9 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
 };
 const logo = require('../images/logotdmu.png');
 class Header extends Component {
+    // componentDidMount(){
+    //     alert('ahihi')
+    // }
     
     logOut = () => {
         this.props.actDangXuat();
@@ -100,12 +103,15 @@ class Header extends Component {
             <div class="bar">
                 <div class="container">
                     <ul>
+                    <a class='red-color'>   <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>  </a>
+
                         <li class="dropdown">
-                            <a class="dropdown-toggle user" type="button" id="barDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <img src="http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png" alt=""
-                                    class="photo" /> {this.props.taiKhoan === null ? '' : hienThiTen }
+                            <span class="dropdown-toggle user" type="button" id="barDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <img src={this.props.taiKhoan && this.props.taiKhoan.taikhoan ? this.props.taiKhoan.taikhoan.anhdaidien : "http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png"} alt=""
+                                    class="photo" />
+                                     {this.props.taiKhoan === null ? '' : hienThiTen }
                         <span class="caret"></span>
-                            </a>
+                            </span>
 
                             <ul class="dropdown-menu" aria-labelledby="barDropdown1">
                                 <li>
@@ -116,13 +122,13 @@ class Header extends Component {
                                 </li>
                                 <li>
                                 <Link to={`/nhatuyendung`}>
-                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
                                 Nhà tuyển dụng
                             </Link>
                                 </li>
                                 <li>
-                                    <a href="shortlisted.html">
-                                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Shortlisted</a>
+                                <Link to={`/nhatuyendung`}>
+                                        <span class="glyphicon glyphicon-bell" aria-hidden="true"></span> Thông báo</Link>
                                 </li>
                                 <li>
                                     <a href="payments.html">
