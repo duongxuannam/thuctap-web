@@ -11,11 +11,14 @@ import ChiTietTinTuc from './pages/ChiTietTinTuc/ChiTietTinTuc';
 import LienHe from './pages/LienHe/LienHe';
 import ThemCongViec from './pages/ThemCongViec/ThemCongViec';
 import CongViecDaDang from './pages/CongViecDaDang/CongViecDaDang';
+import DanhSachUngTuyen from './pages/DanhSachUngTuyen/DanhSachUngTuyen';
 import ThemTinTuc from './pages/ThemTinTuc/ThemTinTuc';
 import NhaTuyenDung from './pages/NhaTuyenDung/NhaTuyenDung';
 import KichHoatNhaTuyenDung from './pages/KichHoatNhaTuyenDung/KichHoatNhaTuyenDung';
 import QuanLy from './pages/QuanLy/QuanLy';
 import ThongTinNhaTuyenDung from './pages/ThongTinNhaTuyenDung/ThongTinNhaTuyenDung';
+import ChiTietTaiKhoan from './pages/ChiTietTaiKhoan/ChiTietTaiKhoan';
+import SuaCongViec from './pages/SuaCongViec/SuaCongViec';
 import Loi from './pages/Loi/Loi';
 
 const routes = [
@@ -80,6 +83,16 @@ const routes = [
         main: ({ match, history }) => <CongViecDaDang match={match} history={history} />
     },
     {
+        path: '/suacongviec/:id',
+        exact: false,
+        main: ({ match, history }) => <SuaCongViec match={match} history={history} />
+    },
+    {
+        path: '/danhsachungtuyen/:id',
+        exact: false,
+        main: ({ match, history }) => <DanhSachUngTuyen match={match} history={history} />
+    },
+    {
         path: '/themtintuc',
         exact: false,
         main: ({ match, history }) => <ThemTinTuc match={match} history={history} />
@@ -103,6 +116,11 @@ const routes = [
         path: '/thongtinnhatuyendung/:id',
         exact: false,
         main: ({ match, history }) => <ThongTinNhaTuyenDung match={match} history={history} />
+    },
+    {
+        path: '/chitiettaikhoan/:id',
+        exact: false,
+        main: ({ match, history }) => <ChiTietTaiKhoan match={match} history={history} />
     },
     {
         path: '',

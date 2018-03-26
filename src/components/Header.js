@@ -131,8 +131,8 @@ class Header extends Component {
                                         <span class="glyphicon glyphicon-bell" aria-hidden="true"></span> Thông báo</Link>
                                 </li>
                                 <li>
-                                    <a href="payments.html">
-                                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Payments</a>
+                                <Link to={`/congviecdadang`}>
+                                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Công việc đã đăng</Link>
                                 </li>
                                 <li>
                                     <a onClick = {this.logOut}>

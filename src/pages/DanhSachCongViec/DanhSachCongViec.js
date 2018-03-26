@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import BannerSearch from '../../components/BannerSearch';
 import { actLayDanhSachCongViecAPI, actTimKiemTrangDanhSachAPI } from '../../actions/index';
 
 class DanhSachCongViec extends Component {

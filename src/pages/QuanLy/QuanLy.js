@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import DanhSachDangKyNhaTuyenDung from '../../components/DanhSachDangKyNhaTuyenDung';
 import { actLayDanhSachDangKyNhaTuyenDungAPI } from '../../actions/index';
 
-const logo = require('../../images/cty2.jpg');
 
 class QuanLy extends Component {
    componentDidMount(){

@@ -5,8 +5,6 @@ import { chiTietCongViecAPI, ungTuyenAPI } from '../../actions/index';
 import CongViecTuongTu from '../../components/CongViecTuongTu';
 
 
-const logo = require('../../images/cty2.jpg');
-
 class ChiTietCongViec extends Component {
     componentDidMount() {
         const { match } = this.props;

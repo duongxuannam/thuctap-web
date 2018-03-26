@@ -32,6 +32,23 @@ export const chiTietCongViec = (data) => {
         data
     }
 }
+
+//-----------SỬA CÔNG VIỆC
+export const actSuaCongViecAPI = (data) => {
+    return dispatch => {
+        return callApi(`suacongviec`, 'POST', data).then(res => {
+            console.log('aaa', res)
+            dispatch(actSuaCongViec(res.data));
+        });
+    }
+}
+
+export const actSuaCongViec = (data) => {
+    return {
+        type : Types.SUA_CONG_VIEC,
+        data
+    }
+}
 //-----------UNG TUYEN
 export const ungTuyenAPI = (data) => {
     return dispatch => {
@@ -104,7 +121,6 @@ export const actLayDanhSachCongViecLanDau = (data) => {
     }
 }
 
-
 //-----------------TIM KIEM CÔNG VIỆC trang chu
 export const actTimKiemCongViecAPI = (data) => {
     // console.log(data)
@@ -154,7 +170,7 @@ export const actTimKiemLanDauTrangDanhSach = (data) => {
 }
 
 
-//-----------CHI TIET CONG VIEC
+//-----------CHI TIET tin tuwc
 export const chiTietTinTucAPI = (id) => {
     return dispatch => {
         return callApi(`tintuc/${id}`, 'GET', null).then(res => {
@@ -166,6 +182,38 @@ export const chiTietTinTucAPI = (id) => {
 export const chiTietTinTuc = (data) => {
     return {
         type : Types.CHI_TIET_TIN_TUC,
+        data
+    }
+}
+
+
+
+//-----------------LAY  DANH SÁCH CÔNG VIỆC ĐẪ ĐĂNG
+export const actLayDanhSachCongViecDaDangAPI = (id) => {
+    return dispatch => {
+        return callApi(`danhsachcongviecdadang/${id}`, 'GET', null).then(res => {
+            dispatch(actLayDanhSachCongViecDaDang(res.data));
+        });
+    };
+}
+export const actLayDanhSachCongViecDaDang = (data) => {
+    return {
+        type : Types.DANH_SACH_CONG_VIEC_DA_DANG,
+        data
+    }
+}
+
+//-----------------LAY  DANH SÁCH DA UNG TUYEN
+export const actLayDanhSachDaUngTuyenAPI = (id) => {
+    return dispatch => {
+        return callApi(`danhsachungtuyen/${id}`, 'GET', null).then(res => {
+            dispatch(actLayDanhSachDaUngTuyen(res.data));
+        });
+    };
+}
+export const actLayDanhSachDaUngTuyen = (data) => {
+    return {
+        type : Types.DANH_SACH_UNG_TUYEN,
         data
     }
 }

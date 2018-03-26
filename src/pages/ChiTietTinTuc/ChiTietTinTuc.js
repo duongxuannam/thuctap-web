@@ -30,7 +30,7 @@ class ChiTietTinTuc extends Component {
                                     <p>
                                         <a class="btn btn-back" onClick={ ()=> this.props.history.goBack() }>
                                             <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                                            <span class="wc-editable" data-pk="ws_blog_back" data-type="text">Quay lại</span>
+                                            <span class="wc-editable">Quay lại</span>
                                         </a>
                                     </p>
                                     <h1>{tieude}</h1>

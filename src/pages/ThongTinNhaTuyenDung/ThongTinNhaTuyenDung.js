@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import { EditorState, convertToRaw, ContentState } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { actLayThongTinTaiKhoanAPI } from '../../actions/index';
 
 
@@ -22,7 +16,12 @@ class ThongTinNhaTuyenDung extends Component {
             <React.Fragment>
                 <div class="main">
                     <div class="container">
-                    
+                    <div class="resume-head">
+                                    <p>
+                                        <a class="btn btn-back btn-secondary" onClick={() => this.props.history.goBack()} >
+                                            <span class="glyphicon glyphicon-menu-left"></span> Quay lại </a>
+                                    </p>
+                                </div>
                         <div class="row">
 
                             <div class="col-lg-4 col-md-5 col-xs-12">
@@ -39,12 +38,7 @@ class ThongTinNhaTuyenDung extends Component {
                             </div>
 
                             <div class="col-lg-8 col-md-7 col-xs-12">
-                            <div class="resume-head">
-                                    <p>
-                                        <a class="btn btn-back btn-secondary" onClick={() => this.props.history.goBack()} >
-                                            <span class="glyphicon glyphicon-menu-left"></span> Quay lại </a>
-                                    </p>
-                                </div>
+                          
                                 <div class="alert alert-success">Thông tin nhà tuyển dụng</div>
 
 

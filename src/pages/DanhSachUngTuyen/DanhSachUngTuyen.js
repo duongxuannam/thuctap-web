@@ -1,38 +1,41 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { actLayDanhSachCongViecDaDangAPI } from '../../actions/index';
+import { actLayDanhSachDaUngTuyenAPI } from '../../actions/index';
 
 class CongViecDaDang extends Component {
     componentDidMount() {
-        if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id) {
-            return this.props.actLayDanhSachCongViecDaDang(this.props.taiKhoan.taikhoan._id)
-
+        const { match } = this.props;
+        if (match) {
+            const { id } = match.params;
+            this.props.actLayDanhSachDaUngTuyen(id);
         }
     }
     showData(data) {
+
         var result = null;
-        if (data.length > 0) {
-            result = data.map((item, index) => {
+        if (data._danhsachungtuyen && data._danhsachungtuyen.length > 0) {
+            result = data._danhsachungtuyen.map((item, index) => {
                 return (
 
                     <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{item.tieude}</td>
-                        <td>{item.diadiem}</td>
-                        <td>{item.ngaydang}</td>
+                        <td>{item.hotenthat}</td>
+                        <td>{item.email}</td>
+                        <td>{item.sodienthoai}</td>
                         {/* <td className='text-center'>
-                        <span class="label label-danger">hết hạn</span>
-                    </td> */}
-                        <td>{item.thoihan}</td>
+                            <span class="label label-danger">hết hạn</span>
+                        </td> */}
+                        <td>{item.truongdaihoc}</td>
                         <td>
-                           <Link to={`/danhsachungtuyen/${item._id}`} >   {item.danop} ứng viên  </Link>
+                            <Link to={`/chitiettaikhoan/${item._id}`} >  Chi tiết </Link>
                         </td>
-                        <td><Link to={`/suacongviec/${item._id}`} >Sửa</Link></td>
                     </tr>
                 );
             });
         }
+
+
         return result;
     }
     render() {
@@ -49,19 +52,18 @@ class CongViecDaDang extends Component {
                 </a>
                             <div className="panel panel-primary">
                                 <div className="panel-heading">
-                                    <h3 className="panel-title">Danh sách công việc đã đăng ({ this.props.danhSachCongViecDaDang.length })</h3>
+                                    <h3 className="panel-title">Danh sách ứng tuyển ({this.props.danhSachUngTuyen && this.props.danhSachUngTuyen._danhsachungtuyen ? this.props.danhSachUngTuyen._danhsachungtuyen.length : '0'})</h3>
                                 </div>
-                                <div className="panel-body ">
+                                <div className="panel-body">
                                     <table className="table table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th>Tiêu đề</th>
-                                                <th>Địa điểm</th>
-                                                <th>Ngày đăng</th>
-                                                <th>Thòi hạn</th>
-                                                <th>Ứng tuyển</th>
-                                                
+                                                <th>Tên</th>
+                                                <th>Email</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Trường đại học</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -70,24 +72,21 @@ class CongViecDaDang extends Component {
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo tiêu đề" />
+                                                    <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo tên" />
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo địa điểm" />
+                                                    <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo email" />
 
                                                 </td>
                                                 <td></td>
                                                 <td>
-                                                    {/* <select type="text" name="locTheoTrangThai" class="form-control">
-                                                        <option value="-1">Tat ca</option>
-                                                        <option value="0">Còn thời hạn</option>
-                                                        <option value="1">Hết hạn</option></select> */}
+
                                                 </td>
                                                 <td></td>
                                             </tr>
 
 
-                                            {this.showData(this.props.danhSachCongViecDaDang)}
+                                            {this.showData(this.props.danhSachUngTuyen)}
 
                                         </tbody>
                                     </table>
@@ -107,14 +106,14 @@ class CongViecDaDang extends Component {
 const mapStateToProps = state => {
     // console.log('log state dc ko', state)
     return {
-        danhSachCongViecDaDang: state.danhSachCongViecDaDang,
+        danhSachUngTuyen: state.danhSachUngTuyen,
         taiKhoan: state.taiKhoan
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        actLayDanhSachCongViecDaDang: (id) => {
-            dispatch(actLayDanhSachCongViecDaDangAPI(id));
+        actLayDanhSachDaUngTuyen: (id) => {
+            dispatch(actLayDanhSachDaUngTuyenAPI(id));
         }
     }
 }

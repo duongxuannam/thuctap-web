@@ -56,9 +56,10 @@ const danhSachCongViec = (state = initialState, action) => {
             console.log('lan dau trang danh sach', action.data)
             if (action.data.thongbao) {
                 var hetdulieu = true;
-                return { ...state, hetdulieu }
+                var mang = []
+                return { ...state, mang, hetdulieu }
             }
-        
+
             var mang = action.data;
             var dangTimKiem = true
             var hetdulieu = false;
