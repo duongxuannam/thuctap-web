@@ -11,6 +11,7 @@ import ChiTietTinTuc from './pages/ChiTietTinTuc/ChiTietTinTuc';
 import LienHe from './pages/LienHe/LienHe';
 import ThemCongViec from './pages/ThemCongViec/ThemCongViec';
 import CongViecDaDang from './pages/CongViecDaDang/CongViecDaDang';
+import TinTucDaDang from './pages/TinTucDaDang/TinTucDaDang';
 import DanhSachUngTuyen from './pages/DanhSachUngTuyen/DanhSachUngTuyen';
 import ThemTinTuc from './pages/ThemTinTuc/ThemTinTuc';
 import NhaTuyenDung from './pages/NhaTuyenDung/NhaTuyenDung';
@@ -81,6 +82,11 @@ const routes = [
         path: '/congviecdadang',
         exact: false,
         main: ({ match, history }) => <CongViecDaDang match={match} history={history} />
+    },
+    {
+        path: '/tintucdadang',
+        exact: false,
+        main: ({ match, history }) => <TinTucDaDang match={match} history={history} />
     },
     {
         path: '/suacongviec/:id',

@@ -186,7 +186,20 @@ export const chiTietTinTuc = (data) => {
     }
 }
 
-
+//-----------------LAY  DANH SÁCH TIN TỨC ĐẪ ĐĂNG
+export const actLayDanhSachTinTucDaDangAPI = (id) => {
+    return dispatch => {
+        return callApi(`danhsachtintucdadang/${id}`, 'GET', null).then(res => {
+            dispatch(actLayDanhSachTinTucDaDang(res.data));
+        });
+    };
+}
+export const actLayDanhSachTinTucDaDang = (data) => {
+    return {
+        type : Types.DANH_SACH_TIN_TUC_DA_DANG,
+        data
+    }
+}
 
 //-----------------LAY  DANH SÁCH CÔNG VIỆC ĐẪ ĐĂNG
 export const actLayDanhSachCongViecDaDangAPI = (id) => {

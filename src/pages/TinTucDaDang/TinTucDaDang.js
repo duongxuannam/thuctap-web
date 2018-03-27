@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { actLayDanhSachCongViecDaDangAPI } from '../../actions/index';
 
-class CongViecDaDang extends Component {
+class TinTucDaDang extends Component {
     componentDidMount() {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id) {
             return this.props.actLayDanhSachCongViecDaDang(this.props.taiKhoan.taikhoan._id)
@@ -20,12 +20,13 @@ class CongViecDaDang extends Component {
                     <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{item.tieude}</td>
-                        <td>  {item.luotxem} lượt</td>
                         <td>{moment(item.ngaydang).utc().format('DD-MM-YYYY')}</td>
+
+                        <td>{item.luotxem}</td>
                         {/* <td className='text-center'>
                         <span class="label label-danger">hết hạn</span>
                     </td> */}
-                        <td>{moment(item.thoihan).format('DD-MM-YYYY')}</td>
+                        <td>{item.thoihan}</td>
                         <td>
                            <Link to={`/danhsachungtuyen/${item._id}`} >   {item.danop} ứng viên  </Link>
                         </td>
@@ -50,7 +51,7 @@ class CongViecDaDang extends Component {
                 </a>
                             <div className="panel panel-primary">
                                 <div className="panel-heading">
-                                    <h3 className="panel-title">Danh sách công việc đã đăng ({ this.props.danhSachCongViecDaDang.length })</h3>
+                                    <h3 className="panel-title">Danh sách tin tức đã đăng ({ this.props.danhSachCongViecDaDang.length })</h3>
                                 </div>
                                 <div className="panel-body ">
                                     <table className="table table-bordered table-hover">
@@ -58,10 +59,10 @@ class CongViecDaDang extends Component {
                                             <tr>
                                                 <th>STT</th>
                                                 <th>Tiêu đề</th>
-                                                <th>Lượt xem</th>
                                                 <th>Ngày đăng</th>
-                                                <th>Thòi hạn</th>
-                                                <th>Ứng tuyển</th>
+                                                <th>Lượt xem</th>
+                                                <th></th>
+                                                <th></th>
                                                 
                                             </tr>
                                         </thead>
@@ -119,4 +120,4 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CongViecDaDang);
+export default connect(mapStateToProps, mapDispatchToProps)(TinTucDaDang);
