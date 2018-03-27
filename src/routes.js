@@ -20,6 +20,7 @@ import QuanLy from './pages/QuanLy/QuanLy';
 import ThongTinNhaTuyenDung from './pages/ThongTinNhaTuyenDung/ThongTinNhaTuyenDung';
 import ChiTietTaiKhoan from './pages/ChiTietTaiKhoan/ChiTietTaiKhoan';
 import SuaCongViec from './pages/SuaCongViec/SuaCongViec';
+import SuaTinTuc from './pages/SuaTinTuc/SuaTinTuc';
 import Loi from './pages/Loi/Loi';
 
 const routes = [
@@ -84,14 +85,19 @@ const routes = [
         main: ({ match, history }) => <CongViecDaDang match={match} history={history} />
     },
     {
+        path: '/suacongviec/:id',
+        exact: false,
+        main: ({ match, history }) => <SuaCongViec match={match} history={history} />
+    },
+    {
         path: '/tintucdadang',
         exact: false,
         main: ({ match, history }) => <TinTucDaDang match={match} history={history} />
     },
     {
-        path: '/suacongviec/:id',
+        path: '/suatintuc/:id',
         exact: false,
-        main: ({ match, history }) => <SuaCongViec match={match} history={history} />
+        main: ({ match, history }) => <SuaTinTuc match={match} history={history} />
     },
     {
         path: '/danhsachungtuyen/:id',

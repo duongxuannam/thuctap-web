@@ -107,7 +107,7 @@ class Header extends Component {
 
                         <li class="dropdown">
                             <span class="dropdown-toggle user" type="button" id="barDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <img src={this.props.taiKhoan && this.props.taiKhoan.taikhoan ? this.props.taiKhoan.taikhoan.anhdaidien : "http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png"} alt=""
+                                <img src={this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.anhdaidien ? this.props.taiKhoan.taikhoan.anhdaidien : "http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png"} alt=""
                                     class="photo" />
                                      {this.props.taiKhoan === null ? '' : hienThiTen }
                         <span class="caret"></span>

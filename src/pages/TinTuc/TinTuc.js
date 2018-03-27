@@ -25,7 +25,7 @@ class TinTuc extends Component {
 
                         <div class="blog-post-image ">
                             <Link to={`/chitiettintuc/${item._id}`} onClick={()=>window.scrollTo(0, 0)}>
-                                <img class="imgbootstrap  " src={item.hinhanh}
+                                <img class="imgbootstrap  " src={item.hinhanh ? item.hinhanh : 'https://res.cloudinary.com/thuctap/image/upload/v1522173916/tinTucMacDinh.png'}
                                     alt="" />
                             </Link>
                         </div>

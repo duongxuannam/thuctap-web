@@ -22,6 +22,10 @@ export const DANH_SACH_CONG_VIEC_DA_DANG = 'DANH_SACH_CONG_VIEC_DA_DANG';
 export const DANH_SACH_UNG_TUYEN = 'DANH_SACH_UNG_TUYEN';
 export const SUA_CONG_VIEC = 'SUA_CONG_VIEC';
 export const DANH_SACH_TIN_TUC_DA_DANG = 'DANH_SACH_TIN_TUC_DA_DANG';
+export const XOA_TIN_TUC = 'XOA_TIN_TUC';
+export const SUA_TIN_TUC = 'SUA_TIN_TUC';
+
+
 
 
 

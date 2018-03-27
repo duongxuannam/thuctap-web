@@ -49,6 +49,24 @@ export const actSuaCongViec = (data) => {
         data
     }
 }
+
+//-----------SỬA Tin TUC
+export const actSuaTinTucAPI = (data) => {
+    return dispatch => {
+        return callApi(`suatintuc`, 'POST', data).then(res => {
+            console.log('aaa', res)
+            dispatch(actSuaTinTuc(res.data));
+        });
+    }
+}
+
+export const actSuaTinTuc = (data) => {
+    return {
+        type : Types.SUA_TIN_TUC,
+        data
+    }
+}
+
 //-----------UNG TUYEN
 export const ungTuyenAPI = (data) => {
     return dispatch => {
@@ -197,6 +215,21 @@ export const actLayDanhSachTinTucDaDangAPI = (id) => {
 export const actLayDanhSachTinTucDaDang = (data) => {
     return {
         type : Types.DANH_SACH_TIN_TUC_DA_DANG,
+        data
+    }
+}
+
+//-----------------Xóa TIN TỨC 
+export const actXoaTinTucAPI = (id) => {
+    return dispatch => {
+        return callApi(`xoatintuc/${id}`, 'GET', null).then(res => {
+            dispatch(actXoaTinTuc(res.data));
+        });
+    };
+}
+export const actXoaTinTuc = (data) => {
+    return {
+        type : Types.XOA_TIN_TUC,
         data
     }
 }

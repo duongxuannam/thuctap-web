@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { actLayDanhSachTinTucDaDangAPI, actXoaTinTucAPI } from '../../actions/index';
+import { actLayDanhSachCongViecDaDangAPI } from '../../actions/index';
 
-class TinTucDaDang extends Component {
+class CongViecDaDang extends Component {
     componentDidMount() {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id) {
-            return this.props.actLayDanhSachTinTucDaDang(this.props.taiKhoan.taikhoan._id)
+            return this.props.actLayDanhSachCongViecDaDang(this.props.taiKhoan.taikhoan._id)
 
         }
-    }
-    xoaTinTuc(id){
-        this.props.actXoaTinTuc(id);
     }
     showData(data) {
         var result = null;
@@ -23,20 +20,16 @@ class TinTucDaDang extends Component {
                     <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{item.tieude}</td>
+                        <td>  {item.luotxem} lượt</td>
                         <td>{moment(item.ngaydang).utc().format('DD-MM-YYYY')}</td>
-
-                        <td>{item.luotxem} lượt</td>
                         {/* <td className='text-center'>
                         <span class="label label-danger">hết hạn</span>
                     </td> */}
-                 
-                       
-                        <td><Link to={`/suatintuc/${item._id}`} >Sửa</Link></td>
+                        <td>{moment(item.thoihan).format('DD-MM-YYYY')}</td>
                         <td>
-                           {/* <a  onClick={this.xoaTinTuc(item._id)}>   Xóa  </a> */}
-                           <a  onClick={()=> this.xoaTinTuc(item._id)}>   Xóa  </a>
-
+                           <Link to={`/danhsachungtuyen/${item._id}`} >   {item.danop} ứng viên  </Link>
                         </td>
+                        <td><Link to={`/suacongviec/${item._id}`} >Sửa</Link></td>
                     </tr>
                 );
             });
@@ -57,7 +50,7 @@ class TinTucDaDang extends Component {
                 </a>
                             <div className="panel panel-primary">
                                 <div className="panel-heading">
-                                    <h3 className="panel-title">Danh sách tin tức đã đăng ({ this.props.danhSachTinTucDaDang.length })</h3>
+                                    <h3 className="panel-title">Danh sách công việc đã đăng ({ this.props.danhSachCongViecDaDang.length })</h3>
                                 </div>
                                 <div className="panel-body ">
                                     <table className="table table-bordered table-hover">
@@ -65,10 +58,10 @@ class TinTucDaDang extends Component {
                                             <tr>
                                                 <th>STT</th>
                                                 <th>Tiêu đề</th>
-                                                <th>Ngày đăng</th>
                                                 <th>Lượt xem</th>
-                                            
-                                                <th></th>
+                                                <th>Ngày đăng</th>
+                                                <th>Thòi hạn</th>
+                                                <th>Ứng tuyển</th>
                                                 
                                             </tr>
                                         </thead>
@@ -84,12 +77,17 @@ class TinTucDaDang extends Component {
 
                                                 </td>
                                                 <td></td>
-                                               
+                                                <td>
+                                                    {/* <select type="text" name="locTheoTrangThai" class="form-control">
+                                                        <option value="-1">Tat ca</option>
+                                                        <option value="0">Còn thời hạn</option>
+                                                        <option value="1">Hết hạn</option></select> */}
+                                                </td>
                                                 <td></td>
                                             </tr>
 
 
-                                            {this.showData(this.props.danhSachTinTucDaDang)}
+                                            {this.showData(this.props.danhSachCongViecDaDang)}
 
                                         </tbody>
                                     </table>
@@ -109,19 +107,16 @@ class TinTucDaDang extends Component {
 const mapStateToProps = state => {
     // console.log('log state dc ko', state)
     return {
-        danhSachTinTucDaDang: state.danhSachTinTucDaDang,
+        danhSachCongViecDaDang: state.danhSachCongViecDaDang,
         taiKhoan: state.taiKhoan
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        actLayDanhSachTinTucDaDang: (id) => {
-            dispatch(actLayDanhSachTinTucDaDangAPI(id));
-        },
-        actXoaTinTuc: (data) => {
-            dispatch(actXoaTinTucAPI(data));
+        actLayDanhSachCongViecDaDang: (id) => {
+            dispatch(actLayDanhSachCongViecDaDangAPI(id));
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TinTucDaDang);
+export default connect(mapStateToProps, mapDispatchToProps)(CongViecDaDang);

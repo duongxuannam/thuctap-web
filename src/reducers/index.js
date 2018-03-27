@@ -8,6 +8,8 @@ import danhSachDangKyNhaTuyenDung from './danhSachDangKyNhaTuyenDung';
 import taiKhoanDuocChon from './taiKhoanDuocChon';
 import danhSachCongViec from './danhSachCongViec';
 import danhSachCongViecDaDang from './danhSachCongViecDaDang';
+import danhSachTinTucDaDang from './danhSachTinTucDaDang';
+
 import danhSachUngTuyen from './danhSachUngTuyen';
 
 const appReducers = combineReducers({
@@ -21,6 +23,7 @@ const appReducers = combineReducers({
    danhSachCongViec,
    danhSachCongViecDaDang,
    danhSachUngTuyen,
+   danhSachTinTucDaDang
 });
 
 export default appReducers;
