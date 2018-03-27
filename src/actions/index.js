@@ -249,6 +249,23 @@ export const actLayDanhSachCongViecDaDang = (data) => {
     }
 }
 
+//-----------------LAY  DANH SÁCH CÔNG VIỆC ĐẪ NỘP
+export const actLayDanhSachCongViecDaNopAPI = (id) => {
+    return dispatch => {
+        return callApi(`danhsachcongviecdanop/${id}`, 'GET', null).then(res => {
+            dispatch(actLayDanhSachCongViecDaNop(res.data));
+        });
+    };
+}
+export const actLayDanhSachCongViecDaNop = (data) => {
+    return {
+        type : Types.DANH_SACH_CONG_VIEC_DA_NOP,
+        data
+    }
+}
+
+
+
 //-----------------LAY  DANH SÁCH DA UNG TUYEN
 export const actLayDanhSachDaUngTuyenAPI = (id) => {
     return dispatch => {

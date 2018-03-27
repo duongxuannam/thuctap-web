@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actLayThongTinTaiKhoanAPI } from '../../actions/index';
-
+import { actLayThongTinTaiKhoanAPI, chiTietCongViecAPI } from '../../actions/index';
+import CongViecDaDangThongTinNhaTuyenDung from '../../components/CongViecDaDangThongTinNhaTuyenDung';
 
 class ThongTinNhaTuyenDung extends Component {
     componentDidMount() {
@@ -16,12 +16,12 @@ class ThongTinNhaTuyenDung extends Component {
             <React.Fragment>
                 <div class="main">
                     <div class="container">
-                    <div class="resume-head">
-                                    <p>
-                                        <a class="btn btn-back btn-secondary" onClick={() => this.props.history.goBack()} >
-                                            <span class="glyphicon glyphicon-menu-left"></span> Quay lại </a>
-                                    </p>
-                                </div>
+                        <div class="resume-head">
+                            <p>
+                                <a class="btn btn-back btn-secondary" onClick={() => this.props.history.goBack()} >
+                                    <span class="glyphicon glyphicon-menu-left"></span> Quay lại </a>
+                            </p>
+                        </div>
                         <div class="row">
 
                             <div class="col-lg-4 col-md-5 col-xs-12">
@@ -33,12 +33,12 @@ class ThongTinNhaTuyenDung extends Component {
                                         alt=""
                                         class="photo" />
                                 </div>
-                                
-                             
+
+
                             </div>
 
                             <div class="col-lg-8 col-md-7 col-xs-12">
-                          
+
                                 <div class="alert alert-success">Thông tin nhà tuyển dụng</div>
 
 
@@ -141,14 +141,23 @@ class ThongTinNhaTuyenDung extends Component {
                             </div>
                         </div>
                         <div class="container black-color">
-                        <div class="jumbotron">
-                        <label class="control-label">
-                                <h1 class="wc-editable" >Giới thiệu công ty</h1>:</label>
-                            <div class="lead" dangerouslySetInnerHTML={{ __html: this.props.taiKhoanDuocChon && this.props.taiKhoanDuocChon.nhatuyendung && this.props.taiKhoanDuocChon.nhatuyendung.gioithieu ? this.props.taiKhoanDuocChon.nhatuyendung.gioithieu : '' }} >
+                            <div class="jumbotron">
+                                <label class="control-label">
+                                    <h1 class="wc-editable" >Giới thiệu công ty</h1>:</label>
+                                <div class="lead" dangerouslySetInnerHTML={{ __html: this.props.taiKhoanDuocChon && this.props.taiKhoanDuocChon.nhatuyendung && this.props.taiKhoanDuocChon.nhatuyendung.gioithieu ? this.props.taiKhoanDuocChon.nhatuyendung.gioithieu : '' }} >
 
+                                </div>
                             </div>
                         </div>
-                        </div>
+
+
+
+                        <CongViecDaDangThongTinNhaTuyenDung
+                            actChiTietCongViec={this.props.actChiTietCongViec}
+                            id={this.props.taiKhoanDuocChon && this.props.taiKhoanDuocChon._id ? this.props.taiKhoanDuocChon._id : ''} />
+
+
+
                     </div>
                 </div>
                 <div class="push"></div>
@@ -164,6 +173,9 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
+        actChiTietCongViec: (id) => {
+            dispatch(chiTietCongViecAPI(id));
+        },
         actLayThongTinTaiKhoan: (data) => {
             dispatch(actLayThongTinTaiKhoanAPI(data));
         },

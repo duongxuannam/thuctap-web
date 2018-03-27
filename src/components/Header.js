@@ -135,6 +135,10 @@ class Header extends Component {
                                         <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Công việc đã đăng</Link>
                                 </li>
                                 <li>
+                                <Link to={`/congviecdanop`}>
+                                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Công việc đã nộp</Link>
+                                </li>
+                                <li>
                                 <Link to={`/tintucdadang`}>
                                         <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Tin tức đã đăng</Link>
                                 </li>

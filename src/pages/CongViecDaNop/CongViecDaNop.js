@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { actLayDanhSachCongViecDaDangAPI } from '../../actions/index';
+import { actLayDanhSachCongViecDaNopAPI } from '../../actions/index';
 
-class CongViecDaDang extends Component {
+class CongViecDaNop extends Component {
     componentDidMount() {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id) {
-            return this.props.actLayDanhSachCongViecDaDang(this.props.taiKhoan.taikhoan._id)
+            return this.props.actLayDanhSachCongViecDaNop(this.props.taiKhoan.taikhoan._id)
 
         }
     }
@@ -20,16 +20,14 @@ class CongViecDaDang extends Component {
                     <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{item.tieude}</td>
-                        <td>  {item.luotxem} lượt</td>
                         <td>{moment(item.ngaydang).utc().format('DD-MM-YYYY')}</td>
-                        {/* <td className='text-center'>
-                        <span class="label label-danger">hết hạn</span>
-                    </td> */}
-                        <td>{moment(item.thoihan).format('DD-MM-YYYY')}</td>
+                        <td>  {item.luotxem} lượt</td>
+                        <td>  {item._danhsachungtuyen.length} ứng viên</td>
                         <td>
-                           <Link to={`/danhsachungtuyen/${item._id}`} >   {item.danop} ứng viên  </Link>
+                           <Link to={`/thongtinnhatuyendung/${item._nguoidang._id}`} >   {item._nguoidang.nhatuyendung.tencongty}   </Link>
                         </td>
-                        <td><Link to={`/suacongviec/${item._id}`} >Sửa</Link></td>
+                        <td><Link to={`/chitietcongviec/${item._id}`} >Chi tiết</Link></td>
+                        
                     </tr>
                 );
             });
@@ -37,9 +35,7 @@ class CongViecDaDang extends Component {
         return result;
     }
     render() {
-        if (!this.props.taiKhoan || !this.props.taiKhoan.taikhoan) {
-            return <Redirect to={`/`} />
-        }
+       console.log('helo', this.props.danhSachCongViecDaNop)
         return (
             <React.Fragment>
                 <div class="container">
@@ -50,7 +46,7 @@ class CongViecDaDang extends Component {
                 </a>
                             <div className="panel panel-primary">
                                 <div className="panel-heading">
-                                    <h3 className="panel-title">Danh sách công việc đã đăng ({ this.props.danhSachCongViecDaDang.length })</h3>
+                                    <h3 className="panel-title">Danh sách công việc đã nộp ({ this.props.danhSachCongViecDaNop.length })</h3>
                                 </div>
                                 <div className="panel-body ">
                                     <table className="table table-bordered table-hover">
@@ -58,10 +54,11 @@ class CongViecDaDang extends Component {
                                             <tr>
                                                 <th>STT</th>
                                                 <th>Tiêu đề</th>
-                                                <th>Lượt xem</th>
                                                 <th>Ngày đăng</th>
-                                                <th>Thòi hạn</th>
-                                                <th>Ứng tuyển</th>
+                                                <th>Lượt xem</th>
+                                                
+                                                <th>Đã ứng tuyển</th>
+                                                <th>Công ty</th>
                                                 
                                             </tr>
                                         </thead>
@@ -87,7 +84,7 @@ class CongViecDaDang extends Component {
                                             </tr>
 
 
-                                            {this.showData(this.props.danhSachCongViecDaDang)}
+                                            {this.showData(this.props.danhSachCongViecDaNop)}
 
                                         </tbody>
                                     </table>
@@ -107,16 +104,16 @@ class CongViecDaDang extends Component {
 const mapStateToProps = state => {
     // console.log('log state dc ko', state)
     return {
-        danhSachCongViecDaDang: state.danhSachCongViecDaDang,
+        danhSachCongViecDaNop: state.danhSachCongViecDaNop,
         taiKhoan: state.taiKhoan
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        actLayDanhSachCongViecDaDang: (id) => {
-            dispatch(actLayDanhSachCongViecDaDangAPI(id));
+        actLayDanhSachCongViecDaNop: (id) => {
+            dispatch(actLayDanhSachCongViecDaNopAPI(id));
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CongViecDaDang);
+export default connect(mapStateToProps, mapDispatchToProps)(CongViecDaNop);

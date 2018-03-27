@@ -10,11 +10,12 @@ const chiTietCongViec = (state = initialState, action) => {
         const idUngTuyen = JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id
         const _danhsachungtuyen = state._danhsachungtuyen
         _danhsachungtuyen.push(idUngTuyen)
+        const danop = state.danop + 1;
         return{
             ...state,
-            _danhsachungtuyen
+            _danhsachungtuyen, danop
         };
-      
+        
         default: return state;
     }
 

@@ -186,6 +186,14 @@ class ChiTietCongViec extends Component {
                                                 <span class="wc-editable" data-pk="front_location" data-type="text">Địa điểm</span>:
                                                 &nbsp;   <strong>{this.props.chiTietCongViec.diadiem ? this.props.chiTietCongViec.diadiem : 'Đang tải'}</strong>
                                             </em>
+                                            <em>
+                                                <span class="wc-editable" data-pk="front_location" data-type="text">Lượt xem</span>:
+                                                &nbsp;   <strong>{this.props.chiTietCongViec.luotxem ? this.props.chiTietCongViec.luotxem : 0}</strong>
+                                            </em>
+                                            <em>
+                                                <span class="wc-editable" data-pk="front_location" data-type="text">Đã nộp</span>:
+                                                &nbsp;   <strong>{this.props.chiTietCongViec.danop ? this.props.chiTietCongViec.danop : 0}</strong>
+                                            </em>
                                         </p>
                                     </div>
 
