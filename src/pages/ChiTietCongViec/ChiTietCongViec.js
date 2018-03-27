@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import { chiTietCongViecAPI, ungTuyenAPI } from '../../actions/index';
 import CongViecTuongTu from '../../components/CongViecTuongTu';
 
@@ -72,14 +73,14 @@ class ChiTietCongViec extends Component {
                                                 <span class="wc-editable" data-pk="front_post_on" data-type="text">Ngày đăng</span>
                                             </span>
                                             <br />
-                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.ngaydang ? this.props.chiTietCongViec.ngaydang : 'Đang tải'}</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.ngaydang ? moment(this.props.chiTietCongViec.ngaydang).utc().format('DD-MM-YYYY') : 'Đang tải'}</strong>
                                         </p>
                                         <p>
                                             <span>
                                                 <span class="wc-editable" data-pk="front_post_on" data-type="text">Thời hạn</span>
                                             </span>
                                             <br />
-                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.thoihan ? this.props.chiTietCongViec.thoihan : 'Đang tải'}</strong>
+                                            <strong>{this.props.chiTietCongViec && this.props.chiTietCongViec.thoihan ? moment(this.props.chiTietCongViec.thoihan).format('DD-MM-YYYY') : 'Đang tải'}</strong>
                                         </p>
                                         <p>
                                             <span>

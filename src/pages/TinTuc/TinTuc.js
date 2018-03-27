@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { actLayDataTinTucAPI } from '../../actions/index';
 
 class TinTuc extends Component {
@@ -18,9 +19,9 @@ class TinTuc extends Component {
                         </h2>
 
                         <p class="lead">
-                            <span class="wc-editable">by</span> {item._nguoidang.hoten} |
-                       <span class="wc-editable" data-pk="ws_blog_posted_on" data-type="text">Posted on</span> February 09, 2018
-                       <span class="wc-editable" data-pk="ws_blog_at" data-type="text">at</span> {item.ngaydang}</p>
+                            <span class="wc-editable">Người đăng</span> {item._nguoidang.hoten} |
+                       <span class="wc-editable" data-pk="ws_blog_posted_on" data-type="text">Ngày đăng:</span> {moment(item.ngaydang).utc().format('DD-MM-YYYY')}
+                       <span class="wc-editable" data-pk="ws_blog_at" data-type="text">   Lượt xem:</span> { item.luotxem }</p>
 
                         <div class="blog-post-image ">
                             <Link to={`/chitiettintuc/${item._id}`} onClick={()=>window.scrollTo(0, 0)}>
@@ -57,11 +58,10 @@ class TinTuc extends Component {
                             <div class="col-md-4 col-xs-12">
                                 <div class="box">
                                     <div class="box-title">
-                                        <span class="wc-editable" data-pk="ws_blog_side" data-type="text">Tell Us Your Story</span>
+                                        <span class="wc-editable" data-pk="ws_blog_side" data-type="text">Đăng tải bài viết của bạn</span>
                                     </div>
                                     <p>
-                                        <span class="wc-editable" data-pk="ws_blog_side_desc" data-type="text">Use this field as a call to action to your job portal visitors - candidates and employers.
-                                    Ask them to send you a short success story or contribute to your blog.</span>
+                                        <span class="wc-editable" data-pk="ws_blog_side_desc" data-type="text">Bạn có những thông tin muốn gửi đến mọi người có những bài viết hay muốn chia sẻ??.</span>
                                     </p>
                                     <Link to={`/themtintuc`} class="btn btn-primary" >
                                         <span class="wc-editable" >Đăng bài</span>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { actLayDanhSachCongViecAPI, actTimKiemTrangDanhSachAPI } from '../../actions/index';
 
 class DanhSachCongViec extends Component {
@@ -38,27 +39,27 @@ class DanhSachCongViec extends Component {
 
                             <div class="job-meta">
                                 <ul>
-                                    <li class="col-size-1of4" title="Posted on">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-
-                                        &nbsp;{item.ngaydang} </li>
-
                                     <li class="col-size-2of4" title="Posted on">
                                         <span class="glyphicon glyphicon-calendar"></span>
 
-                                        &nbsp;{item.thoihan} </li>
+                                        &nbsp;{moment(item.ngaydang).utc().format('DD-MM-YYYY')} </li>
+
+                                    <li class="col-size-1of4" title="Posted on">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+
+                                        &nbsp;{moment(item.thoihan).format('DD-MM-YYYY')} </li>
 
                                     <li class="col-size-1of4" title="Location">
                                         <span class="glyphicon glyphicon-map-marker"></span>
                                         &nbsp;{item.diadiem} </li>
                                 </ul>
                                 <ul>
-                                    <li class="col-size-1of4" title="Posted on">
+                                    <li class="col-size-2of4" title="Posted on">
                                         <span class="glyphicon glyphicon-briefcase"></span>
 
                                         &nbsp;{item.chuyennganh} </li>
 
-                                    <li class="col-size-2of4" title="Posted on">
+                                    <li class="col-size-1of4" title="Posted on">
                                         <span class="glyphicon glyphicon-asterisk"></span>
 
                                         &nbsp;{item.kieu} </li>
@@ -108,13 +109,13 @@ class DanhSachCongViec extends Component {
             <div class="alert alert-danger mrt-20"> Không tìm thấy hoặc đã hết dữ liệu</div>
         )
         const taiThemEnable = (
-            <a onClick={this.taiThem} class="btn btn-primary btn-lg btn-apply">Tải thêmmmmmm</a>
+            <a onClick={this.taiThem} class="btn btn-primary btn-lg btn-apply">Tải thêm</a>
 
         );
         const taiThemDisable = (
             <React.Fragment>
                 <a onClick={this.taiThem} disabled class="btn btn-primary btn-lg btn-apply mr-tt">Tải thêm</a>
-                <a onClick={() => this.props.actLayDanhSachCongViec(1)} class="btn btn-primary btn-lg btn-apply">Mới nhất</a>
+                <a onClick={() =>{  this.props.actLayDanhSachCongViec(1); window.scrollTo(500, 500) }} class="btn btn-primary btn-lg btn-apply">Mới nhất</a>
 
             </React.Fragment>
         );
@@ -181,27 +182,6 @@ class DanhSachCongViec extends Component {
                     <div class="container">
                         <div class="search-jobs-results-filter">
                             <div class="row">
-                                {/* <div class="col-sm-6 col-xs-12">
-
-                                </div>
-
-                                <div class="col-sm-6 col-xs-12">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-xs-12 text-right">
-                                            <label>
-                                                <span class="wc-editable" data-pk="front_sort_by" data-type="text">Sort by</span>
-                                            </label>
-                                        </div>
-
-                                        <div class="col-sm-6 col-xs-12">
-                                            <select name="sort_by" id="pjJLSortBy" class="form-control">
-                                                <option value="category" >Category</option>
-                                                <option value="date">Date</option>
-                                                <option value="type" >Type</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div> */}
                                 <h2 class="text-center cl-black">
                                     <span class="wc-editable" >Công việc mới nhất</span>
                                 </h2>

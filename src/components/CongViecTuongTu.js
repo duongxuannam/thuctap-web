@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import callApi from '../global/apiCaller';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+import callApi from '../global/apiCaller';
 
 class CongViecTuongTu extends Component {
     constructor(props) {
@@ -50,7 +51,7 @@ class CongViecTuongTu extends Component {
                                     <li class="col-size-1of4">
                                         <span class="glyphicon glyphicon-calendar"></span>
 
-                                        &nbsp; {item.thoihan}
+                                        &nbsp; {moment(item.ngaydang).utc().format('DD-MM-YYYY')}
                                     </li>
 
                                     <li class="col-size-2of4">

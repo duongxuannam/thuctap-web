@@ -81,8 +81,7 @@ class DangNhap extends Component {
             <div class="main">
                 <div class="container">
                     <div class="paragraph">
-                        <span class="wc-editable" data-pk="ws_candidate_login_desc" data-type="textarea">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua.</span>
+                        <span class="wc-editable" data-pk="ws_candidate_login_desc" data-type="textarea">Đăng nhập để có thể ứng tuyển và đăng tuyển công việc.</span>
                     </div>
 
                     <br />

@@ -192,8 +192,7 @@ class DangKy extends Component {
             <div class="main">
                 <div class="container">
                     <div class="paragraph">
-                        <span class="wc-editable" data-pk="ws_candidate_regsiter_desc" data-type="textarea">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                      et dolore magna aliqua.</span>
+                        <span class="wc-editable" data-pk="ws_candidate_regsiter_desc" data-type="textarea">Đăng ký tài khoản để sử dụng các tính năng của hệ thống.</span>
                     </div>
                     <br />
                     <div class="row">

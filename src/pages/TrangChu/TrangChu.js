@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
+import moment from 'moment';
 import { actLayDataTrangChuAPI, actTimKiemCongViecAPI } from '../../actions/index';
 
 class TrangChu extends Component {
@@ -14,22 +15,22 @@ class TrangChu extends Component {
             timKiem: false
         }
     }
-     timkiem(e){
+    timkiem(e) {
         e.preventDefault();
         if (this.state.tuKhoa === '') {
             this.setState({ loiTuKhoa: 'Vui lòng nhập từ khóa để tìm kiếm' })
         }
         if (this.state.tuKhoa !== '') {
-            
+
             console.log('kiem de')
             const data = {
-                sotrang : 1,
+                sotrang: 1,
                 tuKhoa: this.state.tuKhoa,
             }
             this.props.actTimKiemCongViec(data)
             this.setState({ timKiem: true })
-         
-          
+
+
         }
 
     }
@@ -59,22 +60,23 @@ class TrangChu extends Component {
 
                                 <div class="job-meta">
                                     <ul>
+                                        <li class="col-size-2of4" title="Posted on">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                            &nbsp;{moment(item.ngaydang).utc().format('DD-MM-YYYY')}
+                                        </li>
+
                                         <li class="col-size-1of4" title="Posted on">
                                             <span class="glyphicon glyphicon-calendar"></span>
 
-                                            &nbsp;{item.ngaydang} </li>
 
-                                        <li class="col-size-1of4" title="Posted on">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-
-                                            &nbsp;{item.thoihan} </li>
+                                            &nbsp;{moment(item.thoihan).format('DD-MM-YYYY')} </li>
 
                                         <li class="col-size-1of4" title="Location">
                                             <span class="glyphicon glyphicon-map-marker"></span>
                                             &nbsp;{item.diadiem} </li>
                                     </ul>
                                     <ul>
-                                        <li class="col-size-1of4" title="Posted on">
+                                        <li class="col-size-2of4" title="Posted on">
                                             <span class="glyphicon glyphicon-briefcase"></span>
 
                                             &nbsp;{item.chuyennganh} </li>
@@ -175,7 +177,7 @@ class TrangChu extends Component {
                                     <span>Đăng nhập để bắt đầu</span>
                                 </h3>
                                 <div class="paragraph">
-                                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                                    <span>Đăng ký tài khoản để sử dụng các tính năng của hệ thống.</span>
                                 </div>
                                 <br />
                                 <Link to={`/dangnhap`} onClick={() => window.scrollTo(0, 0)} class="btn btn-tertiary" >

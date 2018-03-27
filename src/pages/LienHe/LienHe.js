@@ -16,7 +16,7 @@ class LienHe extends Component {
                                                 <form >
                                                     <input type="hidden" name="id" value="1" />
                                                     <div class="form-group">
-                                                        <label class="col-sm-3 control-label">First name</label>
+                                                        <label class="col-sm-3 control-label">Họ tên</label>
                                                         <div class="col-sm-9 col-xs-12">
                                                             <input type="text" id="pjCF_field_20" name="pjCF_field_20" value="" class="form-control pjCF-form-field pjCF-checked-field lienhe-ghide"
                                                                 placeholder="" />
@@ -26,7 +26,7 @@ class LienHe extends Component {
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-sm-3 control-label">Last name</label>
+                                                        <label class="col-sm-3 control-label">Địa chỉ</label>
                                                         <div class="col-sm-9 col-xs-12">
                                                             <input type="text" id="pjCF_field_21" name="pjCF_field_21" value=""  class="form-control pjCF-form-field pjCF-checked-field lienhe-ghide"
                                                                 placeholder="" />
@@ -46,7 +46,7 @@ class LienHe extends Component {
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-sm-3 control-label">Phone</label>
+                                                        <label class="col-sm-3 control-label">Số điện thoại</label>
                                                         <div class="col-sm-9 col-xs-12">
                                                             <input type="text" id="pjCF_field_23" name="pjCF_field_23" value=""  class="form-control pjCF-form-field pjCF-checked-field lienhe-ghide"
                                                                 placeholder="" />
@@ -56,7 +56,7 @@ class LienHe extends Component {
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-sm-3 control-label">Question</label>
+                                                        <label class="col-sm-3 control-label">Câu hỏi</label>
                                                         <div class="col-sm-9 col-xs-12">
                                                             <textarea name="pjCF_field_24" placeholder="" rows="6" cols="40" class="form-control pjCF-form-field pjCF-checked-field"></textarea>
                                                             <div class="help-block with-errors">
@@ -67,7 +67,7 @@ class LienHe extends Component {
 
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-3 col-sm-6">
-                                                            <button  type="submit" class="btn pjVrBtnPrimary pjCF-button btn-primary lienhe-ghide-button">Send</button>
+                                                            <button  type="submit" class="btn pjVrBtnPrimary pjCF-button btn-primary lienhe-ghide-button">Gửi</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -84,7 +84,7 @@ class LienHe extends Component {
                                 <div class="panel">
                                     <div class="panel-heading">
                                         <div class="panel-title">
-                                            <span class="wc-editable" data-pk="ws_our_specialist" data-type="text">Our specialists are available to help</span>
+                                            <span class="wc-editable" data-pk="ws_our_specialist" data-type="text">Nhóm của chúng tôi</span>
                                         </div>
                                     </div>
 
@@ -104,19 +104,19 @@ class LienHe extends Component {
                                         <div class="availability-time">
                                             <p>
                                                 <strong>
-                                                    <span class="wc-editable" data-pk="ws_contact_monday_through_friday" data-type="text">Monday through Friday</span>: </strong>
+                                                    <span class="wc-editable" data-pk="ws_contact_monday_through_friday" data-type="text">Võ Quốc Luong</span> </strong>
 
                                                 <span>
-                                                    <span class="wc-editable" data-pk="ws_contact_monday_through_friday_desc" data-type="text">8:00am – 9:00pm EST</span>
+                                                    <span class="wc-editable" data-pk="ws_contact_monday_through_friday_desc" data-type="text">Giáo viên hướng dẫn</span>
                                                 </span>
                                             </p>
 
                                             <p>
                                                 <strong>
-                                                    <span class="wc-editable" data-pk="ws_contact_saturday" data-type="text">Saturday</span>: </strong>
+                                                    <span class="wc-editable" data-pk="ws_contact_saturday" data-type="text">Võ So Ny</span> </strong>
 
                                                 <span>
-                                                    <span class="wc-editable" data-pk="ws_contact_saturday_desc" data-type="text">10:00am – 7:00pm EST</span>
+                                                    <span class="wc-editable" data-pk="ws_contact_saturday_desc" data-type="text">Thành viên</span>
                                                 </span>
                                             </p>
                                         </div>
@@ -135,10 +135,10 @@ class LienHe extends Component {
                                                 <span class="glyphicon glyphicon-phone"></span>
 
                                                 <strong>
-                                                    <span class="wc-editable" data-pk="ws_contact_phone" data-type="text">Phone</span>:</strong>
+                                                    <span class="wc-editable" data-pk="ws_contact_phone" data-type="text">Số điện thoại</span>:</strong>
 
                                                 <em>
-                                                    <span class="wc-editable" data-pk="ws_contact_phone_number" data-type="text">123.456.789</span>
+                                                    <span class="wc-editable" data-pk="ws_contact_phone_number" data-type="text">0165 326 4570</span>
                                                 </em>
                                             </li>
 
@@ -148,7 +148,7 @@ class LienHe extends Component {
                                                 <strong>
                                                     <span class="wc-editable" data-pk="ws_contact_email" data-type="text">Email</span>:</strong>
                                                 <a href="mailto:info@jobagency.com">
-                                                    <span class="wc-editable" data-pk="ws_contact_email_address" data-type="text">info@jobagency.com</span>
+                                                    <span class="wc-editable" data-pk="ws_contact_email_address" data-type="text">duongxuannam1995@gmail.com</span>
                                                 </a>
                                             </li>
 
@@ -156,10 +156,10 @@ class LienHe extends Component {
                                                 <span class="glyphicon glyphicon-map-marker"></span>
 
                                                 <strong>
-                                                    <span class="wc-editable" data-pk="ws_contact_address" data-type="text">Address</span>:</strong>
+                                                    <span class="wc-editable" data-pk="ws_contact_address" data-type="text">Địa chỉ</span>:</strong>
 
                                                 <em id="address">
-                                                    <span class="wc-editable" data-pk="ws_contact_address_details" data-type="text">Kensington Gardens, London W8 4PX, United Kingdom</span>
+                                                    <span class="wc-editable" data-pk="ws_contact_address_details" data-type="text">137/1 Tân Bình, Dĩ An, Bình Dương</span>
                                                 </em>
                                             </li>
                                         </ul>
