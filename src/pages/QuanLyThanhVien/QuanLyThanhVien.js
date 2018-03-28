@@ -8,7 +8,11 @@ import { actLayDanhSachTaiKhoanAPI, actSuaKhoaAPI } from '../../actions/index';
 class QuanLyThanhVien extends Component {
     constructor(props) {
         super(props);
-        
+        this.state = {
+            locTheoEmail: '',
+            locTheoTen: '',
+            locTheoSDT: ''
+        }
     }
     componentDidMount() {
         this.props.actLayDanhSachTaiKhoan();
@@ -36,7 +40,30 @@ class QuanLyThanhVien extends Component {
         }
         return result;
     }
+    onChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({
+            [name] : value
+        })
+    }
     render() {
+        const { locTheoEmail, locTheoTen, locTheoSDT } = this.state;
+        var  mang  = this.props.danhSachTaiKhoan;
+        if(locTheoEmail){
+            mang = mang.filter((item) => {
+                return item.email.toLowerCase().indexOf(locTheoEmail.toLowerCase()) !== -1
+            })
+        };
+        if(locTheoTen){
+            mang = mang.filter((item) => {
+                return item.hoten.toLowerCase().indexOf(locTheoTen.toLowerCase()) !== -1
+            })
+        }
+        if(locTheoSDT){
+            mang = mang.filter((item) => {
+                return item.sodienthoai.toLowerCase().indexOf(locTheoSDT.toLowerCase()) !== -1
+            })
+        }
         return (
             <React.Fragment>
                 <div class="main">
@@ -88,7 +115,7 @@ class QuanLyThanhVien extends Component {
                              
                                 <div className="panel panel-primary">
                 <div className="panel-heading">
-                    <h3 className="panel-title">Danh sách thành viên ({this.props.danhSachTaiKhoan.length})</h3>
+                    <h3 className="panel-title">Danh sách thành viên ({mang.length})</h3>
                 </div>
                 <div className="panel-body ">
                     <table className="table table-bordered table-hover">
@@ -107,23 +134,27 @@ class QuanLyThanhVien extends Component {
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo email" />
+                                    <input type="text" name="locTheoEmail" class="form-control" placeholder="lọc theo email" value={locTheoEmail} onChange={this.onChange} />
+                                </td>
+                                <td>
+                                <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo tên" value={locTheoTen} onChange={this.onChange}/>
+
+                                </td>
+
+                                <td>
+                                <input type="text" name="locTheoSDT" class="form-control" placeholder="lọc theo SDT" value={locTheoSDT} onChange={this.onChange}/>
+
                                 </td>
                                 <td>
 
                                 </td>
-
-                                <td>
-
-                                </td>
-                                <td></td>
 
                                 <td></td>
                             </tr>
 
 
 
-                            {this.showData(this.props.danhSachTaiKhoan)}
+                            {this.showData(mang)}
 
                         </tbody>
                     </table>

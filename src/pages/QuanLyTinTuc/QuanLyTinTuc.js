@@ -5,6 +5,12 @@ import moment from 'moment';
 import { actLayDanhSachTinTucAPI, actXoaTinTucAdminAPI } from '../../actions/index';
 
 class QuanLyTinTuc extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            locTheoTieuDe: ''
+        }
+    }
     componentDidMount() {
             return this.props.actLayDanhSachTinTuc()
         }
@@ -40,7 +46,20 @@ class QuanLyTinTuc extends Component {
         }
         return result;
     }
+    onChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({
+            [name] : value
+        })
+    }
     render() {
+        const { locTheoTieuDe } = this.state;
+        var  mang  = this.props.danhSachTinTuc;
+        if(locTheoTieuDe){
+            mang = mang.filter((item) => {
+                return item.tieude.toLowerCase().indexOf(locTheoTieuDe.toLowerCase()) !== -1
+            })
+        }
         return (
             <React.Fragment>
                 <div class="main">
@@ -92,7 +111,7 @@ class QuanLyTinTuc extends Component {
 
                                 <div className="panel panel-primary">
                                 <div className="panel-heading">
-                                    <h3 className="panel-title">Danh sách tin tức đã đăng ({ this.props.danhSachTinTuc.length })</h3>
+                                    <h3 className="panel-title">Danh sách tin tức đã đăng ({ mang.length })</h3>
                                 </div>
                                 <div className="panel-body ">
                                     <table className="table table-bordered table-hover">
@@ -113,7 +132,7 @@ class QuanLyTinTuc extends Component {
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo tiêu đề" />
+                                                <input type="text" name="locTheoTieuDe" class="form-control" placeholder="lọc theo tiêu đề"  value = {locTheoTieuDe} onChange={this.onChange} />
                                                 </td>
                                                 <td>
 
@@ -124,7 +143,7 @@ class QuanLyTinTuc extends Component {
                                             </tr>
 
 
-                                            {this.showData(this.props.danhSachTinTuc)}
+                                            {this.showData(mang)}
 
                                         </tbody>
                                     </table>

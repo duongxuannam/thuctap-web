@@ -137,12 +137,9 @@ class QuanLyCongViec extends Component {
                                                     <th>Ngày đăng</th>
                                                     <th>Thòi hạn</th>
                                                     <th>Ứng tuyển</th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-
                                                 <tr>
                                                     <td></td>
                                                     <td>

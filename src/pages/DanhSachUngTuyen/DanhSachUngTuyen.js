@@ -4,6 +4,15 @@ import { connect } from 'react-redux';
 import { actLayDanhSachDaUngTuyenAPI } from '../../actions/index';
 
 class CongViecDaDang extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            locTheoTen: '',
+            locTheoEmail: '',
+            locTheoSDT: '',
+            locTheoTruongDaiHoc: ''
+        }
+    }
     componentDidMount() {
         const { match } = this.props;
         if (match) {
@@ -11,11 +20,16 @@ class CongViecDaDang extends Component {
             this.props.actLayDanhSachDaUngTuyen(id);
         }
     }
+    onChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({
+            [name]: value
+        })
+    }
     showData(data) {
-
         var result = null;
-        if (data._danhsachungtuyen && data._danhsachungtuyen.length > 0) {
-            result = data._danhsachungtuyen.map((item, index) => {
+        if (data && data.length > 0) {
+            result = data.map((item, index) => {
                 return (
 
                     <tr key={index}>
@@ -41,6 +55,28 @@ class CongViecDaDang extends Component {
     render() {
         if (!this.props.taiKhoan || !this.props.taiKhoan.taikhoan) {
             return <Redirect to={`/`} />
+        }
+        const { locTheoTen, locTheoEmail, locTheoSDT, locTheoTruongDaiHoc } = this.state;
+        var mang = this.props.danhSachUngTuyen._danhsachungtuyen;
+        if (locTheoTen) {
+            mang = mang.filter((item) => {
+                return item.hotenthat.toLowerCase().indexOf(locTheoTen.toLowerCase()) !== -1
+            })
+        }
+        if (locTheoEmail) {
+            mang = mang.filter((item) => {
+                return item.email.toLowerCase().indexOf(locTheoEmail.toLowerCase()) !== -1
+            })
+        }
+        if (locTheoSDT) {
+            mang = mang.filter((item) => {
+                return item.sodienthoai.toLowerCase().indexOf(locTheoSDT.toLowerCase()) !== -1
+            })
+        }
+        if (locTheoTruongDaiHoc) {
+            mang = mang.filter((item) => {
+                return item.truongdaihoc.toLowerCase().indexOf(locTheoTruongDaiHoc.toLowerCase()) !== -1
+            })
         }
         return (
             <React.Fragment>
@@ -72,21 +108,25 @@ class CongViecDaDang extends Component {
                                             <tr>
                                                 <td></td>
                                                 <td>
-                                                    <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo tên" />
+                                                    <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo tên" value={locTheoTen} onChange={this.onChange} />
                                                 </td>
                                                 <td>
-                                                    <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo email" />
+                                                    <input type="text" name="locTheoEmail" class="form-control" placeholder="lọc theo email" value={locTheoEmail} onChange={this.onChange} />
 
                                                 </td>
-                                                <td></td>
                                                 <td>
+                                                    <input type="text" name="locTheoSDT" class="form-control" placeholder="lọc theo số điện thoại" value={locTheoSDT} onChange={this.onChange} />
+
+                                                </td>
+                                                <td>
+                                                <input type="text" name="locTheoTruongDaiHoc" class="form-control" placeholder="lọc theo trường đại học" value={locTheoTruongDaiHoc} onChange={this.onChange} />
 
                                                 </td>
                                                 <td></td>
                                             </tr>
 
 
-                                            {this.showData(this.props.danhSachUngTuyen)}
+                                            {this.showData(mang)}
 
                                         </tbody>
                                     </table>
