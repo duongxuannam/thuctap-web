@@ -148,7 +148,7 @@ const routes = [
         main: ({ match, history }) => <TinTucDaDang match={match} history={history} />
     },
     {
-        path: '/khoa',
+        path: '/khoa', 
         exact: false,
         main: () => <Khoa />
     },
