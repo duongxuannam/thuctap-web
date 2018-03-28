@@ -39,7 +39,11 @@ class ThongTinNhaTuyenDung extends Component {
 
                             <div class="col-lg-8 col-md-7 col-xs-12">
 
-                                <div class="alert alert-success">Thông tin nhà tuyển dụng</div>
+                            {
+                                   this.props.taiKhoanDuocChon && this.props.taiKhoanDuocChon.khoa ? <div class="alert alert-danger">Tài khoản này đã bị khóa</div>
+                                        : <div class="alert alert-success">Thông tin nhà tuyển dụng</div>
+
+                                }
 
 
 

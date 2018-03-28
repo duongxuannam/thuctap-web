@@ -26,7 +26,8 @@ class ChiTietTaiKhoan extends Component {
                     txtDiaChi: res.data.diachi,
                     txtTruongDaiHoc: res.data.truongdaihoc,
                     hinhanh: res.data.anhdaidien ? res.data.anhdaidien : this.state.hinhanh,
-                    gioithieu: res.data.gioithieu
+                    gioithieu: res.data.gioithieu,
+                    khoa: res.data.khoa
                 })
             });
         }
@@ -63,7 +64,11 @@ class ChiTietTaiKhoan extends Component {
                             </div>
 
                             <div class="col-lg-8 col-md-7 col-xs-12">
-                                <div class="alert alert-success">Chi tiết tài khoản</div>
+                                {
+                                    this.state.khoa ? <div class="alert alert-danger">Tài khoản này đã bị khóa</div>
+                                        : <div class="alert alert-success">Chi tiết tài khoản</div>
+
+                                }
                                 <div class="form">
                                     <form class="form-dyna xs-4" >
                                         <div class="row">

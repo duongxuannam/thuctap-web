@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { actDangXuatAPI } from '../../actions/index';
+
 
 class Khoa extends Component {
+    componentDidMount(){
+        if(this.props.taiKhoan && this.props.taiKhoan.thongbao){
+            this.props.actDangXuat();
+        }
+        
+    }
     render() {
+        if(this.props.taiKhoan && this.props.taiKhoan.taikhoan && !this.props.taiKhoan.taikhoan.khoa)
+        {
+            
+            return <Redirect to={ `` }/>
+        }
         return (
             <React.Fragment>
                 <div className="loi-ghide-height">
@@ -20,5 +34,17 @@ class Khoa extends Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        taiKhoan: state.taiKhoan
+    }
+}
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        actDangXuat: () => {
+            dispatch(actDangXuatAPI());
+        },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Khoa);
 
-export default Khoa;

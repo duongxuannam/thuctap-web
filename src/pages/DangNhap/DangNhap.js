@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { actDangNhapAPI } from '../../actions/index';
 
 class DangNhap extends Component {
@@ -64,6 +64,9 @@ class DangNhap extends Component {
     }
 
     render() {
+        if(this.props.taiKhoan && this.props.taiKhoan.thongbao){
+            return <Redirect to={`khoa`}/>
+        }
         const { txtEmail, txtMatKhau, demnguoc, hienThiLoi } = this.state;
         const coLoi = (
             <span class="wc-editable hien-thi-loi-edit">{hienThiLoi === 'Tài khoản đã bị khóa' ? hienThiLoi : 'Email hoặc mật khẩu không đúng'}</span>
@@ -143,7 +146,7 @@ class DangNhap extends Component {
         if (demnguoc === 0) {
             this.props.history.goBack();
         }
-        console.log('aaa', this.props.taiKhoan)
+       
         return (
             <React.Fragment>
                 {main}
