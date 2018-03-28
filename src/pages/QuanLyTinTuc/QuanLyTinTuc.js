@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import DanhSachDangKyNhaTuyenDung from '../../components/DanhSachDangKyNhaTuyenDung';
 import DanhSachTaiKhoan from '../../components/DanhSachTaiKhoan';
 import { actLayDanhSachDangKyNhaTuyenDungAPI } from '../../actions/index';
 
 
-class QuanLy extends Component {
+class QuanLyTinTuc extends Component {
     constructor(props) {
         super(props);
-       
+        
     }
     componentDidMount() {
         this.props.actLayDanhSachDangKyNhaTuyenDung();
@@ -29,29 +29,29 @@ class QuanLy extends Component {
                                     </div>
 
                                     <div class="panel-body pointer ">
-                                        <a className='clr contro'
-                                            >
+                                        <a className= 'contro'
+                                           >
                                             Danh sách đăng ký nhà tuyển dụng
                                           </a>
                                     </div>
                                     <div class="panel-body pointer">
                                         <a className='contro'
-                                           
+                                          
                                         >
                                             Danh sách thành viên
                                          </a>
                                     </div>
                                     <div class="panel-body pointer">
-                                        <a className= 'contro'
-                                           >
+                                        <a className='contro'
+                                         >
                                             Danh sách công việc
                                          </a>
                                     </div>
                                     <div class="panel-body pointer">
-                                        <Link to={`quanlytintuc`} className= 'contro'
+                                        <a className='clr contro'
                                             >
                                             Danh sách tin tức
-                                         </Link>
+                                         </a>
                                     </div>
                                 </div>
                             </div>
@@ -92,5 +92,5 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuanLy);
+export default connect(mapStateToProps, mapDispatchToProps)(QuanLyTinTuc);
 

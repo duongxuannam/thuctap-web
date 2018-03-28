@@ -22,6 +22,7 @@ import ThongTinNhaTuyenDung from './pages/ThongTinNhaTuyenDung/ThongTinNhaTuyenD
 import ChiTietTaiKhoan from './pages/ChiTietTaiKhoan/ChiTietTaiKhoan';
 import SuaCongViec from './pages/SuaCongViec/SuaCongViec';
 import SuaTinTuc from './pages/SuaTinTuc/SuaTinTuc';
+import QuanLyTinTuc from './pages/QuanLyTinTuc/QuanLyTinTuc';
 import Khoa from './pages/Khoa/Khoa';
 import Loi from './pages/Loi/Loi';
 
@@ -140,7 +141,12 @@ const routes = [
         path: '/chitiettaikhoan/:id',
         exact: false,
         main: ({ match, history }) => <ChiTietTaiKhoan match={match} history={history} />
-    } ,
+    },
+    {
+        path: '/quanlytintuc',
+        exact: false,
+        main: ({ match, history }) => <TinTucDaDang match={match} history={history} />
+    },
     {
         path: '/khoa',
         exact: false,
