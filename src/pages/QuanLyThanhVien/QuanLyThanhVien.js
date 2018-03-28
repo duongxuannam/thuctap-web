@@ -11,7 +11,9 @@ class QuanLyThanhVien extends Component {
         this.state = {
             locTheoEmail: '',
             locTheoTen: '',
-            locTheoSDT: ''
+            locTheoSDT: '',
+            locTheoLoaiTaiKhoan: '',
+            locTheoTrangThai: ''
         }
     }
     componentDidMount() {
@@ -47,7 +49,7 @@ class QuanLyThanhVien extends Component {
         })
     }
     render() {
-        const { locTheoEmail, locTheoTen, locTheoSDT } = this.state;
+        const { locTheoEmail, locTheoTen, locTheoSDT, locTheoLoaiTaiKhoan, locTheoTrangThai } = this.state;
         var  mang  = this.props.danhSachTaiKhoan;
         if(locTheoEmail){
             mang = mang.filter((item) => {
@@ -64,6 +66,32 @@ class QuanLyThanhVien extends Component {
                 return item.sodienthoai.toLowerCase().indexOf(locTheoSDT.toLowerCase()) !== -1
             })
         }
+        if(locTheoLoaiTaiKhoan){
+            if(locTheoLoaiTaiKhoan === 'Người dùng'){
+                mang = mang.filter((item) => {
+                    return !item.kichhoatnhatuyendung 
+                })
+            };
+            if(locTheoLoaiTaiKhoan === 'Nhà tuyển dụng'){
+                mang = mang.filter((item) => {
+                    return item.kichhoatnhatuyendung 
+                })
+            }
+        }
+        if(locTheoTrangThai){
+            if(locTheoTrangThai === 'Bình thường'){
+                mang = mang.filter((item) => {
+                    return !item.khoa 
+                })
+            };
+            if(locTheoTrangThai === 'Khóa'){
+                mang = mang.filter((item) => {
+                    return item.khoa 
+                })
+            }
+        }
+      
+        
         return (
             <React.Fragment>
                 <div class="main">
@@ -146,10 +174,18 @@ class QuanLyThanhVien extends Component {
 
                                 </td>
                                 <td>
-
+                                <select type="text" name="locTheoLoaiTaiKhoan"  value={locTheoLoaiTaiKhoan} onChange={this.onChange} class="form-control">
+                                                        <option value="">Tất ca</option>
+                                                        <option value="Người dùng">Người dùng</option>
+                                                        <option value="Nhà tuyển dụng">Nhà tuyển dụng</option></select>
                                 </td>
 
-                                <td></td>
+                                <td>
+                                <select type="text" name="locTheoTrangThai"  value={locTheoTrangThai} onChange={this.onChange} class="form-control">
+                                                        <option value="">Tất ca</option>
+                                                        <option value="Bình thường">Bình thường</option>
+                                                        <option value="Khóa">Khóa</option></select>
+                                </td>
                             </tr>
 
 

@@ -5,14 +5,13 @@ import { actLayDanhSachDangKyNhaTuyenDungAPI, actDuyetNhaTuyenDungAPI } from '..
 
 
 class QuanLy extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            locTheoEmail: '',
-            locTheoTenCongTy: '',
-            locTheoSDT: ''
-        }
-    }
+    onChange = (e) => {
+        const target = e.target;
+        const name = target.name;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        this.setState({
+            [name]: value
+        })}
     componentDidMount() {
         this.props.actLayDanhSachDangKyNhaTuyenDung();
     }

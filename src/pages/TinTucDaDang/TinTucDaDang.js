@@ -37,14 +37,10 @@ class TinTucDaDang extends Component {
                         <td>{moment(item.ngaydang).utc().format('DD-MM-YYYY')}</td>
 
                         <td>{item.luotxem} lượt</td>
-                        {/* <td className='text-center'>
-                        <span class="label label-danger">hết hạn</span>
-                    </td> */}
 
 
                         <td><Link to={`/suatintuc/${item._id}`} >Sửa</Link></td>
                         <td>
-                            {/* <a  onClick={this.xoaTinTuc(item._id)}>   Xóa  </a> */}
                             <a onClick={() => this.xoaTinTuc(item._id)}>   Xóa  </a>
 
                         </td>
