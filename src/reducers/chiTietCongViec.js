@@ -4,6 +4,10 @@ var initialState = {};
 const chiTietCongViec = (state = initialState, action) => {
     switch (action.type) {
         case Types.CHI_TIET_CONG_VIEC:
+        if(!action.data){
+            state = { loi: true };
+            return state
+        }
             state = action.data.data;
             return state;
         case Types.UNG_TUYEN:

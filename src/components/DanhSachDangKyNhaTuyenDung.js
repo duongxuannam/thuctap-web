@@ -20,10 +20,10 @@ class DanhSachDangKyNhaTuyenDung extends Component {
                         <td>{item.nhatuyendung.email}</td>
                         <td>{item.nhatuyendung.sodienthoai}</td>
                         <td>
-                            <p  className="btn btn-success-edit mr-10 mrl-edit " onClick={() => this.kichHoatNhaTuyenDung(item._id)} > Kích hoạt </p>
+                            <a class = 'contro' onClick={() => this.kichHoatNhaTuyenDung(item._id)} > Kích hoạt </a>
                         </td>
                         <td>
-                            <Link to={`/thongtinnhatuyendung/${item._id}`} onClick={()=>window.scrollTo(0, 0)} className="btn btn-info-edit mr-10 mrl-edit" > Chi tiết </Link>
+                            <Link to={`/thongtinnhatuyendung/${item._id}`} onClick={()=>window.scrollTo(0, 0)} > Chi tiết </Link>
                         </td>
                     </tr>
                 );
@@ -39,7 +39,7 @@ class DanhSachDangKyNhaTuyenDung extends Component {
         return (
             <div className="panel panel-primary">
                 <div className="panel-heading">
-                    <h3 className="panel-title">Danh sách đăng ký nhà tuyển dụng</h3>
+                    <h3 className="panel-title">Danh sách đăng ký nhà tuyển dụng ({ this.props.danhSachDangKyNhaTuyenDung.length })</h3>
                 </div>
                 <div className="panel-body ">
                     <table className="table table-bordered table-hover">

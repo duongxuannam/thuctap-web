@@ -367,6 +367,41 @@ export const  actDuyetNhaTuyenDung = (data) => {
 }
 
 
+//------------------------DANH SÁCH TÀI KHOẢN
+export const actLayDanhSachTaiKhoanAPI = () => {
+    return dispatch => {
+        return callApi(`danhsachtaikhoan`,'GET', null).then(res => {
+            console.log('huh',res)
+            dispatch(actLayDanhSachTaiKhoan(res.data));
+        });
+    }
+}
+
+export const actLayDanhSachTaiKhoan = (data) => {
+    return {
+        type : Types.LAY_DANH_SACH_TAI_KHOAN,
+        data
+    }
+}
+
+
+//-----------------Sủa KHÓA
+export const actSuaKhoaAPI = (id) => {
+    return dispatch => {
+        return callApi(`xoatintuc/${id}`, 'GET', null).then(res => {
+            dispatch(actSuaKhoa(res.data));
+        });
+    };
+}
+export const actSuaKhoa = (data) => {
+    return {
+        type : Types.SUA_KHOA,
+        data
+    }
+}
+
+
+
 //------------------------LAY THONG TIN TAI KHOAN
 export const actLayThongTinTaiKhoanAPI = (id) => {
     return dispatch => {

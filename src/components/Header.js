@@ -23,7 +23,7 @@ const menus = [
         name: 'Tin tức',
         to: '/tintuc',
         exact: false
-    },  
+    },
     {
         name: 'Thông tin',
         to: '/thongtin',
@@ -58,7 +58,7 @@ class Header extends Component {
     // componentDidMount(){
     //     alert('ahihi')
     // }
-    
+
     logOut = () => {
         this.props.actDangXuat();
     }
@@ -78,11 +78,11 @@ class Header extends Component {
         }
         return result;
     }
-    
+
     render() {
         console.log(this.props);
         var hienThiTen = '';
-        if(this.props.taiKhoan && this.props.taiKhoan.taikhoan){
+        if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
             hienThiTen = this.props.taiKhoan.taikhoan.hoten
         }
         const chuaDangNhap = (
@@ -99,18 +99,39 @@ class Header extends Component {
                 </div>
             </div>
         );
+        const nguoiDung = (
+            <li>
+                <Link to={`/congviecdanop`}>
+                    <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Công việc đã nộp</Link>
+            </li>
+        );
+        const nhaTuyenDung = (
+            <React.Fragment>
+                <li>
+                    <Link to={`/congviecdadang`}>
+                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Công việc đã đăng</Link>
+                </li>
+
+                <li>
+                    <Link to={`/tintucdadang`}>
+                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Tin tức đã đăng</Link>
+                </li>
+            </React.Fragment>
+
+        );
+        const menuCuoiCung = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? nhaTuyenDung : nguoiDung
         const daDangNhap = (
             <div class="bar">
                 <div class="container">
                     <ul>
-                    <a class='red-color'>   <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>  </a>
+                        <a class='red-color'>   <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>  </a>
 
                         <li class="dropdown">
                             <span class="dropdown-toggle user" type="button" id="barDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <img src={this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.anhdaidien ? this.props.taiKhoan.taikhoan.anhdaidien : "http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png"} alt=""
                                     class="photo" />
-                                     {this.props.taiKhoan === null ? '' : hienThiTen }
-                        <span class="caret"></span>
+                                {this.props.taiKhoan === null ? '' : hienThiTen}
+                                <span class="caret"></span>
                             </span>
 
                             <ul class="dropdown-menu" aria-labelledby="barDropdown1">
@@ -121,29 +142,21 @@ class Header extends Component {
                                     </Link>
                                 </li>
                                 <li>
-                                <Link to={`/nhatuyendung`}>
-                                <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
-                                Nhà tuyển dụng
-                            </Link>
+                                    <Link to={`/nhatuyendung`}>
+                                        <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+                                        Nhà tuyển dụng
+                                    </Link>
                                 </li>
+                                {menuCuoiCung}
                                 <li>
-                                <Link to={`/nhatuyendung`}>
-                                        <span class="glyphicon glyphicon-bell" aria-hidden="true"></span> Thông báo</Link>
+                                    <Link to={`/nhatuyendung`}>
+                                        <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+                                        Thông báo
+                                    </Link>
                                 </li>
+
                                 <li>
-                                <Link to={`/congviecdadang`}>
-                                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Công việc đã đăng</Link>
-                                </li>
-                                <li>
-                                <Link to={`/congviecdanop`}>
-                                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Công việc đã nộp</Link>
-                                </li>
-                                <li>
-                                <Link to={`/tintucdadang`}>
-                                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Tin tức đã đăng</Link>
-                                </li>
-                                <li>
-                                    <a onClick = {this.logOut}>
+                                    <a onClick={this.logOut}>
                                         <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Đăng xuất</a>
                                 </li>
                             </ul>

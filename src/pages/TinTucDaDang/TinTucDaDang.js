@@ -44,7 +44,7 @@ class TinTucDaDang extends Component {
         return result;
     }
     render() {
-        if (!this.props.taiKhoan || !this.props.taiKhoan.taikhoan) {
+        if (!this.props.taiKhoan || !this.props.taiKhoan.taikhoan || !this.props.taiKhoan.taikhoan.kichhoatnhatuyendung) {
             return <Redirect to={`/`} />
         }
         return (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import moment from 'moment';
 import { chiTietCongViecAPI, ungTuyenAPI } from '../../actions/index';
 import CongViecTuongTu from '../../components/CongViecTuongTu';
@@ -34,6 +34,9 @@ class ChiTietCongViec extends Component {
         return result
     }
     render() {
+        if(this.props.chiTietCongViec && this.props.chiTietCongViec.loi){
+            return <Redirect to={`/nhaplinhtalinhtinh`} />
+        }
         console.log('chi tiet ne: ', this.props.chiTietCongViec);
         console.log('may tai lai hong', this.props.chiTietCongViec._id);
         const buttondDisabled = (

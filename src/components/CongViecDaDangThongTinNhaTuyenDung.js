@@ -68,7 +68,7 @@ class CongViecDaDangThongTinNhaTuyenDung extends Component {
         return (
             <div class="section-similar">
                 <h2>
-                    <span class="wc-editable" data-pk="ws_similar_jobs" data-type="text">Công việc tương tự</span>
+                    <span class="wc-editable" data-pk="ws_similar_jobs" data-type="text">{this.state.mang && this.state.mang.length > 0 ? 'Công việc đã đăng: ' : 'Chưa đăng công việc nào'}</span>
                 </h2>
                 {this.showData(this.state.mang)}
 
