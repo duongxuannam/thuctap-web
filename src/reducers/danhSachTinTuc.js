@@ -6,9 +6,6 @@ const danhSachTinTuc = (state = initialState, action) => {
         case Types.DANH_SACH_TIN_TUC:
             state = action.data;
             return [...state];
-        case Types.SUA_TIN_TUC_ADMIN:
-            state = action.data;
-            return [...state];
         case Types.XOA_TIN_TUC_ADMIN:
             state = action.data;
             return [...state];

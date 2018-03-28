@@ -27,7 +27,7 @@ class CongViecDaDang extends Component {
                     </td> */}
                         <td>{moment(item.thoihan).format('DD-MM-YYYY')}</td>
                         <td>
-                           <Link to={`/danhsachungtuyen/${item._id}`} >   {item.danop} ứng viên  </Link>
+                            <Link to={`/danhsachungtuyen/${item._id}`} >   {item.danop} ứng viên  </Link>
                         </td>
                         <td><Link to={`/suacongviec/${item._id}`} >Sửa</Link></td>
                     </tr>
@@ -47,10 +47,10 @@ class CongViecDaDang extends Component {
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <a onClick={() => this.props.history.goBack()} className="btn btn-back btn-secondary btn-sm mr10">
                                 Quay lại
-                </a>
+                            </a>
                             <div className="panel panel-primary">
                                 <div className="panel-heading">
-                                    <h3 className="panel-title">Danh sách công việc đã đăng ({ this.props.danhSachCongViecDaDang.length })</h3>
+                                    <h3 className="panel-title">Danh sách công việc đã đăng ({this.props.danhSachCongViecDaDang.length})</h3>
                                 </div>
                                 <div className="panel-body ">
                                     <table className="table table-bordered table-hover">
@@ -62,7 +62,7 @@ class CongViecDaDang extends Component {
                                                 <th>Ngày đăng</th>
                                                 <th>Thòi hạn</th>
                                                 <th>Ứng tuyển</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -362,6 +362,36 @@ export const actCapNhatThongTin = (data) => {
 }
 
 
+//-----------------LAY  DANH SÁCH CÔNG VIỆC Admin
+export const actLayDanhSachCongViecAdminAPI = (sotrang) => {
+    if(sotrang === 1){
+        return dispatch => {
+            return callApi(`danhsachcongviecadmin/${sotrang}`, 'GET', null).then(res => {
+                dispatch(actLayDanhSachCongViecLanDauAdmin(res.data));
+            });
+        };
+    }
+    return dispatch => {
+        return callApi(`danhsachcongviecadmin/${sotrang}`, 'GET', null).then(res => {
+            dispatch(actLayDanhSachCongViecAdmin(res.data));
+        });
+    };
+  
+}
+export const actLayDanhSachCongViecAdmin = (data) => {
+    return {
+        type : Types.LAY_DANH_SACH_CONG_VIEC_ADMIN,
+        data
+    }
+}
+export const actLayDanhSachCongViecLanDauAdmin = (data) => {
+    return {
+        type : Types.LAY_DANH_SACH_CONG_VIEC_LAN_DAU_ADMIN,
+        data
+    }
+}
+
+
 //----------kich hoat nha tuyen dung
 export const actKichHoatNhaTuyenDungAPI = (data) => {
     console.log('qua met moi', data)
