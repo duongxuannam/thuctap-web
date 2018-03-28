@@ -35,17 +35,17 @@ class QuanLy extends Component {
                                           </a>
                                     </div>
                                     <div class="panel-body pointer">
-                                        <a className='contro'
+                                    <Link to={`/quanlythanhvien`}className='contro'
                                            
                                         >
                                             Danh sách thành viên
-                                         </a>
+                                         </Link>
                                     </div>
                                     <div class="panel-body pointer">
-                                        <a className= 'contro'
+                                    <Link to={`/quanlycongviec`}  className= 'contro'
                                            >
                                             Danh sách công việc
-                                         </a>
+                                         </Link>
                                     </div>
                                     <div class="panel-body pointer">
                                         <Link to={`quanlytintuc`} className= 'contro'
@@ -63,8 +63,8 @@ class QuanLy extends Component {
                                             <span class="glyphicon glyphicon-menu-left"></span> Quay lại </a>
                                     </p>
                                 </div>
-                                {this.state.dangChon === 'dkNhaTuyenDung' ? <DanhSachDangKyNhaTuyenDung /> : ''}
-                                {this.state.dangChon === 'thanhVien' ? <DanhSachTaiKhoan /> : ''}
+                              <DanhSachDangKyNhaTuyenDung /> 
+                                 {/* <DanhSachTaiKhoan />  */}
 
 
                             </div>

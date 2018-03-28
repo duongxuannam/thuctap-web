@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
-import DanhSachDangKyNhaTuyenDung from '../../components/DanhSachDangKyNhaTuyenDung';
-import DanhSachTaiKhoan from '../../components/DanhSachTaiKhoan';
-import { actLayDanhSachDangKyNhaTuyenDungAPI } from '../../actions/index';
-
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import { actLayDanhSachTinTucAPI, actXoaTinTucAdminAPI } from '../../actions/index';
 
 class QuanLyTinTuc extends Component {
-    constructor(props) {
-        super(props);
-        
-    }
     componentDidMount() {
-        this.props.actLayDanhSachDangKyNhaTuyenDung();
+            return this.props.actLayDanhSachTinTuc()
+        }
+    xoaTinTuc(id) {
+        this.props.actXoaTinTucAdmin(id);
+    }
+    showData(data) {
+        var result = null;
+        if (data.length > 0) {
+            result = data.map((item, index) => {
+                return (
+
+                    <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.tieude}</td>
+                        <td>{moment(item.ngaydang).utc().format('DD-MM-YYYY')}</td>
+
+                        <td>{item.luotxem} lượt</td>
+                        {/* <td className='text-center'>
+                        <span class="label label-danger">hết hạn</span>
+                    </td> */}
+
+
+                        <td><Link to={`/chitiettintuc/${item._id}`} class='contro'>Xem</Link></td>
+                        <td>
+                            {/* <a  onClick={this.xoaTinTuc(item._id)}>   Xóa  </a> */}
+                            <a onClick={() => this.xoaTinTuc(item._id)} class='contro clr'>   Xóa  </a>
+
+                        </td>
+                    </tr>
+                );
+            });
+        }
+        return result;
     }
     render() {
         return (
@@ -29,29 +55,29 @@ class QuanLyTinTuc extends Component {
                                     </div>
 
                                     <div class="panel-body pointer ">
-                                        <a className= 'contro'
-                                           >
+                                        <Link to={`/quanly`} className='contro'
+                                        >
                                             Danh sách đăng ký nhà tuyển dụng
-                                          </a>
+                                          </Link>
                                     </div>
                                     <div class="panel-body pointer">
-                                        <a className='contro'
-                                          
+                                        <Link to={`/quanlythanhvien`} className='contro '
+
                                         >
                                             Danh sách thành viên
-                                         </a>
+                                         </Link>
                                     </div>
                                     <div class="panel-body pointer">
-                                        <a className='contro'
-                                         >
+                                        <Link to={`/quanlycongviec`} className='contro'
+                                        >
                                             Danh sách công việc
-                                         </a>
+                                         </Link>
                                     </div>
                                     <div class="panel-body pointer">
-                                        <a className='clr contro'
-                                            >
+                                        <Link to={`/quanlytintuc`} className=' contro clr'
+                                        >
                                             Danh sách tin tức
-                                         </a>
+                                         </Link>
                                     </div>
                                 </div>
                             </div>
@@ -63,8 +89,47 @@ class QuanLyTinTuc extends Component {
                                             <span class="glyphicon glyphicon-menu-left"></span> Quay lại </a>
                                     </p>
                                 </div>
-                                {this.state.dangChon === 'dkNhaTuyenDung' ? <DanhSachDangKyNhaTuyenDung /> : ''}
-                                {this.state.dangChon === 'thanhVien' ? <DanhSachTaiKhoan /> : ''}
+
+                                <div className="panel panel-primary">
+                                <div className="panel-heading">
+                                    <h3 className="panel-title">Danh sách tin tức đã đăng ({ this.props.danhSachTinTuc.length })</h3>
+                                </div>
+                                <div className="panel-body ">
+                                    <table className="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Tiêu đề</th>
+                                                <th>Ngày đăng</th>
+                                                <th>Lượt xem</th>
+                                            
+                                                <th></th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <input type="text" name="locTheoTen" class="form-control" placeholder="lọc theo tiêu đề" />
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                                <td></td>
+                                               
+                                                <td></td>
+                                            </tr>
+
+
+                                            {this.showData(this.props.danhSachTinTuc)}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
 
                             </div>
@@ -79,18 +144,22 @@ class QuanLyTinTuc extends Component {
 }
 
 const mapStateToProps = state => {
+    // console.log('log state dc ko', state)
     return {
-        taiKhoan: state.taiKhoan
+        danhSachTinTuc: state.danhSachTinTuc,
+    }
+}
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        actLayDanhSachTinTuc: () => {
+            dispatch(actLayDanhSachTinTucAPI());
+        },
+        actXoaTinTucAdmin: (data) => {
+            dispatch(actXoaTinTucAdminAPI(data));
+        }
     }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        actLayDanhSachDangKyNhaTuyenDung: () => {
-            dispatch(actLayDanhSachDangKyNhaTuyenDungAPI());
-        },
-    }
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuanLyTinTuc);
 

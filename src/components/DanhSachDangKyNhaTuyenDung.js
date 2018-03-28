@@ -20,7 +20,7 @@ class DanhSachDangKyNhaTuyenDung extends Component {
                         <td>{item.nhatuyendung.email}</td>
                         <td>{item.nhatuyendung.sodienthoai}</td>
                         <td>
-                            <a class = 'contro' onClick={() => this.kichHoatNhaTuyenDung(item._id)} > Kích hoạt </a>
+                            <a class = 'contro gre' onClick={() => this.kichHoatNhaTuyenDung(item._id)} > Kích hoạt </a>
                         </td>
                         <td>
                             <Link to={`/thongtinnhatuyendung/${item._id}`} onClick={()=>window.scrollTo(0, 0)} > Chi tiết </Link>

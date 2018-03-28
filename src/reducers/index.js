@@ -12,6 +12,8 @@ import danhSachTinTucDaDang from './danhSachTinTucDaDang';
 import danhSachCongViecDaNop from './danhSachCongViecDaNop';
 import danhSachUngTuyen from './danhSachUngTuyen';
 import danhSachTaiKhoan from './danhSachTaiKhoan';
+import danhSachTinTuc from './danhSachTinTuc';
+
 
 const appReducers = combineReducers({
    dataTrangChu,
@@ -26,7 +28,8 @@ const appReducers = combineReducers({
    danhSachUngTuyen,
    danhSachTinTucDaDang,
    danhSachCongViecDaNop,
-   danhSachTaiKhoan
+   danhSachTaiKhoan,
+   danhSachTinTuc
 });
 
 export default appReducers;

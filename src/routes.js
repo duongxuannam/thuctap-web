@@ -23,6 +23,8 @@ import ChiTietTaiKhoan from './pages/ChiTietTaiKhoan/ChiTietTaiKhoan';
 import SuaCongViec from './pages/SuaCongViec/SuaCongViec';
 import SuaTinTuc from './pages/SuaTinTuc/SuaTinTuc';
 import QuanLyTinTuc from './pages/QuanLyTinTuc/QuanLyTinTuc';
+import QuanLyThanhVien from './pages/QuanLyThanhVien/QuanLyThanhVien';
+import QuanLyCongViec from './pages/QuanLyCongViec/QuanLyCongViec';
 import Khoa from './pages/Khoa/Khoa';
 import Loi from './pages/Loi/Loi';
 
@@ -145,7 +147,17 @@ const routes = [
     {
         path: '/quanlytintuc',
         exact: false,
-        main: ({ match, history }) => <TinTucDaDang match={match} history={history} />
+        main: ({ match, history }) => <QuanLyTinTuc match={match} history={history} />
+    },
+    {
+        path: '/quanlythanhvien',
+        exact: false,
+        main: ({ match, history }) => <QuanLyThanhVien match={match} history={history} />
+    },
+    {
+        path: '/quanlycongviec',
+        exact: false,
+        main: ({ match, history }) => <QuanLyCongViec match={match} history={history} />
     },
     {
         path: '/khoa', 

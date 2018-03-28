@@ -27,6 +27,9 @@ export const XOA_TIN_TUC = 'XOA_TIN_TUC';
 export const SUA_TIN_TUC = 'SUA_TIN_TUC';
 export const LAY_DANH_SACH_TAI_KHOAN = 'LAY_DANH_SACH_TAI_KHOAN';
 export const SUA_KHOA = 'SUA_KHOA';
+export const DANH_SACH_TIN_TUC = 'DANH_SACH_TIN_TUC';
+export const XOA_TIN_TUC_ADMIN = 'XOA_TIN_TUC_ADMIN';
+export const SUA_TIN_TUC_ADMIN = 'SUA_TIN_TUC_ADMIN';
 
 
 

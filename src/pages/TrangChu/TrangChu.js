@@ -195,17 +195,17 @@ class TrangChu extends Component {
                         <ul class="featured-employers">
                             <li>
                                 <a href="" >
-                                    <img class="tam-thoi" src="http://res.cloudinary.com/thuctap/image/upload/v1520248531/cty2.jpg" alt="" />
+                                    <img class="tam-thoi" src="https://res.cloudinary.com/thuctap/image/upload/v1520248531/cty2.jpg" alt="" />
                                 </a>
                             </li>
                             <li>
                                 <a href="">
-                                    <img class="tam-thoi" src="http://res.cloudinary.com/thuctap/image/upload/v1520248531/cty1.jpg" alt="" />
+                                    <img class="tam-thoi" src="https://res.cloudinary.com/thuctap/image/upload/v1520248531/cty1.jpg" alt="" />
                                 </a>
                             </li>
                             <li>
                                 <a href="">
-                                    <img class="tam-thoi" src="http://res.cloudinary.com/thuctap/image/upload/v1520248531/cty3.jpg" alt="" />
+                                    <img class="tam-thoi" src="https://res.cloudinary.com/thuctap/image/upload/v1520248531/cty3.jpg" alt="" />
                                 </a>
                             </li>
                         </ul>

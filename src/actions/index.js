@@ -50,22 +50,6 @@ export const actSuaCongViec = (data) => {
     }
 }
 
-//-----------SỬA Tin TUC
-export const actSuaTinTucAPI = (data) => {
-    return dispatch => {
-        return callApi(`suatintuc`, 'POST', data).then(res => {
-            console.log('aaa', res)
-            dispatch(actSuaTinTuc(res.data));
-        });
-    }
-}
-
-export const actSuaTinTuc = (data) => {
-    return {
-        type : Types.SUA_TIN_TUC,
-        data
-    }
-}
 
 //-----------UNG TUYEN
 export const ungTuyenAPI = (data) => {
@@ -234,6 +218,71 @@ export const actXoaTinTuc = (data) => {
     }
 }
 
+//-----------SỬA Tin TUC
+export const actSuaTinTucAPI = (data) => {
+    return dispatch => {
+        return callApi(`suatintuc`, 'POST', data).then(res => {
+            console.log('aaa', res)
+            dispatch(actSuaTinTuc(res.data));
+        });
+    }
+}
+
+export const actSuaTinTuc = (data) => {
+    return {
+        type : Types.SUA_TIN_TUC,
+        data
+    }
+}
+
+
+
+//-----------------LAY  DANH SÁCH TIN TỨC ADMIN
+export const actLayDanhSachTinTucAPI = () => {
+    return dispatch => {
+        return callApi(`danhsachtintuc`, 'GET', null).then(res => {
+            dispatch(actLayDanhSachTinTuc(res.data));
+        });
+    };
+}
+export const actLayDanhSachTinTuc = (data) => {
+    return {
+        type : Types.DANH_SACH_TIN_TUC,
+        data
+    }
+}
+
+//-----------------Xóa TIN TỨC ADMIN
+export const actXoaTinTucAdminAPI = (id) => {
+    return dispatch => {
+        return callApi(`xoatintucadmin/${id}`, 'GET', null).then(res => {
+            dispatch(actXoaTinTucAdmin(res.data));
+        });
+    };
+}
+export const actXoaTinTucAdmin = (data) => {
+    return {
+        type : Types.XOA_TIN_TUC_ADMIN,
+        data
+    }
+}
+
+// //-----------SỬA Tin TUC ADMIN
+// export const actSuaTinTucAdminAPI = (data) => {
+//     return dispatch => {
+//         return callApi(`suatintucadmin`, 'POST', data).then(res => {
+//             dispatch(actSuaTinTucAdmin(res.data));
+//         });
+//     }
+// }
+
+// export const actSuaTinTucAdmin = (data) => {
+//     return {
+//         type : Types.SUA_TIN_TUC_ADMIN,
+//         data
+//     }
+// }
+
 //-----------------LAY  DANH SÁCH CÔNG VIỆC ĐẪ ĐĂNG
 export const actLayDanhSachCongViecDaDangAPI = (id) => {
     return dispatch => {
@@ -370,7 +419,6 @@ export const  actDuyetNhaTuyenDung = (data) => {
 export const actLayDanhSachTaiKhoanAPI = () => {
     return dispatch => {
         return callApi(`danhsachtaikhoan`,'GET', null).then(res => {
-            console.log('huh',res)
             dispatch(actLayDanhSachTaiKhoan(res.data));
         });
     }
