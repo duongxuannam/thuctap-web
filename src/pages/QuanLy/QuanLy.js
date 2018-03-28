@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actLayDanhSachDangKyNhaTuyenDungAPI, actDuyetNhaTuyenDungAPI } from '../../actions/index';
 
-
 class QuanLy extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            locTheoEmail:'', locTheoTenCongTy:'', locTheoSDT:''
+        }
+    }
     onChange = (e) => {
         const target = e.target;
         const name = target.name;
@@ -39,12 +44,6 @@ class QuanLy extends Component {
             });
         }
         return result;
-    }
-    onChange = (e) => {
-        const { name, value } = e.target;
-        this.setState({
-            [name] : value
-        })
     }
     render() {
         const { locTheoEmail, locTheoTenCongTy, locTheoSDT } = this.state;

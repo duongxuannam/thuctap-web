@@ -11,6 +11,7 @@ class DanhSachCongViec extends Component {
             chuyenNganh: '',
             kieu: '',
         };
+        console.log('aaaaaaaaaaa')
     }
     onChange = (e) => {
         const target = e.target;
