@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actDangXuatAPI } from '../actions/index';
 
@@ -56,7 +56,7 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
 const logo = require('../images/logotdmu.png');
 class Header extends Component {
     // componentDidMount(){
-    //     alert('ahihi')
+      
     // }
 
     logOut = () => {
@@ -80,7 +80,6 @@ class Header extends Component {
     }
 
     render() {
-        console.log(this.props);
         var hienThiTen = '';
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
             hienThiTen = this.props.taiKhoan.taikhoan.hoten
@@ -165,7 +164,7 @@ class Header extends Component {
                 </div>
             </div>
         );
-        const topHeader = localStorage.getItem('taikhoan') ? daDangNhap : chuaDangNhap;
+        const topHeader = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? daDangNhap : chuaDangNhap;
         return (
             <React.Fragment>
 

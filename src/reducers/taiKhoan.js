@@ -21,6 +21,9 @@ const taiKhoan = (state = initialState, action) => {
             if (action.data === '') {
                 state = { loi: true }
             }
+            if (action.data && action.data.thongbao) {
+                state = { loi: action.data.thongbao }
+            }
             if (action.data !== '') {
                 state = action.data;
                 localStorage.setItem('taikhoan', JSON.stringify(state));

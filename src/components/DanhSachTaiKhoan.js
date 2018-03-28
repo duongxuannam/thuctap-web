@@ -10,13 +10,15 @@ class DanhSachTaiKhoan extends Component {
     componentDidMount() {
         this.props.actLayDanhSachTaiKhoan();
     }
-    suaKhoa(id) {
-        this.props.actSuaKhoa(id);
+    suaKhoa(data) {
+        this.props.actSuaKhoa(data);
     }
     showData(data) {
         var result = null;
         if (data.length > 0) {
             result = data.map((item, index) => {
+            const truyenvao = { _id: item._id, khoa: item.khoa }
+            console.log('huhum ', truyenvao)
                 return (
                     <tr key={index}>
                         <td>{index + 1}</td>
@@ -24,7 +26,7 @@ class DanhSachTaiKhoan extends Component {
                         <td>{item.hoten}</td>
                         <td>{item.sodienthoai}</td>
                         {item.kichhoatnhatuyendung ? <td><Link to={`/thongtinnhatuyendung/${item._id}`} onClick={() => window.scrollTo(0, 0)} class='contro clr'> Nhà tuyển dụng </Link></td> : <td><Link to={`/chitiettaikhoan/${item._id}`} onClick={() => window.scrollTo(0, 0)} class='contro'> Người dùng </Link></td>}
-                        {item.khoa ? <td><a class='contro clr' onClick={() => this.suaKhoa(item._id)}> Khóa </a></td> : <td><a class='contro gre' onClick={() => this.suaKhoa(item._id)}> Bình thường </a></td>}
+                        {item.khoa ? <td><a class='contro clr' onClick={()=> this.suaKhoa(truyenvao)}> Khóa </a></td> : <td><a class='contro gre' onClick={() =>this.suaKhoa(truyenvao)}> Bình thường </a></td>}
 
                     </tr>
                 );
@@ -33,7 +35,6 @@ class DanhSachTaiKhoan extends Component {
         return result;
     }
     render() {
-        console.log('log ', this.props.danhSachTaiKhoan)
         return (
             <div className="panel panel-primary">
                 <div className="panel-heading">

@@ -15,19 +15,24 @@ class DangNhap extends Component {
     };
 
     componentDidMount() {
-        if (localStorage.getItem('taikhoan')) {
+        // if (localStorage.getItem('taikhoan')) {
+            if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
             this.batDauDemNguoc();
         }
     }
     componentWillReceiveProps(nextProps) {
         console.log('nextProps', nextProps.taiKhoan)
         if (nextProps.taiKhoan && nextProps.taiKhoan.loi) {
-            console.log('co ra k')
             return this.setState({
                 hienThiLoi: true
             })
         }
-        if (localStorage.getItem('taikhoan')) {
+        if (nextProps.taiKhoan && nextProps.taiKhoan.thongbao) {
+            return this.setState({
+                hienThiLoi: nextProps.taiKhoan.thongbao
+            })
+        }
+         if (localStorage.getItem('taikhoan')) {
             this.batDauDemNguoc();
         }
     }
@@ -59,11 +64,9 @@ class DangNhap extends Component {
     }
 
     render() {
-        console.log('log o dang nhap', this.props.taiKhoan)
-        console.log('log  store o dang nhap', localStorage.getItem('taikhoan'))
         const { txtEmail, txtMatKhau, demnguoc, hienThiLoi } = this.state;
         const coLoi = (
-            <span class="wc-editable hien-thi-loi-edit">Email hoặc mật khẩu không đúng</span>
+            <span class="wc-editable hien-thi-loi-edit">{hienThiLoi === 'Tài khoản đã bị khóa' ? hienThiLoi : 'Email hoặc mật khẩu không đúng'}</span>
         )
         const hienThiCoLoi = hienThiLoi ? coLoi : '';
         const daDangNhap = (
@@ -136,10 +139,11 @@ class DangNhap extends Component {
                 </div>
             </div>
         )
-        const main = localStorage.getItem('taikhoan') ? daDangNhap : chuaDangNhap;
+        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? daDangNhap : chuaDangNhap;
         if (demnguoc === 0) {
             this.props.history.goBack();
         }
+        console.log('aaa', this.props.taiKhoan)
         return (
             <React.Fragment>
                 {main}

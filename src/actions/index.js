@@ -335,7 +335,6 @@ export const actKichHoatNhaTuyenDung = (data) => {
 export const actLayDanhSachDangKyNhaTuyenDungAPI = () => {
     return dispatch => {
         return callApi(`danhsachdangkynhatuyendung`,'GET', null).then(res => {
-            console.log('huh',res)
             dispatch(actLayDanhSachDangKyNhaTuyenDung(res.data));
         });
     }
@@ -386,9 +385,9 @@ export const actLayDanhSachTaiKhoan = (data) => {
 
 
 //-----------------Sủa KHÓA
-export const actSuaKhoaAPI = (id) => {
+export const actSuaKhoaAPI = (data) => {
     return dispatch => {
-        return callApi(`xoatintuc/${id}`, 'GET', null).then(res => {
+        return callApi(`suakhoa`, 'POST', data).then(res => {
             dispatch(actSuaKhoa(res.data));
         });
     };
