@@ -61,11 +61,12 @@ class Header extends Component {
         super(props);
         e = this
         this.socket = io('http://192.168.1.38:1995/')
-        this.socket.on('Server-send-id', function (text) {
-          console.log('aaaa', text)
-          });
+        // this.socket.on('Server-send-id', function (text) {
+        //   console.log('aaaa', text)
+        //   });
           this.socket.on('CO_NGUOI_UNG_TUYEN', function (_id) {
            if(e.props.taiKhoan && e.props.taiKhoan.taikhoan && e.props.taiKhoan.taikhoan._id === _id){
+            console.log('co vao dc ko 3', _id)
                alert('to be shared');
                e.props.actKiemTraDangNhap(_id);
            }

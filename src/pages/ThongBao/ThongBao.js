@@ -61,7 +61,6 @@ class ThongBao extends Component {
             return <Redirect to={``} />
         }
         const mang = this.props.thongBao;
-        console.log('log log ', this.props.thongBao)
         return (
             <React.Fragment>
                 <div className="thongbao-ghide-height">
