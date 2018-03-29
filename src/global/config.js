@@ -1,5 +1,5 @@
-export const API_URL = 'https://apimongo.herokuapp.com';
-//export const API_URL = 'http://192.168.1.38:1995';
+//export const API_URL = 'https://apimongo.herokuapp.com';
+export const API_URL = 'http://192.168.1.38:1995';
 
 export const configCloudinary = ({
     cloud_name: 'thuctap',

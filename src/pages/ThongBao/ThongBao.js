@@ -8,8 +8,11 @@ import { actTaiThongBaoAPI } from '../../actions/index';
 
 class ThongBao extends Component {
     componentDidMount() {
-        const id = this.props.taiKhoan.taikhoan._id
-        this.props.actTaiThongBao(id);
+        if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id) {
+            const id = this.props.taiKhoan.taikhoan._id
+            this.props.actTaiThongBao(id);
+        }
+
     }
     showData(data) {
         var result = null;
@@ -38,7 +41,7 @@ class ThongBao extends Component {
 
                             Xem <Link to={`danhsachungtuyen/${item.idCongViec}`}>danh sách
                         </Link>
-                            
+
                         </div>
 
                     </div>
@@ -54,8 +57,8 @@ class ThongBao extends Component {
         return result;
     }
     render() {
-        if(!this.props.taiKhoan || !this.props.taiKhoan.taikhoan ){
-            return <Redirect to={``}/>
+        if (!this.props.taiKhoan || !this.props.taiKhoan.taikhoan) {
+            return <Redirect to={``} />
         }
         const mang = this.props.thongBao;
         console.log('log log ', this.props.thongBao)

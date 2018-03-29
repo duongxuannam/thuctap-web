@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
+import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { actDangXuatAPI, actKiemTraDangNhapAPI } from '../actions/index';
 
@@ -54,7 +55,22 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
     );
 };
 const logo = require('../images/logotdmu.png');
+var e;
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        e = this
+        this.socket = io('http://192.168.1.38:1995/')
+        this.socket.on('Server-send-id', function (text) {
+          console.log('aaaa', text)
+          });
+          this.socket.on('CO_NGUOI_UNG_TUYEN', function (_id) {
+           if(e.props.taiKhoan && e.props.taiKhoan.taikhoan && e.props.taiKhoan.taikhoan._id === _id){
+               alert('to be shared');
+               e.props.actKiemTraDangNhap(_id);
+           }
+            });
+    }
     componentDidMount() {
          const  _id  = JSON.parse(localStorage.getItem('taikhoan')) && JSON.parse(localStorage.getItem('taikhoan')).taikhoan && JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id ? JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id : '';
         if (_id) {
