@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Link,Redirect } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { actDangXuatAPI } from '../actions/index';
+import { actDangXuatAPI, actKiemTraDangNhapAPI } from '../actions/index';
 
 const menus = [
     {
@@ -55,10 +55,12 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
 };
 const logo = require('../images/logotdmu.png');
 class Header extends Component {
-    // componentDidMount(){
-
-    // }
-
+    componentDidMount() {
+         const  _id  = JSON.parse(localStorage.getItem('taikhoan')) && JSON.parse(localStorage.getItem('taikhoan')).taikhoan && JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id ? JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id : '';
+        if (_id) {
+          return   this.props.actKiemTraDangNhap(_id);
+        }
+    }
     logOut = () => {
         this.props.actDangXuat();
     }
@@ -148,19 +150,10 @@ class Header extends Component {
                                 </li>
                                 {menuCuoiCung}
                                 <li>
-
-                                    {this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.thongbao ?
-                                        <Link to={`/thongbao`} class='red-color'>
-                                            <span class="glyphicon glyphicon-bell red-color" aria-hidden="true"></span>
-                                          <span class='red-color'> Thông báo </span>
-                                        </Link>
-                                        :
-                                        <Link to={`/thongbao`}>
+                                    <Link to={`/thongbao`}>
                                         <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
                                         Thông báo
                                     </Link>
-                                    }
-
                                 </li>
 
                                 <li>
@@ -215,6 +208,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         actDangXuat: () => {
             dispatch(actDangXuatAPI());
+        },
+        actKiemTraDangNhap: (id) => {
+            dispatch(actKiemTraDangNhapAPI(id));
         },
     }
 }

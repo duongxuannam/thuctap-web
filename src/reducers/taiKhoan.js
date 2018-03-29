@@ -1,7 +1,7 @@
 import * as Types from '../constants/ActionTypes';
-var data = JSON.parse(localStorage.getItem('taikhoan'));
-var initialState = data ? data : null;
-
+// var data = JSON.parse(localStorage.getItem('taikhoan'));
+// var initialState = data ? data : null;
+var initialState = null;
 const taiKhoan = (state = initialState, action) => {
     switch (action.type) {
         case Types.DANG_KY:
@@ -30,6 +30,14 @@ const taiKhoan = (state = initialState, action) => {
                 taikhoan: action.data
             }
             state = taikhoan;
+            localStorage.setItem('taikhoan', JSON.stringify(state));
+            return state;
+        case Types.KIEM_TRA_DANG_NHAP:
+            console.log('troi oi', action.data)
+            const lttk = {
+                taikhoan: action.data
+            }
+            state = lttk;
             localStorage.setItem('taikhoan', JSON.stringify(state));
             return state;
         case Types.KICH_HOAT_NHA_TUYEN_DUNG:

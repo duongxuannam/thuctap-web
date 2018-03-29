@@ -33,7 +33,6 @@ class ChiTietTaiKhoan extends Component {
         }
     }
     render() {
-        console.log('thoidai mo', this.state)
         return (
             <React.Fragment>
                 <div class="main">

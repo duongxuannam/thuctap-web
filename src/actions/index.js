@@ -346,7 +346,6 @@ export const actThemTinTucAPI = (data) => {
 
 //----------Cap nhat thong tin
 export const actCapNhatThongTinAPI = (data) => {
-    console.log('qua met moi', data)
     return dispatch => {
         return callApi(`capnhatthongtin`, 'POST', data).then(res => { 
              dispatch(actCapNhatThongTin(res.data));
@@ -500,6 +499,7 @@ export const actSuaKhoa = (data) => {
 export const actLayThongTinTaiKhoanAPI = (id) => {
     return dispatch => {
         return callApi(`laythongtintaikhoan/${id}`,'GET', null).then(res => {
+            console.log('khong lau dc a ', res)
             dispatch( actLayThongTinTaiKhoan(res.data));
         });
     }
@@ -508,6 +508,23 @@ export const actLayThongTinTaiKhoanAPI = (id) => {
 export const  actLayThongTinTaiKhoan = (data) => {
     return {
         type : Types.LAY_THONG_TIN_TAI_KHOAN,
+        data
+    }
+}
+
+
+//------------------------KIEM TRA DANG NHAP
+export const actKiemTraDangNhapAPI = (id) => {
+    return dispatch => {
+        return callApi(`laythongtintaikhoan/${id}`,'GET', null).then(res => {
+            dispatch( actKiemTraDangNhap(res.data));
+        });
+    }
+}
+
+export const  actKiemTraDangNhap = (data) => {
+    return {
+        type : Types.KIEM_TRA_DANG_NHAP,
         data
     }
 }

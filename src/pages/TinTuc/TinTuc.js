@@ -45,7 +45,7 @@ class TinTuc extends Component {
 
 
     render() {
-        console.log(this.props.dataTinTuc)
+        console.log(this.props.dataTinTuc) 
         return (
             <React.Fragment>
                 <div class="main">

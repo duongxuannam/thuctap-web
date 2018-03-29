@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actLayThongTinTaiKhoanAPI, chiTietCongViecAPI } from '../../actions/index';
+import { actLayThongTinTaiKhoanAPI } from '../../actions/index';
 import CongViecDaDangThongTinNhaTuyenDung from '../../components/CongViecDaDangThongTinNhaTuyenDung';
 
 class ThongTinNhaTuyenDung extends Component {
@@ -177,9 +177,6 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        actChiTietCongViec: (id) => {
-            dispatch(chiTietCongViecAPI(id));
-        },
         actLayThongTinTaiKhoan: (data) => {
             dispatch(actLayThongTinTaiKhoanAPI(data));
         },
