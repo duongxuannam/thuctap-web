@@ -60,7 +60,7 @@ class Header extends Component {
     constructor(props) {
         super(props);
         e = this
-        this.socket = io('http://192.168.1.38:1995/')
+        this.socket = io('https://apimongo.herokuapp.com/')
         // this.socket.on('Server-send-id', function (text) {
         //   console.log('aaaa', text)
         //   });
