@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import DanhSachDangKyNhaTuyenDung from '../../components/DanhSachDangKyNhaTuyenDung';
-import DanhSachTaiKhoan from '../../components/DanhSachTaiKhoan';
 import { actLayDanhSachTaiKhoanAPI, actSuaKhoaAPI } from '../../actions/index';
 
 class QuanLyThanhVien extends Component {

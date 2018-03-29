@@ -19,7 +19,7 @@ class Khoa extends Component {
         }
         return (
             <React.Fragment>
-                <div className="loi-ghide-height">
+                <div className="thongbao-ghide-height">
                     <div className="container ">
                         <div class="panel panel-danger ">
                             <div class="panel-heading">Tài khoản của bạn đã bị khóa</div>

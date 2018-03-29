@@ -392,6 +392,23 @@ export const actLayDanhSachCongViecLanDauAdmin = (data) => {
 }
 
 
+//-----------------LAY  DANH SÁCH THONG BAO
+export const actTaiThongBaoAPI = (id) => {
+    return dispatch => {
+        return callApi(`xemthongbao/${id}`, 'GET', null).then(res => {
+            dispatch(actTaiThongBao(res.data));
+        });
+    };
+}
+export const actTaiThongBao = (data) => {
+    return {
+        type : Types.THONG_BAO,
+        data
+    }
+}
+
+
+
 //----------kich hoat nha tuyen dung
 export const actKichHoatNhaTuyenDungAPI = (data) => {
     console.log('qua met moi', data)

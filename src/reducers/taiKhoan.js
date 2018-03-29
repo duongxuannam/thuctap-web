@@ -33,12 +33,14 @@ const taiKhoan = (state = initialState, action) => {
             localStorage.setItem('taikhoan', JSON.stringify(state));
             return state;
         case Types.KICH_HOAT_NHA_TUYEN_DUNG:
-            console.log('ahihi ', action.data)
             const taikhoanDangKichHoat = {
                 taikhoan: action.data
             }
             state = taikhoanDangKichHoat;
-            console.log('ahuhu', state)
+            localStorage.setItem('taikhoan', JSON.stringify(state));
+            return state;
+        case Types.THONG_BAO:
+            state = action.data;
             localStorage.setItem('taikhoan', JSON.stringify(state));
             return state;
         case Types.DANG_XUAT:

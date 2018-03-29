@@ -26,6 +26,7 @@ import QuanLyTinTuc from './pages/QuanLyTinTuc/QuanLyTinTuc';
 import QuanLyThanhVien from './pages/QuanLyThanhVien/QuanLyThanhVien';
 import QuanLyCongViec from './pages/QuanLyCongViec/QuanLyCongViec';
 import Khoa from './pages/Khoa/Khoa';
+import ThongBao from './pages/ThongBao/ThongBao';
 import Loi from './pages/Loi/Loi';
 
 const routes = [
@@ -163,6 +164,11 @@ const routes = [
         path: '/khoa', 
         exact: false,
         main: () => <Khoa />
+    },
+    {
+        path: '/thongbao', 
+        exact: false,
+        main: () => <ThongBao />
     },
     {
         path: '',

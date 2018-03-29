@@ -181,3 +181,11 @@
 .contro{
     cursor: pointer;
 }
+.thongbao-ghide-height{
+   max-height: auto;
+    min-height:  293px;
+
+}
+.flr{
+    float: right
+}

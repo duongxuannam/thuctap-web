@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link,  } from 'react-router-dom';
+import { Route, Link,Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actDangXuatAPI } from '../actions/index';
 
@@ -56,7 +56,7 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
 const logo = require('../images/logotdmu.png');
 class Header extends Component {
     // componentDidMount(){
-      
+
     // }
 
     logOut = () => {
@@ -123,7 +123,7 @@ class Header extends Component {
             <div class="bar">
                 <div class="container">
                     <ul>
-                        <a class='red-color'>   <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>  </a>
+                        {this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.thongbao ? <Link to={`/thongbao`} class='red-color'><span class="glyphicon glyphicon-bell" ></span></Link> : ''}
 
                         <li class="dropdown">
                             <span class="dropdown-toggle user" type="button" id="barDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -148,10 +148,19 @@ class Header extends Component {
                                 </li>
                                 {menuCuoiCung}
                                 <li>
-                                    <Link to={`/nhatuyendung`}>
+
+                                    {this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.thongbao ?
+                                        <Link to={`/thongbao`} class='red-color'>
+                                            <span class="glyphicon glyphicon-bell red-color" aria-hidden="true"></span>
+                                          <span class='red-color'> Thông báo </span>
+                                        </Link>
+                                        :
+                                        <Link to={`/thongbao`}>
                                         <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
                                         Thông báo
                                     </Link>
+                                    }
+
                                 </li>
 
                                 <li>
