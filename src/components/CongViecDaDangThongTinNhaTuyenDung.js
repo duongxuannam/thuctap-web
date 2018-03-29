@@ -26,13 +26,13 @@ class CongViecDaDangThongTinNhaTuyenDung extends Component {
             result = data.map((item, index) => {
                 return (
                     <div class="job" key={index}>
-                        <Link to={`/chitietcongviec/${item._id}`} onClick={() => { this.props.actChiTietCongViec(item._id);window.scrollTo(0, 0) }} class="job-image">
+                        <Link to={`/chitietcongviec/${item._id}`} onClick={() => {window.scrollTo(0, 0) }} class="job-image">
                             <img src={item._nguoidang.nhatuyendung.logo ? item._nguoidang.nhatuyendung.logo : 'https://res.cloudinary.com/thuctap/image/upload/v1521876438/LogoTitle.png'}
                                 alt="" />
                         </Link>
 
                         <div class="job-info">
-                            <Link to={`/chitietcongviec/${item._id}`} onClick={() => { this.props.actChiTietCongViec(item._id);window.scrollTo(0, 0) }}  class="job-title">{item.tieude}</Link>
+                            <Link to={`/chitietcongviec/${item._id}`} onClick={() => { window.scrollTo(0, 0) }}  class="job-title">{item.tieude}</Link>
 
                             <div class="job-meta">
                                 <ul>
@@ -54,7 +54,7 @@ class CongViecDaDangThongTinNhaTuyenDung extends Component {
                                 </ul>
 
                                 <div class="job-meta-inner">
-                                    <span class="badge badge-label-temp">  <Link to={`/chitietcongviec/${item._id}`} onClick={() => { this.props.actChiTietCongViec(item._id);window.scrollTo(0, 0) }}>Chi tiết</Link></span>
+                                    <span class="badge badge-label-temp">  <Link to={`/chitietcongviec/${item._id}`} onClick={() => { window.scrollTo(0, 0) }}>Chi tiết</Link></span>
                                 </div>
                             </div>
                         </div>
