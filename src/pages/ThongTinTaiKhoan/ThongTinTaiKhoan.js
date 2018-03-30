@@ -8,7 +8,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { configCloudinary } from '../../global/config';
-import { actCapNhatThongTinAPI } from '../../actions/index';
+import { actCapNhatThongTinAPI, actKiemTraDangNhapAPI } from '../../actions/index';
 
 
 cloudinary.config(configCloudinary)
@@ -43,6 +43,30 @@ class ThongTinTaiKhoan extends Component {
         //  this.state = { editorState };
     }
     componentDidMount() {
+        if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
+            const { anhdaidien, email, hotenthat, diachi, truongdaihoc, chuyennganh, gioithieu, sodienthoai } = this.props.taiKhoan.taikhoan
+            const gioiThieuCuoiCung = gioithieu ? EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(gioithieu).contentBlocks)) : EditorState.createEmpty()
+            // const contentBlock = htmlToDraft(gioithieu);
+            // const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+            // gioiThieuCuoiCung = EditorState.createWithContent(contentState);
+
+            this.setState({
+                txtHoTen: hotenthat,
+                txtDiaChi: diachi,
+                txtEmail: email,
+                txtChuyenNganh: chuyennganh,
+                txtTruongDaiHoc: truongdaihoc,
+                txtSoDienThoai: sodienthoai,
+                editorState: gioiThieuCuoiCung,
+                hinhanh: anhdaidien ? anhdaidien : this.state.hinhanh
+            })
+        }
+        const _id = JSON.parse(localStorage.getItem('taikhoan')) && JSON.parse(localStorage.getItem('taikhoan')).taikhoan && JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id ? JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id : '';
+        if (_id) {
+            return this.props.actKiemTraDangNhap(_id);
+        }
+    }
+    componentWillReceiveProps(nextProps) {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
             const { anhdaidien, email, hotenthat, diachi, truongdaihoc, chuyennganh, gioithieu, sodienthoai } = this.props.taiKhoan.taikhoan
             const gioiThieuCuoiCung = gioithieu ? EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(gioithieu).contentBlocks)) : EditorState.createEmpty()
@@ -167,7 +191,7 @@ class ThongTinTaiKhoan extends Component {
         }
         if (this.state.loiHoTen === '' && this.state.loiHinhAnh === '' && this.state.loiSoDienThoai === '' && this.state.loiDiaChi === '' && this.state.loiTruongDaiHoc === '' && this.state.loiChuyenNganh === '') {
             if (this.state.txtHoTen !== '' && this.state.txtDiaChi !== '' && this.state.txtTruongDaiHoc !== '' && this.state.txtChuyenNganh !== '') {
-      
+
                 if (this.state.daThayHinh) {
                     this.setState({ disabled: 'disabled' })
                     cloudinary.uploader.upload(`${this.state.hinhanh}`).then(result => {
@@ -228,10 +252,10 @@ class ThongTinTaiKhoan extends Component {
         )
         const uploading = this.state.disabled ? divUploading : '';
         const chuaHoanThienHoSo = (
-            <div class="alert alert-danger">Bạn cần hoàn thiện hồ sơ để có thể ứng tuyển</div>
+            <div class="alert alert-danger text-center">Bạn cần hoàn thiện hồ sơ để có thể ứng tuyển</div>
         )
         const daHoanThienHoSo = (
-            <div class="alert alert-success">Bạn đã hoàn thiện hồ sơ. Có thê cập nhật và lưu lại</div>
+            <div class="alert alert-success text-center">Bạn đã hoàn thiện hồ sơ. Có thê cập nhật và lưu lại</div>
 
         )
         const mainHoanThien = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.hoanthienhoso ? daHoanThienHoSo : chuaHoanThienHoSo
@@ -249,6 +273,9 @@ class ThongTinTaiKhoan extends Component {
             <React.Fragment>
                 <div class="main">
                     <div class="container">
+                        <div class="col-lg-8 col-md-7 col-xs-12 flr">
+                            {mainHoanThien}
+                        </div>
                         <div class="row">
                             {uploading}
                             <div class="col-lg-4 col-md-5 col-xs-12">
@@ -269,18 +296,42 @@ class ThongTinTaiKhoan extends Component {
                                             multiple="true"
                                             onChange={this.onChangeFile} />
                                     </div>
-
                                     <div class="help-block with-errors">
                                         <span class="wc-editable hien-thi-loi-edit">{loiHinhAnh}</span>
                                     </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            <span class="wc-editable">CV</span>: </label>
+                                        <input name="txtChuyenNganh" type="file" class="form-control required"
+                                        />
+                                        <div class="help-block with-errors">
+                                            <span class="wc-editable hien-thi-loi-edit ml-20">file khong dung dinh dang</span>
+                                        </div>
+                                    </div>
 
+
+
+
+                                    {/* <div class="form-group text-center">
+                                        <label class="control-label">
+                                            <span class="wc-editable clr">CV </span>: <a class='contro'>Xem</a></label>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            <a class="wc-editable contro" onClick={() => this.setState({ hienThiThayCV: true })}>Thay CV</a></label>
+                                        {this.state.hienThiThayCV ?
+                                           <React.Fragment> <input name="txtChuyenNganh" type="file" class="form-control required"
+                                            />
+                                            <div class="help-block with-errors">
+                                                <span class="wc-editable hien-thi-loi-edit ml-20">file khong dung dinh dang</span>
+                                            </div></React.Fragment> : ''}
+                                    </div> */}
                                 </div>
                             </div>
-
                             <div class="col-lg-8 col-md-7 col-xs-12">
-                                {mainHoanThien}
-
-
                                 <div class="form">
                                     <form class="form-dyna xs-4" onSubmit={this.onSubmit}>
                                         <div class="row">
@@ -299,7 +350,6 @@ class ThongTinTaiKhoan extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <div class="col-sm-6 col-xs-12">
                                                     <div class="form-group">
                                                         <label class="control-label">
@@ -357,6 +407,13 @@ class ThongTinTaiKhoan extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+
+
+
+
+
+
+
                                             </div>
                                             <div class="col-sm-12 col-xs-12">
                                                 <div class="form-group editor-themcongviec" >
@@ -408,6 +465,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         actCapNhatThongTin: (data) => {
             dispatch(actCapNhatThongTinAPI(data));
+        },
+        actKiemTraDangNhap: (data) => {
+            dispatch(actKiemTraDangNhapAPI(data));
         },
     }
 }

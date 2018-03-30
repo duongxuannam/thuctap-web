@@ -8,7 +8,7 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { configCloudinary } from '../../global/config';
-import { actKichHoatNhaTuyenDungAPI } from '../../actions/index';
+import { actKichHoatNhaTuyenDungAPI, actKiemTraDangNhapAPI } from '../../actions/index';
 
 
 cloudinary.config(configCloudinary)
@@ -43,6 +43,31 @@ class NhaTuyenDung extends Component {
         };
     }
     componentDidMount() {
+        if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.nhatuyendung) {
+            const { tencongty, email, website, diachi, linhvuchoatdong, gioithieu, sodienthoai, logo } = this.props.taiKhoan.taikhoan.nhatuyendung
+            const gioiThieuCuoiCung = gioithieu ? EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(gioithieu).contentBlocks)) : EditorState.createEmpty()
+            // const contentBlock = htmlToDraft(gioithieu);
+            // const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+            // gioiThieuCuoiCung = EditorState.createWithContent(contentState);
+
+            this.setState({
+                txtTenCongTy: tencongty,
+                txtDiaChi: diachi,
+                txtEmail: email,
+                txtWebsite: website,
+                txtSoDienThoai: sodienthoai,
+                linhvuchoatdong: linhvuchoatdong,
+                editorState: gioiThieuCuoiCung,
+                hinhanh: logo ? logo : this.state.hinhanh,
+                trangthai: this.props.taiKhoan.taikhoan
+            })
+        }
+        const  _id  = JSON.parse(localStorage.getItem('taikhoan')) && JSON.parse(localStorage.getItem('taikhoan')).taikhoan && JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id ? JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id : '';
+        if (_id) {
+          return   this.props.actKiemTraDangNhap(_id);
+        }
+    }
+    componentWillReceiveProps() {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.nhatuyendung) {
             const { tencongty, email, website, diachi, linhvuchoatdong, gioithieu, sodienthoai, logo } = this.props.taiKhoan.taikhoan.nhatuyendung
             const gioiThieuCuoiCung = gioithieu ? EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(gioithieu).contentBlocks)) : EditorState.createEmpty()
@@ -245,7 +270,6 @@ class NhaTuyenDung extends Component {
             linhvuchoatdong,
             hinhanh, loiLinhVucHoatDong, loiSoDienThoai, loiTenCongTy, loiDiaChi, loiHinhAnh, loiEmail
         } = this.state;
-        console.log('linnh vu : ', this.state.trangthai)
         const divUploading = (
             <div>
                 <div id="popup">
@@ -260,13 +284,13 @@ class NhaTuyenDung extends Component {
         )
         const uploading = this.state.disabled ? divUploading : '';
         const chuaDangKy = (
-            <div class="alert alert-danger">Bạn cần đăng ký thông tin nhà tuyển dụng để có thể đăng tuyển</div>
+            <div class="alert alert-danger text-center">Bạn cần đăng ký thông tin nhà tuyển dụng để có thể đăng tuyển</div>
         )
         const choDuyet = (
-            <div class="alert alert-warning">Bạn đã đăng ký thông tin nhà tuyển dụng vui lòng đợi hoặc liên hệ trực tiếp để kích hoạt tính năng</div>
+            <div class="alert alert-warning text-center">Bạn đã đăng ký thông tin nhà tuyển dụng vui lòng đợi hoặc liên hệ trực tiếp để kích hoạt tính năng</div>
         )
         const daDuyet = (
-            <div class="alert alert-success">Bạn đã kích hoạt nhà tuyển dụng. Có thể đăng tuyển và chỉnh sửa thông tin</div>
+            <div class="alert alert-success text-center">Bạn đã kích hoạt nhà tuyển dụng. Có thể đăng tuyển và chỉnh sửa thông tin</div>
         )
         const mainHoanThien = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.trangthai === 'dangduyet' ? choDuyet : chuaDangKy;
         const mainHoanThienDaDuyet = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.trangthai === 'daduyet' ? daDuyet : mainHoanThien;
@@ -287,6 +311,9 @@ class NhaTuyenDung extends Component {
                     <div class="container">
                         <div class="row">
                             {uploading}
+                            <div class="col-lg-8 col-md-7 col-xs-12 flr">
+                            {mainHoanThienDaDuyet}
+</div>
                             <div class="col-lg-4 col-md-5 col-xs-12">
                                 <div class="current-image">
                                     {/* <img src="http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png" alt=""
@@ -314,7 +341,6 @@ class NhaTuyenDung extends Component {
                             </div>
 
                             <div class="col-lg-8 col-md-7 col-xs-12">
-                                {mainHoanThienDaDuyet}
 
 
                                 <div class="form">
@@ -456,6 +482,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         actKichHoatNhaTuyenDung: (data) => {
             dispatch(actKichHoatNhaTuyenDungAPI(data));
+        },
+        actKiemTraDangNhap: (data) => {
+            dispatch(actKiemTraDangNhapAPI(data));
         },
     }
 }
