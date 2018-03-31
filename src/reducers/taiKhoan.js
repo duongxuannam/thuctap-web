@@ -33,7 +33,6 @@ const taiKhoan = (state = initialState, action) => {
             localStorage.setItem('taikhoan', JSON.stringify(state));
             return state;
         case Types.KIEM_TRA_DANG_NHAP:
-            console.log('troi oi', action.data)
             const lttk = {
                 taikhoan: action.data
             }

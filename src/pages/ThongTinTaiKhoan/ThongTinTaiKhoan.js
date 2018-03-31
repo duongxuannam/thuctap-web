@@ -6,12 +6,16 @@ import { Link } from 'react-router-dom';
 import cloudinary from 'cloudinary';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+import { Dropbox } from 'dropbox'
+import 'isomorphic-fetch';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { configCloudinary } from '../../global/config';
+import { configCloudinary, accessToken } from '../../global/config';
 import { actCapNhatThongTinAPI, actKiemTraDangNhapAPI } from '../../actions/index';
 
 
-cloudinary.config(configCloudinary)
+cloudinary.config(configCloudinary);
+const dbx = new Dropbox({ accessToken: `rWZ7mfeZyOAAAAAAAAAAXzDy56EeMPzDvdeI3R-5x1D4C2AdtEWyACRMZb8G8GGP` });
+//const dbx = new Dropbox(accessToken);
 
 class ThongTinTaiKhoan extends Component {
     constructor(props) {
@@ -37,14 +41,15 @@ class ThongTinTaiKhoan extends Component {
             loiHinhAnh: '',
             daThayHinh: false,
             disabled: '',
-            hinhanh: 'http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png'
+            hinhanh: 'http://res.cloudinary.com/thuctap/image/upload/v1520564546/user-default.png',
+            linkCV: ''
 
         };
         //  this.state = { editorState };
     }
     componentDidMount() {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
-            const { anhdaidien, email, hotenthat, diachi, truongdaihoc, chuyennganh, gioithieu, sodienthoai } = this.props.taiKhoan.taikhoan
+            const { anhdaidien, email, hotenthat, diachi, truongdaihoc, chuyennganh, gioithieu, sodienthoai, cv } = this.props.taiKhoan.taikhoan
             const gioiThieuCuoiCung = gioithieu ? EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(gioithieu).contentBlocks)) : EditorState.createEmpty()
             // const contentBlock = htmlToDraft(gioithieu);
             // const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
@@ -58,7 +63,8 @@ class ThongTinTaiKhoan extends Component {
                 txtTruongDaiHoc: truongdaihoc,
                 txtSoDienThoai: sodienthoai,
                 editorState: gioiThieuCuoiCung,
-                hinhanh: anhdaidien ? anhdaidien : this.state.hinhanh
+                hinhanh: anhdaidien ? anhdaidien : this.state.hinhanh,
+                linkCV: cv
             })
         }
         const _id = JSON.parse(localStorage.getItem('taikhoan')) && JSON.parse(localStorage.getItem('taikhoan')).taikhoan && JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id ? JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id : '';
@@ -68,7 +74,7 @@ class ThongTinTaiKhoan extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
-            const { anhdaidien, email, hotenthat, diachi, truongdaihoc, chuyennganh, gioithieu, sodienthoai } = this.props.taiKhoan.taikhoan
+            const { anhdaidien, email, hotenthat, diachi, truongdaihoc, chuyennganh, gioithieu, sodienthoai, cv } = this.props.taiKhoan.taikhoan
             const gioiThieuCuoiCung = gioithieu ? EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(gioithieu).contentBlocks)) : EditorState.createEmpty()
             // const contentBlock = htmlToDraft(gioithieu);
             // const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
@@ -82,7 +88,8 @@ class ThongTinTaiKhoan extends Component {
                 txtTruongDaiHoc: truongdaihoc,
                 txtSoDienThoai: sodienthoai,
                 editorState: gioiThieuCuoiCung,
-                hinhanh: anhdaidien ? anhdaidien : this.state.hinhanh
+                hinhanh: anhdaidien ? anhdaidien : this.state.hinhanh,
+                linkCV: cv
             })
         }
     }
@@ -175,8 +182,24 @@ class ThongTinTaiKhoan extends Component {
             })
         };
     }
+    onChangePDF = () => {
+        const filePDF = this.refs.pdf.files[0];
+        switch (filePDF.name.substring(filePDF.name.lastIndexOf('.') + 1).toLowerCase()) {
+            case 'pdf':
+                this.setState({ loiPDF: '', filePDF: filePDF, daThayFile: true, loiKhonChonPDF: '' })
+                break;
+            default:
+                return this.setState({
+                    loiPDF: 'File được chọn không phải định dạng PDF', daThayFile: true,
+                })
+                break;
+        }
+    }
     onSubmit = (e) => {
         e.preventDefault();
+        if (!this.state.linkCV && !this.state.filePDF) {
+            this.setState({ loiKhonChonPDF: 'CV là bắt buộc' })
+        }
         if (!this.state.txtHoTen) {
             this.setState({ loiHoTen: "Trương này là bắt buộc" })
         }
@@ -190,41 +213,106 @@ class ThongTinTaiKhoan extends Component {
             this.setState({ loiChuyenNganh: "Trương này là bắt buộc" })
         }
         if (this.state.loiHoTen === '' && this.state.loiHinhAnh === '' && this.state.loiSoDienThoai === '' && this.state.loiDiaChi === '' && this.state.loiTruongDaiHoc === '' && this.state.loiChuyenNganh === '') {
-            if (this.state.txtHoTen !== '' && this.state.txtDiaChi !== '' && this.state.txtTruongDaiHoc !== '' && this.state.txtChuyenNganh !== '') {
+            if (this.state.txtHoTen !== '' && this.state.txtDiaChi !== '' && this.state.txtTruongDaiHoc !== '' && this.state.txtChuyenNganh !== '' && (this.state.linkCV || this.state.filePDF)) {
+                console.log('loggg', this.state.linkCV)
+                console.log('loggg', this.state.filePDF)
+                if (this.state.linkCV || this.state.filePDF)
+                    if (this.state.filePDF) {
+                        if (this.state.daThayHinh) {
+                            this.setState({ disabled: 'disabled' })
+                            var linkDaTao;
+                            dbx.filesUpload({ path: `/${JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id}.pdf`, contents: this.state.filePDF, mode: 'overwrite' })
+                                .then(res => {
+                                    dbx.sharingCreateSharedLink({ path: res.path_display, }).then((response) => {
+                                        // console.log(`lay dc thi phai`, response.url);
+                                        linkDaTao = response.url;
 
-                if (this.state.daThayHinh) {
-                    this.setState({ disabled: 'disabled' })
-                    cloudinary.uploader.upload(`${this.state.hinhanh}`).then(result => {
-                        return result.secure_url
-                    }).then(hinh => {
-                        const data = {
-                            hoten: this.state.txtHoTen,
-                            sodienthoai: this.state.txtSoDienThoai,
-                            diachi: this.state.txtDiaChi,
-                            truongdaihoc: this.state.txtTruongDaiHoc,
-                            chuyennganh: this.state.txtChuyenNganh,
-                            gioithieu: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
-                            _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
-                            hinhanh: hinh,
+                                        return cloudinary.uploader.upload(`${this.state.hinhanh}`, null, { public_id: `${JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id}`, })
+                                    }).then(rs => {
+                                        const data = {
+                                            hoten: this.state.txtHoTen,
+                                            sodienthoai: this.state.txtSoDienThoai,
+                                            diachi: this.state.txtDiaChi,
+                                            truongdaihoc: this.state.txtTruongDaiHoc,
+                                            chuyennganh: this.state.txtChuyenNganh,
+                                            gioithieu: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
+                                            _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
+                                            hinhanh: rs.secure_url,
+                                            cv: linkDaTao
+                                        }
+                                        console.log('huhu', data)
+                                        this.props.actCapNhatThongTin(data);
+                                        alert("Thêm thành công");
+                                        return this.props.history.goBack();
+                                    })
+                                }).catch((e)=>alert('co loi roi', e))
+
+                            console.log('da tahy hinh da thay file', this.state.filePDF)
+                        } else {
+                            this.setState({ disabled: 'disabled' })
+                            var linkDaTao;
+                            dbx.filesUpload({ path: `/${JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id}.pdf`, contents: this.state.filePDF, mode: 'overwrite' })
+                                .then(res => {
+                                    dbx.sharingCreateSharedLink({ path: res.path_display, }).then((response) => {
+                                        // console.log(`lay dc thi phai`, response.url);
+                                        linkDaTao = response.url;
+                                        const data = {
+                                            hoten: this.state.txtHoTen,
+                                            sodienthoai: this.state.txtSoDienThoai,
+                                            diachi: this.state.txtDiaChi,
+                                            truongdaihoc: this.state.txtTruongDaiHoc,
+                                            chuyennganh: this.state.txtChuyenNganh,
+                                            gioithieu: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
+                                            _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
+                                            cv: linkDaTao
+                                        }
+                                        console.log('huhu', data)
+                                        this.props.actCapNhatThongTin(data);
+                                        alert("Thêm thành công");
+                                        return this.props.history.goBack();
+                                    })
+                                }).catch((e)=>alert('co loi roi', e))
+                            console.log('da thay file nhung chua thay hinh', this.state.filePDF)
+
                         }
-                        this.props.actCapNhatThongTin(data);
-                        alert("Thêm thành công");
-                        return this.props.history.goBack();
-                    })
-                } else {
-                    const data = {
-                        hoten: this.state.txtHoTen,
-                        sodienthoai: this.state.txtSoDienThoai,
-                        diachi: this.state.txtDiaChi,
-                        truongdaihoc: this.state.txtTruongDaiHoc,
-                        chuyennganh: this.state.txtChuyenNganh,
-                        gioithieu: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
-                        _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
+                    } else {
+                        if (this.state.daThayHinh) {
+                            this.setState({ disabled: 'disabled' })
+                            cloudinary.uploader.upload(`${this.state.hinhanh}`, null, { public_id: `${JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id}`, })
+                            .then(hinh => {
+                                const data = {
+                                    hoten: this.state.txtHoTen,
+                                    sodienthoai: this.state.txtSoDienThoai,
+                                    diachi: this.state.txtDiaChi,
+                                    truongdaihoc: this.state.txtTruongDaiHoc,
+                                    chuyennganh: this.state.txtChuyenNganh,
+                                    gioithieu: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
+                                    _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
+                                    hinhanh: hinh.secure_url,
+                                }
+                                this.props.actCapNhatThongTin(data);
+                                alert("Thêm thành công");
+                                return this.props.history.goBack();
+                            })
+                            console.log('da tahy hinh k thay file', this.state.filePDF)
+                        } else {
+                            const data = {
+                                hoten: this.state.txtHoTen,
+                                sodienthoai: this.state.txtSoDienThoai,
+                                diachi: this.state.txtDiaChi,
+                                truongdaihoc: this.state.txtTruongDaiHoc,
+                                chuyennganh: this.state.txtChuyenNganh,
+                                gioithieu: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
+                                _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
+                            }
+                            this.props.actCapNhatThongTin(data);
+                            alert("Thêm thành công");
+                            return this.props.history.goBack();
+                            console.log('k thjjay hinh k thay file', this.state.filePDF)
+
+                        }
                     }
-                    this.props.actCapNhatThongTin(data);
-                    alert("Thêm thành công");
-                    return this.props.history.goBack();
-                }
+
             }
         }
     }
@@ -236,8 +324,62 @@ class ThongTinTaiKhoan extends Component {
             txtDiaChi,
             txtTruongDaiHoc,
             txtChuyenNganh,
-            hinhanh, loiChuyenNganh, loiTruongDaiHoc, loiSoDienThoai, loiHoTen, loiDiaChi, loiHinhAnh,
+            hinhanh, loiChuyenNganh, loiTruongDaiHoc, loiSoDienThoai, loiHoTen, loiDiaChi, loiHinhAnh, daThayFile, loiPDF, filePDF, loiKhonChonPDF
         } = this.state;
+        const lanDau = (
+            <div class="form-group">
+                <label class="control-label">
+                    <span class="wc-editable">CV</span>: </label>
+                <input className="fileInput"
+                    ref='pdf'
+                    name='pdf'
+                    type="file"
+                    multiple='true'
+                    onChange={this.onChangePDF} />
+                {loiKhonChonPDF ? <div class="help-block with-errors">
+                    <p class="wc-editable hien-thi-loi-edit ml-20">{loiKhonChonPDF}</p>
+                </div> :
+                    <div class="help-block with-errors">
+                        {daThayFile ? '' : <p class="wc-editable hien-thi-thongbao-edit ml-20">File cv phải có định dạng PDF</p>}
+                        {loiPDF ? <p class="wc-editable hien-thi-loi-edit ml-20">{loiPDF}</p> : ''}
+                    </div>
+                }
+
+
+            </div>
+        );
+        const lanThu = (
+            <React.Fragment>
+                <div class="form-group text-center">
+                    <label class="control-label">
+                        <span class="wc-editable clr">CV </span>: <a href={this.state.linkCV} target="_blank"  >Xem</a></label>
+
+                </div>
+                <div class="form-group text-center">
+                    <label class="control-label">
+                        <a class="wc-editable contro" onClick={() => this.setState({ hienThiThayCV: true })}>Thay CV</a></label>
+                    {this.state.hienThiThayCV ?
+                        <React.Fragment>
+                            <input className="fileInput"
+                                ref='pdf'
+                                name='pdf'
+                                type="file"
+                                multiple='true'
+                                onChange={this.onChangePDF} />
+                            {loiKhonChonPDF ? <div class="help-block with-errors">
+                                <p class="wc-editable hien-thi-loi-edit ml-20">{loiKhonChonPDF}</p>
+                            </div> :
+                                <div class="help-block with-errors">
+                                    {daThayFile ? '' : <p class="wc-editable hien-thi-thongbao-edit ml-20">File cv phải có định dạng PDF</p>}
+                                    {loiPDF ? <p class="wc-editable hien-thi-loi-edit ml-20">File không đúng định dạng PDF.Giữ nguyên file cũ</p> : ''}
+                                </div>
+                            }
+
+                        </React.Fragment> : ''}
+                </div>
+            </React.Fragment>
+        )
+        const hienThiCVFinal = this.state.linkCV ? lanThu : lanDau;
         const divUploading = (
             <div>
                 <div id="popup">
@@ -301,35 +443,16 @@ class ThongTinTaiKhoan extends Component {
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">
-                                            <span class="wc-editable">CV</span>: </label>
-                                        <input name="txtChuyenNganh" type="file" class="form-control required"
-                                        />
-                                        <div class="help-block with-errors">
-                                            <span class="wc-editable hien-thi-loi-edit ml-20">file khong dung dinh dang</span>
-                                        </div>
-                                    </div>
+
+
+                                    {hienThiCVFinal}
 
 
 
 
-                                    {/* <div class="form-group text-center">
-                                        <label class="control-label">
-                                            <span class="wc-editable clr">CV </span>: <a class='contro'>Xem</a></label>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">
-                                            <a class="wc-editable contro" onClick={() => this.setState({ hienThiThayCV: true })}>Thay CV</a></label>
-                                        {this.state.hienThiThayCV ?
-                                           <React.Fragment> <input name="txtChuyenNganh" type="file" class="form-control required"
-                                            />
-                                            <div class="help-block with-errors">
-                                                <span class="wc-editable hien-thi-loi-edit ml-20">file khong dung dinh dang</span>
-                                            </div></React.Fragment> : ''}
-                                    </div> */}
                                 </div>
+
                             </div>
                             <div class="col-lg-8 col-md-7 col-xs-12">
                                 <div class="form">
