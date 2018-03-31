@@ -366,7 +366,6 @@ export const actCapNhatThongTinAPI = (data) => {
     return dispatch => {
         return callApi(`capnhatthongtin`, 'POST', data).then(res => { 
              dispatch(actCapNhatThongTin(res.data));
-            console.log('res: ',res);
         }).catch(()=> console.log('loi o dayu ne'));
     }
 }

@@ -33,7 +33,7 @@ class QuanLyCongViec extends Component {
                             <Link to={`/danhsachungtuyen/${item._id}`} >   {item.danop} ứng viên  </Link>
                         </td>
                         <td><Link to={`/chitietcongviec/${item._id}`} >Xem</Link></td>
-                        <td><a class='clr contro' onClick={() => this.xoaCongViecAdmin(item._id)}>Xóa</a></td>
+                        <td><a class='clr contro' onClick={() =>{ if(window.confirm('Bạn chắc chắn muốn xóa?')){ this.xoaCongViecAdmin(item._id) } } }>Xóa</a></td>
                     </tr>
                 );
             });

@@ -41,7 +41,7 @@ class TinTucDaDang extends Component {
 
                         <td><Link to={`/suatintuc/${item._id}`} >Sửa</Link></td>
                         <td>
-                            <a onClick={() => this.xoaTinTuc(item._id)}>   Xóa  </a>
+                            <a  className='clr' onClick={() => { if(window.confirm('Bạn chắc chắn muốn xóa?')){ this.xoaTinTuc(item._id) } } }>   Xóa  </a>
 
                         </td>
                     </tr>

@@ -64,18 +64,32 @@ class Header extends Component {
         // this.socket.on('Server-send-id', function (text) {
         //   console.log('aaaa', text)
         //   });
-          this.socket.on('CO_NGUOI_UNG_TUYEN', function (_id) {
-           if(e.props.taiKhoan && e.props.taiKhoan.taikhoan && e.props.taiKhoan.taikhoan._id === _id){
-            console.log('co vao dc ko 3', _id)
-               alert('to be shared');
-               e.props.actKiemTraDangNhap(_id);
-           }
-            });
+        this.socket.on('CO_NGUOI_UNG_TUYEN', function (_id) {
+            if (e.props.taiKhoan && e.props.taiKhoan.taikhoan && e.props.taiKhoan.taikhoan._id === _id) {
+                e.props.actKiemTraDangNhap(_id);
+                alert('Có người vừa ứng tuyển công việc mà bạn đăng');
+
+            }
+        });
+        this.socket.on('TAI_KHOAN_DA_DUOC_KICH_HOAT', function (_id) {
+            if (e.props.taiKhoan && e.props.taiKhoan.taikhoan && e.props.taiKhoan.taikhoan._id === _id) {
+                e.props.actKiemTraDangNhap(_id);
+                alert('Tài khoản của bạn đã được kích hoạt nhà tuyển dụng');
+
+            }
+        });
+        this.socket.on('TAI_KHOAN_DA_BI_KHOA', function (_id) {
+            if (e.props.taiKhoan && e.props.taiKhoan.taikhoan && e.props.taiKhoan.taikhoan._id === _id) {
+                e.props.actDangXuat();
+                alert('Tài khoản của bạn đã bị khóa');
+
+            }
+        });
     }
     componentDidMount() {
-         const  _id  = JSON.parse(localStorage.getItem('taikhoan')) && JSON.parse(localStorage.getItem('taikhoan')).taikhoan && JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id ? JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id : '';
+        const _id = JSON.parse(localStorage.getItem('taikhoan')) && JSON.parse(localStorage.getItem('taikhoan')).taikhoan && JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id ? JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id : '';
         if (_id) {
-          return   this.props.actKiemTraDangNhap(_id);
+            return this.props.actKiemTraDangNhap(_id);
         }
     }
     logOut = () => {
@@ -101,7 +115,7 @@ class Header extends Component {
     render() {
         var hienThiTen = '';
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
-            hienThiTen = this.props.taiKhoan.taikhoan.hoten
+            hienThiTen = (<a class='contro'>{this.props.taiKhoan.taikhoan.hoten}</a>)
         }
         const chuaDangNhap = (
             <div class="bar">

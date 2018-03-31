@@ -45,7 +45,7 @@ class CongViecDaDang extends Component {
                         </td>
                         <td><Link to={`/suacongviec/${item._id}`} >Sửa</Link></td>
                         <td>
-                            <a class='clr contro' onClick={() => this.xoaCongViec(item._id)}>   Xóa  </a>
+                            <a class='clr contro' onClick={() =>{ if(window.confirm('Bạn chắc chắn muốn xóa?')){ this.xoaCongViec(item._id) } } }>   Xóa  </a>
 
                         </td>
                     </tr>
@@ -56,7 +56,7 @@ class CongViecDaDang extends Component {
     }
     xoaCongViec(id) {
         this.props.actXoaCongViec(id);
-        console.log('no chay ko', id)
+        // console.log('no chay ko', id)
     }
     render() {
         if (!this.props.taiKhoan || !this.props.taiKhoan.taikhoan || !this.props.taiKhoan.taikhoan.kichhoatnhatuyendung) {

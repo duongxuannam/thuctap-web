@@ -37,7 +37,7 @@ class QuanLyTinTuc extends Component {
                         <td><Link to={`/chitiettintuc/${item._id}`} class='contro'>Xem</Link></td>
                         <td>
                             {/* <a  onClick={this.xoaTinTuc(item._id)}>   Xóa  </a> */}
-                            <a onClick={() => this.xoaTinTuc(item._id)} class='contro clr'>   Xóa  </a>
+                            <a onClick={() =>{if(window.confirm('Bạn chắc chắn muốn xóa?')){ this.xoaTinTuc(item._id)} } } class='contro clr'>   Xóa  </a>
 
                         </td>
                     </tr>

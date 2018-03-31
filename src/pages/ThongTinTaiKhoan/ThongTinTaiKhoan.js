@@ -14,8 +14,8 @@ import { actCapNhatThongTinAPI, actKiemTraDangNhapAPI } from '../../actions/inde
 
 
 cloudinary.config(configCloudinary);
-const dbx = new Dropbox({ accessToken: `rWZ7mfeZyOAAAAAAAAAAXzDy56EeMPzDvdeI3R-5x1D4C2AdtEWyACRMZb8G8GGP` });
-//const dbx = new Dropbox(accessToken);
+//const dbx = new Dropbox({ accessToken: `rWZ7mfeZyOAAAAAAAAAAXzDy56EeMPzDvdeI3R-5x1D4C2AdtEWyACRMZb8G8GGP` });
+const dbx = new Dropbox(accessToken);
 
 class ThongTinTaiKhoan extends Component {
     constructor(props) {
@@ -73,6 +73,7 @@ class ThongTinTaiKhoan extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
+        console.log('cha cha')
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
             const { anhdaidien, email, hotenthat, diachi, truongdaihoc, chuyennganh, gioithieu, sodienthoai, cv } = this.props.taiKhoan.taikhoan
             const gioiThieuCuoiCung = gioithieu ? EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(gioithieu).contentBlocks)) : EditorState.createEmpty()
@@ -214,8 +215,8 @@ class ThongTinTaiKhoan extends Component {
         }
         if (this.state.loiHoTen === '' && this.state.loiHinhAnh === '' && this.state.loiSoDienThoai === '' && this.state.loiDiaChi === '' && this.state.loiTruongDaiHoc === '' && this.state.loiChuyenNganh === '') {
             if (this.state.txtHoTen !== '' && this.state.txtDiaChi !== '' && this.state.txtTruongDaiHoc !== '' && this.state.txtChuyenNganh !== '' && (this.state.linkCV || this.state.filePDF)) {
-                console.log('loggg', this.state.linkCV)
-                console.log('loggg', this.state.filePDF)
+                // console.log('loggg', this.state.linkCV)
+                // console.log('loggg', this.state.filePDF)
                 if (this.state.linkCV || this.state.filePDF)
                     if (this.state.filePDF) {
                         if (this.state.daThayHinh) {
@@ -240,22 +241,21 @@ class ThongTinTaiKhoan extends Component {
                                             hinhanh: rs.secure_url,
                                             cv: linkDaTao
                                         }
-                                        console.log('huhu', data)
+                                       // console.log('huhu', data)
                                         this.props.actCapNhatThongTin(data);
-                                        alert("Thêm thành công");
+                                        alert("Cập nhật thành công");
                                         return this.props.history.goBack();
                                     })
                                 }).catch((e)=>alert('co loi roi', e))
 
-                            console.log('da tahy hinh da thay file', this.state.filePDF)
+                           // console.log('da tahy hinh da thay file', this.state.filePDF)
                         } else {
                             this.setState({ disabled: 'disabled' })
-                            var linkDaTao;
                             dbx.filesUpload({ path: `/${JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id}.pdf`, contents: this.state.filePDF, mode: 'overwrite' })
                                 .then(res => {
                                     dbx.sharingCreateSharedLink({ path: res.path_display, }).then((response) => {
                                         // console.log(`lay dc thi phai`, response.url);
-                                        linkDaTao = response.url;
+                                        var linkDaTao = response.url;
                                         const data = {
                                             hoten: this.state.txtHoTen,
                                             sodienthoai: this.state.txtSoDienThoai,
@@ -266,13 +266,13 @@ class ThongTinTaiKhoan extends Component {
                                             _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
                                             cv: linkDaTao
                                         }
-                                        console.log('huhu', data)
+                                       // console.log('huhu', data)
                                         this.props.actCapNhatThongTin(data);
-                                        alert("Thêm thành công");
+                                        alert("Cập nhật thành công");
                                         return this.props.history.goBack();
                                     })
                                 }).catch((e)=>alert('co loi roi', e))
-                            console.log('da thay file nhung chua thay hinh', this.state.filePDF)
+                           // console.log('da thay file nhung chua thay hinh', this.state.filePDF)
 
                         }
                     } else {
@@ -291,10 +291,10 @@ class ThongTinTaiKhoan extends Component {
                                     hinhanh: hinh.secure_url,
                                 }
                                 this.props.actCapNhatThongTin(data);
-                                alert("Thêm thành công");
+                                alert("Cập nhật thành công");
                                 return this.props.history.goBack();
                             })
-                            console.log('da tahy hinh k thay file', this.state.filePDF)
+                           // console.log('da tahy hinh k thay file', this.state.filePDF)
                         } else {
                             const data = {
                                 hoten: this.state.txtHoTen,
@@ -306,9 +306,9 @@ class ThongTinTaiKhoan extends Component {
                                 _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
                             }
                             this.props.actCapNhatThongTin(data);
-                            alert("Thêm thành công");
+                            alert("Cập nhật thành công");
                             return this.props.history.goBack();
-                            console.log('k thjjay hinh k thay file', this.state.filePDF)
+                            // console.log('k thjjay hinh k thay file', this.state.filePDF)
 
                         }
                     }
@@ -324,7 +324,7 @@ class ThongTinTaiKhoan extends Component {
             txtDiaChi,
             txtTruongDaiHoc,
             txtChuyenNganh,
-            hinhanh, loiChuyenNganh, loiTruongDaiHoc, loiSoDienThoai, loiHoTen, loiDiaChi, loiHinhAnh, daThayFile, loiPDF, filePDF, loiKhonChonPDF
+            hinhanh, loiChuyenNganh, loiTruongDaiHoc, loiSoDienThoai, loiHoTen, loiDiaChi, loiHinhAnh, daThayFile, loiPDF, loiKhonChonPDF
         } = this.state;
         const lanDau = (
             <div class="form-group">

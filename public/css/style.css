@@ -281,9 +281,9 @@ button.upload-file { color: #fff; font-size: 17px; text-align: center; text-tran
 
 .blog-search-results { padding-bottom: 0; }
 
-.btn-facebook { padding: 12px 0 0 55px; background: #3a589b url(../images/social-facebook.png) no-repeat 17px center; display: block; height: 60px; max-width: 165px; color: #fff; border-radius: 5px; text-align: left; margin: 0 auto; }
+/* .btn-facebook { padding: 12px 0 0 55px; background: #3a589b url(../images/social-facebook.png) no-repeat 17px center; display: block; height: 60px; max-width: 165px; color: #fff; border-radius: 5px; text-align: left; margin: 0 auto; } */
 
-.btn-linkedin { padding: 12px 0 0 55px; background: #007ab9 url(../images/social-linkedin.png) no-repeat 17px 16px; display: block; height: 60px; max-width: 165px; color: #fff; border-radius: 5px; text-align: left; margin: 0 auto; }
+/* .btn-linkedin { padding: 12px 0 0 55px; background: #007ab9 url(../images/social-linkedin.png) no-repeat 17px 16px; display: block; height: 60px; max-width: 165px; color: #fff; border-radius: 5px; text-align: left; margin: 0 auto; } */
 
 .btn-linkedin:hover,
 .btn-facebook:hover { color: #fff; opacity: 0.7; }

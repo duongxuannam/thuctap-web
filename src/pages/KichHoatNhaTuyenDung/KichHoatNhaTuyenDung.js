@@ -63,17 +63,17 @@ class KichHoatNhaTuyenDung extends Component {
         }
     }
     onEditorStateChange = (editorState) => this.setState({ editorState: editorState });
-    validateEmail(sEmail) {
-        var reEmail = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
+    // validateEmail(sEmail) {
+    //     var reEmail = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
 
-        if (!sEmail.match(reEmail)) {
+    //     if (!sEmail.match(reEmail)) {
 
-            return false;
-        }
+    //         return false;
+    //     }
 
-        return true;
+    //     return true;
 
-    }
+    // }
     onChange = (e) => {
         const target = e.target;
         const name = target.name;
@@ -101,21 +101,21 @@ class KichHoatNhaTuyenDung extends Component {
                     this.setState({ loiDiaChi: '' })
                 }
             }
-            if (name === 'txtEmail') {
-                if (this.state.txtEmail.length < 5) {
-                    this.setState({ loiEmail: 'Email không hợp lệ' });
-                    if (this.state.txtChuyenNganh === '') {
-                        this.setState({ loiEmail: 'Trường này là bắt buộc' })
-                    }
+            // if (name === 'txtEmail') {
+            //     if (this.state.txtEmail.length < 5) {
+            //         this.setState({ loiEmail: 'Email không hợp lệ' });
+            //         if (this.state.txtEmail === '') {
+            //             this.setState({ loiEmail: 'Trường này là bắt buộc' })
+                   // }
 
-                }
-                if (!this.validateEmail(this.state.txtEmail)) {
-                    console.log('co vo day ko')
-                    this.setState({ loiEmail: 'Email không hợp lệ' })
-                } else {
-                    this.setState({ loiEmail: '' })
-                }
-            }
+               // }
+                // if (!this.validateEmail(this.state.txtEmail)) {
+                //     console.log('co vo day ko')
+                //     this.setState({ loiEmail: 'Email không hợp lệ' })
+                // } else {
+                //     this.setState({ loiEmail: '' })
+                // }
+           // }
             if (name === 'txtWebsite') {
                 if (this.state.txtWebsite.length < 3) {
                     this.setState({ loiTruongDaiHoc: 'Tên website quá ngắn' });
@@ -182,16 +182,16 @@ class KichHoatNhaTuyenDung extends Component {
         if (!this.state.txtSoDienThoai) {
             this.setState({ loiSoDienThoai: "Trương này là bắt buộc" })
         }
-        if (!this.state.txtEmail) {
-            this.setState({ loiEmail: "Trương này là bắt buộc" })
-        }
+        // if (!this.state.txtEmail) {
+        //     this.setState({ loiEmail: "Trương này là bắt buộc" })
+        // }
         if (this.state.linhvuchoatdong === '') {
             this.setState({ loiLinhVucHoatDong: "Trương này là bắt buộc" })
         }
 
         if (this.state.loiTenCongTy === '' && this.state.loiHinhAnh === '' && this.state.loiSoDienThoai === '' && this.state.loiDiaChi === '' && this.state.loiEmail === '' && this.state.loiLinhVucHoatDong === '') {
-            console.log('hi')
-            if (this.state.txtTenCongTy !== '' && this.state.txtDiaChi !== '' && this.state.txtEmail !== '' && this.state.txtSoDienThoai !== '' && this.state.linhvuchoatdong !== '') {
+       
+            if (this.state.txtTenCongTy !== '' && this.state.txtDiaChi !== ''  && this.state.txtSoDienThoai !== '' && this.state.linhvuchoatdong !== '') {
                 console.log('hello')
                 if (this.state.daThayHinh) {
                     this.setState({ disabled: 'disabled' })
@@ -225,7 +225,7 @@ class KichHoatNhaTuyenDung extends Component {
                         _id: JSON.parse(localStorage.getItem('taikhoan')).taikhoan._id,
                     }
                     this.props.actKichHoatNhaTuyenDung(data);
-                    alert("Thêm thành công");
+                    alert("Đăng ký thành công");
                     return this.props.history.goBack();
                 }
             }

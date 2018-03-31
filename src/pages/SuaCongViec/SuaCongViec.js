@@ -154,16 +154,6 @@ class SuaCongViec extends Component {
         });
     };
 
-    onChangeFile = () => {
-        var file = this.refs.file.files[0];
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = (e) => {
-            this.setState({
-                imgSrc: [reader.result]
-            })
-        };
-    }
     onSubmit = (e) => {
         e.preventDefault();
         const data = {
@@ -213,17 +203,14 @@ class SuaCongViec extends Component {
         if (this.state.txtMoTa === '') {
             this.setState({ loiMoTa: 'Trường này là bắt buộc' })
         }
-       console.log('um ba la ra da ta ', data)
+    
         if (this.state.loiTieuDe === '' && this.state.loiDiaDiem === '' && this.state.loiChuyenNganh === ''&& this.state.loiKieu === ''  && this.state.loiChucVu === '' && this.state.loiLuong === '' && this.state.loiTrinhDo === '' && this.state.loiKinhNghiem === '' && this.state.loiSoLuong === '' && this.state.loiThoiHan === ''  ) {
-            console.log('um ba la ra da ta ', data)
+           
             if (this.state.txtTieuDe !== '' && this.state.txtDiaDiem !== '' && this.state.chuyenNganh !== '' && this.state.kieu !== '' && this.state.chucVu !== '' && this.state.txtLuong !== '' && this.state.trinhDo !== '' && this.state.kinhNghiem !== '' && this.state.txtSoLuong !== '' && this.state.thoiHan !== '') {
                 this.props.actSuaCongViec(data);
-                alert("Thêm thành công");
+                alert("Chỉnh sửa thành công");
                 return this.props.history.goBack();
             }
-
-
-
         }
 
     }
@@ -449,28 +436,7 @@ class SuaCongViec extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-
-                                        <div class="col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <label class="control-label">
-                                                    <span class="wc-editable" >Hình ảnh(nếu có)</span>:</label>
-                                                <input
-                                                    ref="file"
-                                                    type="file"
-                                                    name="user[image]"
-                                                    multiple="true"
-                                                    onChange={this.onChangeFile} />
-                                                <div class="col-sm-12 col-xs-12">
-                                                    <img class="col-sm-12 col-xs-12" src={this.state.imgSrc} alt="Chưa chọn hình" />
-                                                </div>
-
-                                                <div class="help-block with-errors">
-                                                    <ul class="list-unstyled"></ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="form-group editor-themcongviec">
                                         <label class="control-label">
                                             <span class="wc-editable" >Mô tả chi tiết</span>:</label>

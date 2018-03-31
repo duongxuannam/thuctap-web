@@ -128,16 +128,6 @@ class ThemCongViec extends Component {
         });
     };
 
-    onChangeFile = () => {
-        var file = this.refs.file.files[0];
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = (e) => {
-            this.setState({
-                imgSrc: [reader.result]
-            })
-        };
-    }
     onSubmit = (e) => {
         e.preventDefault();
         const data = {
@@ -422,28 +412,7 @@ class ThemCongViec extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-
-                                        <div class="col-sm-6 col-xs-12">
-                                            <div class="form-group">
-                                                <label class="control-label">
-                                                    <span class="wc-editable" >Hình ảnh(nếu có)</span>:</label>
-                                                <input
-                                                    ref="file"
-                                                    type="file"
-                                                    name="user[image]"
-                                                    multiple="true"
-                                                    onChange={this.onChangeFile} />
-                                                <div class="col-sm-12 col-xs-12">
-                                                    <img class="col-sm-12 col-xs-12" src={this.state.imgSrc} alt="Chưa chọn hình" />
-                                                </div>
-
-                                                <div class="help-block with-errors">
-                                                    <ul class="list-unstyled"></ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                               
                                     <div class="form-group editor-themcongviec">
                                         <label class="control-label">
                                             <span class="wc-editable" >Mô tả chi tiết</span>:</label>
@@ -474,7 +443,7 @@ class ThemCongViec extends Component {
                 <div className="container ">
                     <div class="panel panel-danger ">
                         <div class="panel-heading">Bạn chưa kich hoạt tài khoản nhà tuyên dụng</div>
-                        <div class="panel-body">Vui lòng <Link to='kichhoatnhatuyendung'>kích hoạt</Link> tài khoản nhà tuyển dụng để đăng tuyển</div>
+                        <div class="panel-body">Vui lòng <Link to='nhatuyendung'>kích hoạt</Link> tài khoản nhà tuyển dụng để đăng tuyển</div>
 
                     </div>
                 </div>

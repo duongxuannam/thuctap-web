@@ -134,13 +134,14 @@ class NhaTuyenDung extends Component {
                         this.setState({ loiEmail: 'Trường này là bắt buộc' })
                     }
 
-                }
-                if (!this.validateEmail(this.state.txtEmail)) {
-                    console.log('co vo day ko')
-                    this.setState({ loiEmail: 'Email không hợp lệ' })
-                } else {
+                }else{
                     this.setState({ loiEmail: '' })
                 }
+                // if (!this.validateEmail(this.state.txtEmail)) {
+                //     this.setState({ loiEmail: 'Email không hợp lệ' })
+                // } else {
+                //     this.setState({ loiEmail: '' })
+                // }
             }
             if (name === 'txtWebsite') {
                 if (this.state.txtWebsite.length < 3) {
