@@ -25,11 +25,11 @@ const menus = [
         to: '/tintuc',
         exact: false
     },
-    {
-        name: 'Thông tin',
-        to: '/thongtin',
-        exact: false
-    },
+    // {
+    //     name: 'Thông tin',
+    //     to: '/thongtin',
+    //     exact: false
+    // },
     {
         name: 'Liên hệ',
         to: '/lienhe',

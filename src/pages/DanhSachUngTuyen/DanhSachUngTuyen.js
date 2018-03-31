@@ -44,6 +44,9 @@ class CongViecDaDang extends Component {
                         <td>
                             <Link to={`/chitiettaikhoan/${item._id}`} >  Chi tiết </Link>
                         </td>
+                        <td>
+                            <a  href={item.cv} target="_blank">CV </a>
+                        </td>
                     </tr>
                 );
             });
@@ -100,6 +103,7 @@ class CongViecDaDang extends Component {
                                                 <th>Số điện thoại</th>
                                                 <th>Trường đại học</th>
                                                 <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -122,6 +126,7 @@ class CongViecDaDang extends Component {
                                                 <input type="text" name="locTheoTruongDaiHoc" class="form-control" placeholder="lọc theo trường đại học" value={locTheoTruongDaiHoc} onChange={this.onChange} />
 
                                                 </td>
+                                                <td></td>
                                                 <td></td>
                                             </tr>
 

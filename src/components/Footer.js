@@ -18,12 +18,12 @@ const menus = [
         name: 'Thêm công việc',
         to: '/themcongviec',
         exact: false
-    },
-    {
-        name: 'Tin tức',
-        to: '/tintuc',
-        exact: false
-    },
+     },
+    // {
+    //     name: 'Tin tức',
+    //     to: '/tintuc',
+    //     exact: false
+    // },
     {
         name: 'Thông tin',
         to: '/thongtin',
@@ -101,40 +101,11 @@ class Footer extends Component {
 							<ul>
 								<li>
 									<a href="https://www.facebook.com" >
-										<img src="http://vevs.website/web-demo/job-portal-website/app/web/upload/medium/social-facebook-176-1507281876.png" alt=""
+										<img src="https://res.cloudinary.com/thuctap/image/upload/v1521951393/social-facebook-176-1507281876.png" alt=""
 											title="" />
 									</a>
 								</li>
-								<li>
-									<a href="https://plus.google.com" >
-										<img src="http://vevs.website/web-demo/job-portal-website/app/web/upload/medium/social-googleplus-177-1507281878.png" alt=""
-											title="" />
-									</a>
-								</li>
-								<li>
-									<a href="https://www.instagram.com" >
-										<img src="http://vevs.website/web-demo/job-portal-website/app/web/upload/medium/social-instagram-181-1507281879.png" alt=""
-											title="" />
-									</a>
-								</li>
-								<li>
-									<a href="https://www.linkedin.com" >
-										<img src="http://vevs.website/web-demo/job-portal-website/app/web/upload/medium/social-linkedin-178-1507281881.png" alt=""
-											title="" />
-									</a>
-								</li>
-								<li>
-									<a href="https://www.pinterest.com" >
-										<img src="http://vevs.website/web-demo/job-portal-website/app/web/upload/medium/social-pinterest-180-1507281882.png" alt=""
-											title="" />
-									</a>
-								</li>
-								<li>
-									<a href="https://twitter.com" >
-										<img src="http://vevs.website/web-demo/job-portal-website/app/web/upload/medium/social-twitter-179-1507281884.png" alt=""
-											title="" />
-									</a>
-								</li>
+							
 							</ul>
 						</div>
 					</div>

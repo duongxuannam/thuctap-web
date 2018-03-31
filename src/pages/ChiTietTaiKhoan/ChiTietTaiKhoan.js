@@ -27,7 +27,8 @@ class ChiTietTaiKhoan extends Component {
                     txtTruongDaiHoc: res.data.truongdaihoc,
                     hinhanh: res.data.anhdaidien ? res.data.anhdaidien : this.state.hinhanh,
                     gioithieu: res.data.gioithieu,
-                    khoa: res.data.khoa
+                    khoa: res.data.khoa,
+                    linkCV:  res.data.cv
                 })
             });
         }
@@ -54,6 +55,15 @@ class ChiTietTaiKhoan extends Component {
                                     <span >
                                         <span class="wc-editable" >Ảnh đại diện</span>
                                     </span>
+                                </div>
+                                <div class="col-sm-12 col-xs-12">
+
+
+                                    <div class="form-group text-center">
+                                        <label class="control-label">
+                                            <span class="wc-editable clr">CV </span>: <a href={this.state.linkCV} target="_blank"  >Xem</a></label>
+
+                                    </div>
 
 
 
