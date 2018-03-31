@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { actLayDanhSachCongViecAdminAPI } from '../../actions/index';
+import { actLayDanhSachCongViecAdminAPI, actXoaCongViecAdminAPI } from '../../actions/index';
 
 class QuanLyCongViec extends Component {
     constructor(props){
@@ -33,6 +33,7 @@ class QuanLyCongViec extends Component {
                             <Link to={`/danhsachungtuyen/${item._id}`} >   {item.danop} ứng viên  </Link>
                         </td>
                         <td><Link to={`/chitietcongviec/${item._id}`} >Xem</Link></td>
+                        <td><a class='clr contro' onClick={() => this.xoaCongViecAdmin(item._id)}>Xóa</a></td>
                     </tr>
                 );
             });
@@ -44,6 +45,9 @@ class QuanLyCongViec extends Component {
             const sotrang = this.props.danhSachCongViecAdmin.sotrang
             this.props.actLayDanhSachCongViecAdmin(sotrang);
         }
+    }
+    xoaCongViecAdmin(id) {
+        this.props.actXoaCongViecAdmin(id);
     }
     onChange = (e) => {
         const { name, value } = e.target;
@@ -193,7 +197,10 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         actLayDanhSachCongViecAdmin: (id) => {
             dispatch(actLayDanhSachCongViecAdminAPI(id));
-        }
+        },
+        actXoaCongViecAdmin: (data) => {
+            dispatch(actXoaCongViecAdminAPI(data));
+        },
     }
 }
 

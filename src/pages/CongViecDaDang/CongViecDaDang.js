@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { actLayDanhSachCongViecDaDangAPI } from '../../actions/index';
+import { actLayDanhSachCongViecDaDangAPI, actXoaCongViecAPI } from '../../actions/index';
 
 class CongViecDaDang extends Component {
     constructor(props) {
@@ -17,6 +17,8 @@ class CongViecDaDang extends Component {
 
         }
     }
+  
+    
     onChange = (e) => {
         const { name, value } = e.target;
         this.setState({
@@ -42,11 +44,19 @@ class CongViecDaDang extends Component {
                             <Link to={`/danhsachungtuyen/${item._id}`} >   {item.danop} ứng viên  </Link>
                         </td>
                         <td><Link to={`/suacongviec/${item._id}`} >Sửa</Link></td>
+                        <td>
+                            <a class='clr contro' onClick={() => this.xoaCongViec(item._id)}>   Xóa  </a>
+
+                        </td>
                     </tr>
                 );
             });
         }
         return result;
+    }
+    xoaCongViec(id) {
+        this.props.actXoaCongViec(id);
+        console.log('no chay ko', id)
     }
     render() {
         if (!this.props.taiKhoan || !this.props.taiKhoan.taikhoan || !this.props.taiKhoan.taikhoan.kichhoatnhatuyendung) {
@@ -103,6 +113,7 @@ class CongViecDaDang extends Component {
                                                         <option value="1">Hết hạn</option></select> */}
                                                 </td>
                                                 <td></td>
+                                                <td></td>
                                             </tr>
 
 
@@ -134,6 +145,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         actLayDanhSachCongViecDaDang: (id) => {
             dispatch(actLayDanhSachCongViecDaDangAPI(id));
+        },
+        actXoaCongViec: (data) => {
+            dispatch(actXoaCongViecAPI(data));
         }
     }
 }

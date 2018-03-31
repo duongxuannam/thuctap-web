@@ -27,8 +27,8 @@ class QuanLyThanhVien extends Component {
             const truyenvao = { _id: item._id, khoa: item.khoa }
                 return (
                     <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{item.email}</td>
+                        <td class='namMuoi'>{index + 1}</td>
+                        <td class='baTram'>{item.email}</td>
                         <td>{item.hoten}</td>
                         <td>{item.sodienthoai}</td>
                         {item.kichhoatnhatuyendung ? <td><Link to={`/thongtinnhatuyendung/${item._id}`} onClick={() => window.scrollTo(0, 0)} class='contro clr'> Nhà tuyển dụng </Link></td> : <td><Link to={`/chitiettaikhoan/${item._id}`} onClick={() => window.scrollTo(0, 0)} class='contro'> Người dùng </Link></td>}
@@ -144,11 +144,11 @@ class QuanLyThanhVien extends Component {
                     <h3 className="panel-title">Danh sách thành viên ({mang.length})</h3>
                 </div>
                 <div className="panel-body ">
-                    <table className="table table-bordered table-hover">
+                    <table className="table table-bordered table-hover quanlydaithietdai">
                         <thead>
                             <tr>
-                                <th>STT</th>
-                                <th >Email</th>
+                                <th class='namMuoi'>STT</th>
+                                <th class='baTram'>Email</th>
                                 <th >Tên hiển thị</th>
                                 <th >Số điện thoại</th>
                                 <th >Loại tài khoản</th>
@@ -158,8 +158,8 @@ class QuanLyThanhVien extends Component {
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td>
+                                <td class='namMuoi'></td>
+                                <td class='baTram'>
                                     <input type="text" name="locTheoEmail" class="form-control" placeholder="lọc theo email" value={locTheoEmail} onChange={this.onChange} />
                                 </td>
                                 <td>

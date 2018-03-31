@@ -4,6 +4,7 @@ const logo = require('../images/cty2.jpg')
 
 class ChiTietCongViec extends Component {
     render() {
+        
         return (
             <React.Fragment>
                 <div class="main">
@@ -13,13 +14,13 @@ class ChiTietCongViec extends Component {
                                 <div class="panel">
                                     <div class="panel-heading">
                                         <div class="panel-title">
-                                            <span class="wc-editable" data-pk="front_job_summary" data-type="text">Thông tin</span>
+                                            <span class="wc-editable" >Thông tin</span>
                                         </div>
                                     </div>
                                     <div class="panel-body">
                                         <p>
                                             <span>
-                                                <span class="wc-editable" data-pk="front_post_on" data-type="text">Ngày đăng</span>
+                                                <span class="wc-editable" >Ngày đăng</span>
                                             </span>
                                             <br />
                                             <strong>06.04.2017</strong>

@@ -11,7 +11,7 @@ class CongViecTuongTu extends Component {
         };
     }
     componentDidMount() {
-        console.log(' log ne ', this.props.chuyennganh)
+      
         //     const data ={
         //         chuyennganh : 'Giáo dục'
         //     }
@@ -26,7 +26,6 @@ class CongViecTuongTu extends Component {
             chuyennganh: nextProps.chuyennganh
         }
         callApi(`congviectuongtu`, 'POST', data).then(res => {
-            console.log('dâta', res.data)
             this.setState({
                 mang: res.data
             })

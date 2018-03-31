@@ -29,10 +29,10 @@ class QuanLy extends Component {
             result = data.map((item, index) => {
                 return (
                     <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{item.nhatuyendung.tencongty}</td>
-                        <td>{item.nhatuyendung.email}</td>
-                        <td>{item.nhatuyendung.sodienthoai}</td>
+                        <td  class='namMuoi'>{index + 1}</td>
+                        <td  class='baTramMuoi'>{item.nhatuyendung.tencongty}</td>
+                        <td  class='baTramMuoi'>{item.nhatuyendung.email}</td>
+                        <td class='baTramMuoi'>{item.nhatuyendung.sodienthoai}</td>
                         <td>
                             <a class = 'contro gre' onClick={() => this.kichHoatNhaTuyenDung(item._id)} > Kích hoạt </a>
                         </td>
@@ -111,16 +111,16 @@ class QuanLy extends Component {
                                             <span class="glyphicon glyphicon-menu-left"></span> Quay lại </a>
                                     </p>
                                 </div>
-                                <div className="panel panel-primary">
+                                <div className="panel panel-primary ">
                                 <div className="panel-heading">
                                     <h3 className="panel-title">Danh sách đăng ký nhà tuyển dụng ({ mang.length })</h3>
                                 </div>
                                 <div className="panel-body ">
-                                    <table className="table table-bordered table-hover">
+                                    <table className="table table-bordered table-hover ">
                                         <thead>
                                             <tr>
-                                                <th>STT</th>
-                                                <th >Tên công ty</th>
+                                                <th  class='namMuoi'>STT</th>
+                                                <th>Tên công ty</th>
                                                 <th >Email</th>
                                                 <th >Số điện thoại</th>
                                                 <th  ></th>
@@ -130,8 +130,8 @@ class QuanLy extends Component {
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td></td>
-                                                <td>
+                                                <td  class='namMuoi'></td>
+                                                <td >
                                                 <input type="text" name="locTheoTenCongTy" class="form-control" placeholder="lọc theo tên" value={locTheoTenCongTy} onChange={this.onChange}/>
                                                 </td>
                                                 <td>

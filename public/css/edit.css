@@ -192,3 +192,18 @@
 .flr{
     float: right
 }
+
+/* table{
+    table-layout: fixed
+} */
+.quanlydaithietdai{
+    table-layout: fixed
+}
+td{
+    word-wrap: break-word
+}
+.namMuoi{
+    width: 50px
+}.baTram{
+    width: 300px
+}

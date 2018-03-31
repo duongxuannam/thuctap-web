@@ -9,6 +9,9 @@ const danhSachCongViecDaDang = (state = initialState, action) => {
         case Types.SUA_CONG_VIEC:
             state = action.data;
             return [...state];
+        case Types.XOA_CONG_VIEC:
+            state = action.data;
+            return [...state];
         default: return [...state];
     }
 };

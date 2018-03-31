@@ -298,6 +298,23 @@ export const actLayDanhSachCongViecDaDang = (data) => {
     }
 }
 
+//-----------------Xóa CONG VIEC 
+export const actXoaCongViecAPI = (id) => {
+    return dispatch => {
+        return callApi(`xoacongviec/${id}`, 'GET', null).then(res => {
+            console.log('data', res)
+            dispatch(actXoaCongViec(res.data));
+        });
+    };
+}
+export const actXoaCongViec = (data) => {
+    return {
+        type : Types.XOA_CONG_VIEC,
+        data
+    }
+}
+
+
 //-----------------LAY  DANH SÁCH CÔNG VIỆC ĐẪ NỘP
 export const actLayDanhSachCongViecDaNopAPI = (id) => {
     return dispatch => {
@@ -389,6 +406,23 @@ export const actLayDanhSachCongViecLanDauAdmin = (data) => {
         data
     }
 }
+
+
+//-----------------xoa CÔNG VIỆC Admin
+export const actXoaCongViecAdminAPI = (id) => {
+    return dispatch => {
+        return callApi(`xoacongviecadmin/${id}`, 'GET', null).then(res => {
+            dispatch(actXoaCongViecAdmin(id));
+        });
+    };
+}
+export const actXoaCongViecAdmin = (data) => {
+    return {
+        type : Types.XOA_CONG_VIEC_ADMIN,
+        data
+    }
+}
+
 
 
 //-----------------LAY  DANH SÁCH THONG BAO

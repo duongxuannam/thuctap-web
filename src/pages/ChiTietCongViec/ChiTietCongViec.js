@@ -34,11 +34,17 @@ class ChiTietCongViec extends Component {
         return result
     }
     render() {
+        const thoihan = this.props.chiTietCongViec && this.props.chiTietCongViec.thoihan ? moment(this.props.chiTietCongViec.thoihan).format('YYYY-MM-DD') : ''
+        // const ngaydang = this.props.chiTietCongViec && this.props.chiTietCongViec.ngaydang ? moment(this.props.chiTietCongViec.ngaydang).utc().format('YYYY-MM-DD') : ''
+       const homnay = moment(new Date()).utc().format('YYYY-MM-DD')
+        // console.log('hom nay ', homnay);
+        // console.log('ngayhethan', thoihan );
+        if(parseInt(homnay.replace(/-/g,""),10) > parseInt(thoihan.replace(/-/g,""),10)){
+        
+         }
         if(this.props.chiTietCongViec && this.props.chiTietCongViec.loi){
             return <Redirect to={`/nhaplinhtalinhtinh`} />
         }
-        console.log('chi tiet ne: ', this.props.chiTietCongViec);
-        console.log('may tai lai hong', this.props.chiTietCongViec._id);
         const buttondDisabled = (
             <a disabled class="btn btn-primary btn-lg btn-apply">Bạn đã ứng tuyển</a>
         )
@@ -54,9 +60,17 @@ class ChiTietCongViec extends Component {
         const buttonChuaDangNhap = (
             <Link to={`/dangnhap`} class="btn btn-primary btn-lg btn-apply">Đăng nhập để ứng tuyển</Link>
         )
+        const buttonHetHanRoiOngNoi = (
+            <a disabled class="btn btn-danger-edit btn-lg btn-apply">Hết hạn</a>
+        )
         const daDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.hoanthienhoso ? buttonEnabled : buttondChuaHoanThienHoSo
         const hienthiButton = this.kiemTraDaUngTuyen() ? buttondDisabled : daDangNhap;
         const hienthiButtonCuoiCung = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? buttonNhaTuyenDung : hienthiButton
+        var xacdinhngay = false;
+        if(parseInt(homnay.replace(/-/g,""),10) > parseInt(thoihan.replace(/-/g,""),10)){
+            xacdinhngay = true
+        }
+        
         const ChuaDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? hienthiButtonCuoiCung : buttonChuaDangNhap
         return (
             <React.Fragment>
@@ -212,7 +226,7 @@ class ChiTietCongViec extends Component {
 
                                 </div>
                                 <div class="post-actions">
-                                    {ChuaDangNhap}
+                                    {xacdinhngay ? buttonHetHanRoiOngNoi  :ChuaDangNhap}
                                     <div class="share-actions">
                                         <div class="socials-share">
                                             <ul>

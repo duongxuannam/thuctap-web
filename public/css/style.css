@@ -1,19 +1,19 @@
 /* Fonts */
 /* Arabik */
 /* font-family: 'Amiri', serif; */
-@import url(//fonts.googleapis.com/css?family=Amiri:400,400italic,700,700italic&subset=arabic);
+/* @import url(//fonts.googleapis.com/css?family=Amiri:400,400italic,700,700italic&subset=arabic); */
 
 /* Hebrew */
 /* font-family: 'Arimo', sans-serif; */
-@import url(//fonts.googleapis.com/css?family=Arimo:400,700italic,700,400italic&subset=hebrew);
+/* @import url(//fonts.googleapis.com/css?family=Arimo:400,700italic,700,400italic&subset=hebrew); */
 
 /* Open Sans-serif Full(no Arabik and Hebrew) */
 /* font-family: 'Open Sans', sans-serif; */
-@import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600,600italic,700,700italic,800,800italic&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic);
+/* @import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600,600italic,700,700italic,800,800italic&subset=latin,greek,greek-ext,vietnamese,cyrillic-ext,latin-ext,cyrillic); */
 
 /* Noto Serif Full(no Arabik and Hebrew) */
 /* font-family: 'Noto Serif', serif; */
-@import url(//fonts.googleapis.com/css?family=Noto+Serif:400,700,700italic,400italic&subset=latin,cyrillic,greek-ext,vietnamese,latin-ext,cyrillic-ext,greek);
+/* @import url(//fonts.googleapis.com/css?family=Noto+Serif:400,700,700italic,400italic&subset=latin,cyrillic,greek-ext,vietnamese,latin-ext,cyrillic-ext,greek); */
 
 * { padding: 0; margin: 0; outline: none; }
 
