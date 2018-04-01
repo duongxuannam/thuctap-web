@@ -287,6 +287,8 @@ export const actXoaTinTucAdmin = (data) => {
 export const actLayDanhSachCongViecDaDangAPI = (id) => {
     return dispatch => {
         return callApi(`danhsachcongviecdadang/${id}`, 'GET', null).then(res => {
+        
+console.log(' m  chay ha ',res)            
             dispatch(actLayDanhSachCongViecDaDang(res.data));
         });
     };

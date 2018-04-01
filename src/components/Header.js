@@ -132,10 +132,18 @@ class Header extends Component {
             </div>
         );
         const nguoiDung = (
+            <React.Fragment>
+            <li>
+            <Link to={`/thongtintaikhoan`}>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                Thông tin tài khoản
+            </Link>
+        </li>
             <li>
                 <Link to={`/congviecdanop`}>
                     <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Công việc đã nộp</Link>
             </li>
+            </React.Fragment>
         );
         const nhaTuyenDung = (
             <React.Fragment>
@@ -167,12 +175,7 @@ class Header extends Component {
                             </span>
 
                             <ul class="dropdown-menu" aria-labelledby="barDropdown1">
-                                <li>
-                                    <Link to={`/thongtintaikhoan`}>
-                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                        Thông tin tài khoản
-                                    </Link>
-                                </li>
+                            
                                 <li>
                                     <Link to={`/nhatuyendung`}>
                                         <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>

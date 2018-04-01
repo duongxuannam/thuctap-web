@@ -13,7 +13,13 @@ class CongViecDaDang extends Component {
     }
     componentDidMount() {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id) {
+      
+            // if(this.props.danhSachCongViecDaDang.length === 0){
+            //     return this.props.actLayDanhSachCongViecDaDang(this.props.taiKhoan.taikhoan._id)
+            // }
+         
             return this.props.actLayDanhSachCongViecDaDang(this.props.taiKhoan.taikhoan._id)
+
 
         }
     }
@@ -64,6 +70,7 @@ class CongViecDaDang extends Component {
         }
         const { locTheoTieuDe } = this.state;
         var mang = this.props.danhSachCongViecDaDang;
+        console.log('ra coi', mang)
         if (locTheoTieuDe) {
             mang = mang.filter((item) => {
                 return item.tieude.toLowerCase().indexOf(locTheoTieuDe.toLowerCase()) !== -1

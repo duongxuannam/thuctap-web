@@ -56,7 +56,8 @@ class SuaCongViec extends Component {
                     txtSoLuong: res.data.soluong,
                     thoiHan: res.data.thoihan,
                     _id: res.data._id,
-                    txtMoTa:  EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(res.data.mota).contentBlocks))
+                    txtMoTa:  EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(res.data.mota).contentBlocks)),
+                    _nguoidang: res.data._nguoidang._id
                 })
             });
         }
@@ -238,23 +239,14 @@ class SuaCongViec extends Component {
             loiSoLuong,
             loiThoiHan,
             loiMoTa,
+            _nguoidang
          } = this.state;
 
         const day = new Date().toISOString().substr(0, 10);
-        // console.log('ahuhu', this.state)
-        console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
-        // console.log('aaa', this.props.taiKhoan.taikhoan)
-        const chuaDangNhap = (
-            <div className="loi-ghide-height">
-                <div className="container ">
-                    <div class="panel panel-danger ">
-                        <div class="panel-heading">Bạn chưa đăng nhập</div>
-                        <div class="panel-body">Vui lòng <Link to='dangnhap'>đăng nhập</Link> và kích hoạt tài khoản nhà tuyển dụng để đăng tuyển</div>
-
-                    </div>
-                </div>
-            </div>
-        )
+  
+        //console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
+       
+  
         const ok = (
             <div class="main">
                 <div class="container">
@@ -462,31 +454,21 @@ class SuaCongViec extends Component {
                 </div>
             </div>
         )
-        const chuaKichHoat = (
+     
+        const koChinhChu = (
             <div className="loi-ghide-height">
                 <div className="container ">
                     <div class="panel panel-danger ">
-                        <div class="panel-heading">Bạn chưa kich hoạt tài khoản nhà tuyên dụng</div>
-                        <div class="panel-body">Vui lòng <Link to='kichhoatnhatuyendung'>kích hoạt</Link> tài khoản nhà tuyển dụng để đăng tuyển</div>
+                        <div class="panel-heading">Bạn không đủ quyền chi cập trang này</div>
+                        <div class="panel-body">Vui lòng quay lại <Link to=''>trang chủ</Link></div>
 
                     </div>
                 </div>
             </div>
         )
-        const choDuyet = (
-            <div className="loi-ghide-height">
-                <div className="container ">
-                    <div class="panel panel-warning ">
-                        <div class="panel-heading">Bạn đã đăng ký tài khoản nhà tuyên dụng</div>
-                        <div class="panel-body">Vui lòng đợi duyệt hoặc liên hệ trực tiếp <Link to='lienhe'>tại đây</Link></div>
+        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id === _nguoidang || this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.admin ? ok : koChinhChu;
+       
 
-                    </div>
-                </div>
-            </div>
-        )
-        const daDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? ok : chuaKichHoat;
-        const daDangKyChuaDuyet = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.trangthai === 'dangduyet' ? choDuyet : daDangNhap;
-        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? daDangKyChuaDuyet : chuaDangNhap
         return (
             <React.Fragment>
 
