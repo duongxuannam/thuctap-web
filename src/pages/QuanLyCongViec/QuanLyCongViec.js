@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { actLayDanhSachCongViecAdminAPI, actXoaCongViecAdminAPI } from '../../actions/index';
+import KhongDuocTruyCap from '../../components/KhongDuocTruyCap';
 
 class QuanLyCongViec extends Component {
     constructor(props){
@@ -78,108 +79,112 @@ class QuanLyCongViec extends Component {
                 return item.tieude.toLowerCase().indexOf(locTheoTieuDe.toLowerCase()) !== -1
             })
         }
-        return (
-            <React.Fragment>
-                <div class="main">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-3 col-xs-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <span class="wc-editable" >Quản lý</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="panel-body pointer ">
-                                        <Link to={`/quanly`} className='contro'
-                                        >
-                                            Danh sách đăng ký nhà tuyển dụng
-                                          </Link>
-                                    </div>
-                                    <div class="panel-body pointer">
-                                        <Link to={`/quanlythanhvien`} className='contro '
-
-                                        >
-                                            Danh sách thành viên
-                                         </Link>
-                                    </div>
-                                    <div class="panel-body pointer">
-                                        <Link to={`/quanlycongviec`} className='contro clr'
-                                        >
-                                            Danh sách công việc
-                                            </Link>
-                                    </div>
-                                    <div class="panel-body pointer">
-                                        <Link to={`/quanlytintuc`} className=' contro '
-                                        >
-                                            Danh sách tin tức
-                                         </Link>
-                                    </div>
+        const ok = (
+            <div class="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <span class="wc-editable" >Quản lý</span>
                                 </div>
                             </div>
-                            <div class="col-sm-9 col-xs-12">
 
-                                <div class="resume-head">
-                                    <p>
-                                        <a class="btn btn-back btn-secondary" >
-                                            <span class="glyphicon glyphicon-menu-left"></span> Quay lại </a>
-                                    </p>
-                                </div>
+                            <div class="panel-body pointer ">
+                                <Link to={`/quanly`} className='contro'
+                                >
+                                    Danh sách đăng ký nhà tuyển dụng
+                                  </Link>
+                            </div>
+                            <div class="panel-body pointer">
+                                <Link to={`/quanlythanhvien`} className='contro '
 
-                                <div className="panel panel-primary">
-                                    <div className="panel-heading">
-                                        <h3 className="panel-title">Danh sách công việc  ({mang.length})</h3>
-                                    </div>
-                                    <div className="panel-body ">
-                                        <table className="table table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>STT</th>
-                                                    <th>Tiêu đề</th>
-                                                    <th>Lượt xem</th>
-                                                    <th>Ngày đăng</th>
-                                                    <th>Thòi hạn</th>
-                                                    <th>Ứng tuyển</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>
-                                                        <input type="text" name="locTheoTieuDe" class="form-control" placeholder="lọc theo tiêu đề"  value = {locTheoTieuDe} onChange={this.onChange} />
-                                                    </td>
-                                                    <td>
-
-                                                    </td>
-                                                    <td></td>
-                                                    <td>
-                                                        {/* <select type="text" name="locTheoTrangThai" class="form-control">
-                                                        <option value="-1">Tat ca</option>
-                                                        <option value="0">Còn thời hạn</option>
-                                                        <option value="1">Hết hạn</option></select> */}
-                                                    </td>
-                                                    <td></td>
-                                                </tr>
-
-
-                                                {this.showData(mang)}
-
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-                                {this.props.danhSachCongViecAdmin.hetdulieu ? hetDuLieu : ''}
-
-                                <div class="search-jobs-results-footer">
-                                    {taiThem}
-                                </div>
+                                >
+                                    Danh sách thành viên
+                                 </Link>
+                            </div>
+                            <div class="panel-body pointer">
+                                <Link to={`/quanlycongviec`} className='contro clr'
+                                >
+                                    Danh sách công việc
+                                    </Link>
+                            </div>
+                            <div class="panel-body pointer">
+                                <Link to={`/quanlytintuc`} className=' contro '
+                                >
+                                    Danh sách tin tức
+                                 </Link>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-sm-9 col-xs-12">
 
+                        <div class="resume-head">
+                            <p>
+                                <a class="btn btn-back btn-secondary" >
+                                    <span class="glyphicon glyphicon-menu-left"></span> Quay lại </a>
+                            </p>
+                        </div>
+
+                        <div className="panel panel-primary">
+                            <div className="panel-heading">
+                                <h3 className="panel-title">Danh sách công việc  ({mang.length})</h3>
+                            </div>
+                            <div className="panel-body ">
+                                <table className="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tiêu đề</th>
+                                            <th>Lượt xem</th>
+                                            <th>Ngày đăng</th>
+                                            <th>Thòi hạn</th>
+                                            <th>Ứng tuyển</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <input type="text" name="locTheoTieuDe" class="form-control" placeholder="lọc theo tiêu đề"  value = {locTheoTieuDe} onChange={this.onChange} />
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                            <td></td>
+                                            <td>
+                                                {/* <select type="text" name="locTheoTrangThai" class="form-control">
+                                                <option value="-1">Tat ca</option>
+                                                <option value="0">Còn thời hạn</option>
+                                                <option value="1">Hết hạn</option></select> */}
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+
+                                        {this.showData(mang)}
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        {this.props.danhSachCongViecAdmin.hetdulieu ? hetDuLieu : ''}
+
+                        <div class="search-jobs-results-footer">
+                            {taiThem}
+                        </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+        )
+        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.admin ? ok : <KhongDuocTruyCap/>
+        return (
+            <React.Fragment>
+               { main }
                 <div class="push"></div>
             </React.Fragment>
         );
@@ -190,6 +195,7 @@ class QuanLyCongViec extends Component {
 const mapStateToProps = state => {
     // console.log('log state dc ko', state)
     return {
+        taiKhoan: state.taiKhoan,
         danhSachCongViecAdmin: state.danhSachCongViecAdmin,
     }
 }

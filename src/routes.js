@@ -5,6 +5,7 @@ import ChiTietCongViec from './pages/ChiTietCongViec/ChiTietCongViec';
 import DangNhap from './pages/DangNhap/DangNhap';
 import DangKy from './pages/DangKy/DangKy';
 import QuenMatKhau from './pages/QuenMatKhau/QuenMatKhau';
+import DoiMatKhau from './pages/DoiMatKhau/DoiMatKhau';
 import ThongTinTaiKhoan from './pages/ThongTinTaiKhoan/ThongTinTaiKhoan';
 import TinTuc from './pages/TinTuc/TinTuc';
 import ChiTietTinTuc from './pages/ChiTietTinTuc/ChiTietTinTuc';
@@ -59,6 +60,11 @@ const routes = [
         path: '/quenmatkhau',
         exact: false,
         main: ({ match, history }) => <QuenMatKhau match={match} history={history} />
+    },
+    {
+        path: '/doimatkhau',
+        exact: false,
+        main: ({ match, history }) => <DoiMatKhau match={match} history={history} />
     },
     {
         path: '/thongtintaikhoan',

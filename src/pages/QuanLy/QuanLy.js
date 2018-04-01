@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actLayDanhSachDangKyNhaTuyenDungAPI, actDuyetNhaTuyenDungAPI } from '../../actions/index';
+import KhongDuocTruyCap from '../../components/KhongDuocTruyCap';
 
 class QuanLy extends Component {
     constructor(props){
@@ -63,8 +64,8 @@ class QuanLy extends Component {
                 return item.nhatuyendung.sodienthoai.toLowerCase().indexOf(locTheoSDT.toLowerCase()) !== -1
             })
         }
-        return (
-            <React.Fragment>
+        const ok = (
+<React.Fragment>
                 <div class="main">
                     <div class="container">
                         <div class="row">
@@ -163,7 +164,14 @@ class QuanLy extends Component {
 
                     </div>
                 </div>
-                <div class="push"></div>
+                
+            </React.Fragment>
+        )
+        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.admin ? ok : <KhongDuocTruyCap/>
+        return (
+            <React.Fragment>
+            {main}
+            <div class="push"></div>
             </React.Fragment>
         );
     }
@@ -171,6 +179,7 @@ class QuanLy extends Component {
 
 const mapStateToProps = state => {
     return {
+        taiKhoan: state.taiKhoan,
         danhSachDangKyNhaTuyenDung: state.danhSachDangKyNhaTuyenDung
     }
 }

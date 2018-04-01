@@ -63,6 +63,9 @@ class ChiTietCongViec extends Component {
         const buttonHetHanRoiOngNoi = (
             <a disabled class="btn btn-danger-edit btn-lg btn-apply">Hết hạn</a>
         )
+        const emLaAdmin = (
+            <a disabled class="btn btn-primary btn-lg btn-apply">Admin không thể ứng tuyển</a>
+        )
         const daDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.hoanthienhoso ? buttonEnabled : buttondChuaHoanThienHoSo
         const hienthiButton = this.kiemTraDaUngTuyen() ? buttondDisabled : daDangNhap;
         const hienthiButtonCuoiCung = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? buttonNhaTuyenDung : hienthiButton
@@ -72,6 +75,7 @@ class ChiTietCongViec extends Component {
         }
         
         const ChuaDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? hienthiButtonCuoiCung : buttonChuaDangNhap
+       const ganCuoi = xacdinhngay ? buttonHetHanRoiOngNoi  :ChuaDangNhap;
         return (
             <React.Fragment>
                 <div class="main">
@@ -226,7 +230,7 @@ class ChiTietCongViec extends Component {
 
                                 </div>
                                 <div class="post-actions">
-                                    {xacdinhngay ? buttonHetHanRoiOngNoi  :ChuaDangNhap}
+                                    { this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.admin ? emLaAdmin : ganCuoi}
                                     <div class="share-actions">
                                         <div class="socials-share">
                                             <ul>

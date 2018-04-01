@@ -13,14 +13,9 @@ class CongViecDaDang extends Component {
     }
     componentDidMount() {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id) {
-      
-            // if(this.props.danhSachCongViecDaDang.length === 0){
-            //     return this.props.actLayDanhSachCongViecDaDang(this.props.taiKhoan.taikhoan._id)
-            // }
-         
-            return this.props.actLayDanhSachCongViecDaDang(this.props.taiKhoan.taikhoan._id)
-
-
+            if(this.props.danhSachCongViecDaDang.length === 0){
+                return this.props.actLayDanhSachCongViecDaDang(this.props.taiKhoan.taikhoan._id)
+            }
         }
     }
   

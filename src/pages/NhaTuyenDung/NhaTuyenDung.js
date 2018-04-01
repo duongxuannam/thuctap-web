@@ -218,9 +218,9 @@ class NhaTuyenDung extends Component {
         
         
         if (this.state.loiTenCongTy === '' && this.state.loiHinhAnh === '' && this.state.loiSoDienThoai === '' && this.state.loiDiaChi === '' && this.state.loiEmail === '' && this.state.loiLinhVucHoatDong === '') {
-            console.log('hi')
+           
             if (this.state.txtTenCongTy !== '' && this.state.txtDiaChi !== '' && this.state.txtEmail !== '' && this.state.txtSoDienThoai !== '' && this.state.linhvuchoatdong !== '') {
-                console.log('hello')
+        
                 if (this.state.daThayHinh) {
                     this.setState({ disabled: 'disabled' })
                     cloudinary.uploader.upload(`${this.state.hinhanh}`).then(result => {

@@ -117,6 +117,38 @@ class Header extends Component {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan) {
             hienThiTen = (<a class='contro'>{this.props.taiKhoan.taikhoan.hoten}</a>)
         }
+        const admin = (
+            <React.Fragment>
+
+                <li>
+                    <Link to={`/quanly`}>
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        Đăng ký NTD
+            </Link>
+                </li>
+
+                <li>
+                    <Link to={`/quanlythanhvien`}>
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        Danh sách tài khoản
+            </Link>
+                </li>
+
+                <li>
+                    <Link to={`/quanlycongviec`}>
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        Danh sách công việc
+            </Link>
+                </li>
+
+                <li>
+                    <Link to={`/quanlytintuc`}>
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        Danh sách tin tức
+            </Link>
+                </li>
+            </React.Fragment>
+        )
         const chuaDangNhap = (
             <div class="bar">
                 <div class="container">
@@ -133,29 +165,42 @@ class Header extends Component {
         );
         const nguoiDung = (
             <React.Fragment>
-            <li>
-            <Link to={`/thongtintaikhoan`}>
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                Thông tin tài khoản
+                <li>
+                    <Link to={`/thongtintaikhoan`}>
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        Thông tin tài khoản
             </Link>
-        </li>
-            <li>
-                <Link to={`/congviecdanop`}>
-                    <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Công việc đã nộp</Link>
-            </li>
+                </li>
+                <li>
+                    <Link to={`/congviecdanop`}>
+                        <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Công việc đã nộp</Link>
+                </li>
+                <li>
+                    <Link to={`/thongbao`}>
+                        <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+                        Thông báo
+                                    </Link>
+                </li>
+
             </React.Fragment>
         );
         const nhaTuyenDung = (
             <React.Fragment>
                 <li>
                     <Link to={`/congviecdadang`}>
-                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Công việc đã đăng</Link>
+                        <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Công việc đã đăng</Link>
                 </li>
 
                 <li>
                     <Link to={`/tintucdadang`}>
-                        <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Tin tức đã đăng</Link>
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Tin tức đã đăng</Link>
                 </li>
+
+                {this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.admin ? admin : <li> <Link to={`/thongbao`}>
+                    <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+                    Thông báo
+                                    </Link></li>}
+
             </React.Fragment>
 
         );
@@ -175,23 +220,24 @@ class Header extends Component {
                             </span>
 
                             <ul class="dropdown-menu" aria-labelledby="barDropdown1">
-                            
+
                                 <li>
                                     <Link to={`/nhatuyendung`}>
-                                        <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-object-align-vertical" aria-hidden="true"></span>
                                         Nhà tuyển dụng
                                     </Link>
                                 </li>
+
                                 {menuCuoiCung}
-                                <li>
-                                    <Link to={`/thongbao`}>
-                                        <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-                                        Thông báo
-                                    </Link>
-                                </li>
 
                                 <li>
-                                    <a onClick={this.logOut}>
+                                    <Link to={`/doimatkhau`}>
+                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                        Đổi mật khẩu
+                                    </Link>
+                                </li>
+                                <li>
+                                    <a class='contro' onClick={this.logOut}>
                                         <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Đăng xuất</a>
                                 </li>
                             </ul>

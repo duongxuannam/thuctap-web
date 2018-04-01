@@ -88,6 +88,15 @@
     text-align: center;
     text-align: center;
 }
+.btn-warning-edit{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+    text-align: center;
+}
 .mr10{
     margin-bottom: 5px;
     margin-top: 5px;

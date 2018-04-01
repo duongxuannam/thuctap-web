@@ -19,7 +19,9 @@ class TinTucDaDang extends Component {
     }
     componentDidMount() {
         if (this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id) {
-            return this.props.actLayDanhSachTinTucDaDang(this.props.taiKhoan.taikhoan._id)
+            if(this.props.danhSachTinTucDaDang.length === 0){
+                return this.props.actLayDanhSachTinTucDaDang(this.props.taiKhoan.taikhoan._id)
+            }
         }
     }
     xoaTinTuc(id) {

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import callApi from '../../global/apiCaller';
 import { actDangTuyenAPI, actSuaCongViecAPI } from '../../actions/index';
-
+import KhongDuocTruyCap from '../../components/KhongDuocTruyCap';
 
 class SuaCongViec extends Component {
     constructor(props) {
@@ -455,18 +455,8 @@ class SuaCongViec extends Component {
             </div>
         )
      
-        const koChinhChu = (
-            <div className="loi-ghide-height">
-                <div className="container ">
-                    <div class="panel panel-danger ">
-                        <div class="panel-heading">Bạn không đủ quyền chi cập trang này</div>
-                        <div class="panel-body">Vui lòng quay lại <Link to=''>trang chủ</Link></div>
-
-                    </div>
-                </div>
-            </div>
-        )
-        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id === _nguoidang || this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.admin ? ok : koChinhChu;
+       
+        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id === _nguoidang || this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.admin ? ok : <KhongDuocTruyCap/>;
        
 
         return (

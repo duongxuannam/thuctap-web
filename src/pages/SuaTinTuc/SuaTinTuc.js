@@ -10,6 +10,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import callApi from '../../global/apiCaller';
 import { actSuaTinTucAPI } from '../../actions/index';
 import { configCloudinary } from '../../global/config';
+import KhongDuocTruyCap from '../../components/KhongDuocTruyCap';
 
 cloudinary.config(configCloudinary)
 
@@ -36,6 +37,7 @@ class SuaTinTuc extends Component {
                 this.setState({
                     txtTieuDe: res.data.tieude,
                     txtHinhAnh: res.data.hinhanh,
+                    _nguoidang:  res.data._nguoidang._id,
                     _id: res.data._id,
                     txtNoiDung:  EditorState.createWithContent(ContentState.createFromBlockArray(htmlToDraft(res.data.noidung).contentBlocks))
                 })
@@ -123,32 +125,12 @@ class SuaTinTuc extends Component {
         }
     }
     render() {
-        const { txtNoiDung, txtTieuDe, loiTieuDe, loiHinhAnh } = this.state;
+        const { txtNoiDung, txtTieuDe, loiTieuDe, loiHinhAnh, _nguoidang } = this.state;
 
         //console.log('luu lai o day ne:', draftToHtml(convertToRaw(txtMoTa.getCurrentContent())));
      
-        const chuaDangNhap = (
-            <div className="loi-ghide-height">
-                <div className="container ">
-                    <div class="panel panel-danger ">
-                        <div class="panel-heading">Bạn chưa đăng nhập</div>
-                        <div class="panel-body">Vui lòng <Link to='dangnhap'>đăng nhập</Link> và kích hoạt tài khoản nhà tuyển dụng để đăng bài</div>
-
-                    </div>
-                </div>
-            </div>
-        )
-        const chuaKichHoat = (
-            <div className="loi-ghide-height">
-                <div className="container ">
-                    <div class="panel panel-danger ">
-                        <div class="panel-heading">Bạn chưa kich hoạt tài khoản nhà tuyên dụng</div>
-                        <div class="panel-body">Vui lòng <Link to='dangnhap'>kích hoạt</Link> tài khoản nhà tuyển dụng để đăng bài</div>
-
-                    </div>
-                </div>
-            </div>
-        )
+      
+      
         const divUploading = (
             <div>
                 <div id="popup">
@@ -236,8 +218,7 @@ class SuaTinTuc extends Component {
                 </div>
             </div>
         )
-        const daDangNhap = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.kichhoatnhatuyendung ? ok : chuaKichHoat;
-        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan ? daDangNhap : chuaDangNhap
+        const main = this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan._id === _nguoidang || this.props.taiKhoan && this.props.taiKhoan.taikhoan && this.props.taiKhoan.taikhoan.admin ? ok : <KhongDuocTruyCap/>;
         return (
             <React.Fragment>
                 {main}
