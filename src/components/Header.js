@@ -172,6 +172,12 @@ class Header extends Component {
             </Link>
                 </li>
                 <li>
+                                    <Link to={`/nhatuyendung`}>
+                                        <span class="glyphicon glyphicon-object-align-vertical" aria-hidden="true"></span>
+                                        Nhà tuyển dụng
+                                    </Link>
+                                </li>
+                <li>
                     <Link to={`/congviecdanop`}>
                         <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Công việc đã nộp</Link>
                 </li>
@@ -186,6 +192,12 @@ class Header extends Component {
         );
         const nhaTuyenDung = (
             <React.Fragment>
+                  <li>
+                                    <Link to={`/nhatuyendung`}>
+                                        <span class="glyphicon glyphicon-object-align-vertical" aria-hidden="true"></span>
+                                        Nhà tuyển dụng
+                                    </Link>
+                                </li>
                 <li>
                     <Link to={`/congviecdadang`}>
                         <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Công việc đã đăng</Link>
@@ -221,12 +233,7 @@ class Header extends Component {
 
                             <ul class="dropdown-menu" aria-labelledby="barDropdown1">
 
-                                <li>
-                                    <Link to={`/nhatuyendung`}>
-                                        <span class="glyphicon glyphicon-object-align-vertical" aria-hidden="true"></span>
-                                        Nhà tuyển dụng
-                                    </Link>
-                                </li>
+                              
 
                                 {menuCuoiCung}
 

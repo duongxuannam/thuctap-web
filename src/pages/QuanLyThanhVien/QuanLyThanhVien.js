@@ -47,9 +47,25 @@ class QuanLyThanhVien extends Component {
             [name]: value
         })
     }
+    timAdminTrongMang = (mang) => {
+        var index = -1;
+        if (mang.length > 0) {
+            for (var i = 0; i < mang.length; i++) {
+                if (mang[i].admin) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
+    }
     render() {
         const { locTheoEmail, locTheoTen, locTheoSDT, locTheoLoaiTaiKhoan, locTheoTrangThai } = this.state;
         var mang = this.props.danhSachTaiKhoan;
+       var index =  this.timAdminTrongMang(mang)
+       if (index !== -1) {
+        mang.splice(index, 1);
+    }
         if (locTheoEmail) {
             mang = mang.filter((item) => {
                 return item.email.toLowerCase().indexOf(locTheoEmail.toLowerCase()) !== -1
