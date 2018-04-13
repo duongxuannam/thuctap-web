@@ -90,7 +90,7 @@ class LienHe extends Component {
 
                                     <div class="panel-body">
                                         <div class="availability-specialist">
-                                            <img src="http://res.cloudinary.com/thuctap/image/upload/v1520583917/Nammm.jpg" alt="" title="" />
+                                            <img src="https://res.cloudinary.com/thuctap/image/upload/v1523634189/Namm.jpg" alt="" title="" />
 
                                             <strong>
                                                 <span class="wc-editable" data-pk="ws_contact_customer_support_name" data-type="text">Dương Xuân Nam</span>
