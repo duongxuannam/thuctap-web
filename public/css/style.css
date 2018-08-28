@@ -1337,7 +1337,7 @@ html[dir="rtl"] .search-jobs-results-footer .btn { float: left; }
 	#applied-for .job-title { font-size: 18px; }
 }
 .ads{
+	background-color: red;
+	height: 100px;
 	width: 250px;
-	height: 250px;
-	background-color: rgba(214, 207, 207, 0)
 }
