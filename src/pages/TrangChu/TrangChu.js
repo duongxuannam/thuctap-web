@@ -211,6 +211,11 @@ class TrangChu extends Component {
                         </ul>
                     </div>
                 </section>
+                <ins className="adsbygoogle"
+         style={{display:'block'}} 
+         data-ad-client="ca-pub-9378724246417115"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
                 <div class="push"></div>
             </React.Fragment>
         );

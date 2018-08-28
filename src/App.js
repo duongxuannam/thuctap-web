@@ -18,11 +18,7 @@ class App extends Component {
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       </Helmet>
       {/* <div className="ads"> */}
-       <ins className="adsbygoogle"
-         style={{display:'block'}} 
-         data-ad-client="ca-pub-9378724246417115"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
+      
       {/* </div> */}
 
       <Router >
