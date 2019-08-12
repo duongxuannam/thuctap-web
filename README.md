@@ -2,8 +2,8 @@
 
 Back-end: [Nodejs-MongoDB](https://github.com/duongxuannam/api-thuctap)
 Front-end: [React-js](https://thuctap-web.herokuapp.com/)
-[Demo](https://thuctap-web.herokuapp.com/)
 
+[Demo](https://thuctap-web.herokuapp.com/)
 Một số thư viện tiêu biểu:
 - Redux xữ lý luồng dữ liệu
 - Socket-io để xữ lý dữ liệu real-time
